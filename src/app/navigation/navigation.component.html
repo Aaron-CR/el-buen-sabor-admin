@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <!-- Logo Image -->
+  <img class="logo-icon" src="assets/images/logos/angular.png">
+  <span class="mx-2">El Buen Sabor</span>
+  <!-- Spacer -->
+  <div class="mr-auto"></div>
+  <!-- User Button -->
+  <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
+    <div class="mat-button-wrapper">
+      <img src="assets/images/avatars/profile.jpg" class="avatar">
+      <span class="mx-2"> Nombre Apellido </span>
+      <mat-icon class="material-icons-outlined s-16">
+        keyboard_arrow_down</mat-icon>
+    </div>
+    <div matripple="" class="mat-ripple mat-button-ripple"></div>
+    <div class="mat-button-focus-overlay"></div>
+  </button>
+  <!-- User Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/cashier">
+      <mat-icon>assignment</mat-icon>
+      <span>Cashier</span>
+    </button>
+    <button mat-menu-item routerLink="/kitchen">
+      <mat-icon>restaurant</mat-icon>
+      <span>Kitchen</span>
+    </button>
+    <button mat-menu-item routerLink="/admin">
+      <mat-icon>insert_chart</mat-icon>
+      <span>Admin</span>
+    </button>
+    <button mat-menu-item routerLink="/menu">
+      <mat-icon>restaurant_menu</mat-icon>
+      <span>Menu</span>
+    </button>
+    <button mat-menu-item routerLink="/manufactured">
+      <mat-icon>storefront</mat-icon>
+      <span>Manufactured</span>
+    </button>
+    <button mat-menu-item routerLink="/supplies">
+      <mat-icon>shopping_basket</mat-icon>
+      <span>Supplies</span>
+    </button>
+    <button mat-menu-item routerLink="/categories">
+      <mat-icon>list_alt</mat-icon>
+      <span>Categories</span>
+    </button>
+    <button mat-menu-item routerLink="/my-profile">
+      <mat-icon>account_circle</mat-icon>
+      <span>My profile</span>
+    </button>
+    <button mat-menu-item routerLink="/index">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<!-- Toolbar End -->
+<ng-content></ng-content>
