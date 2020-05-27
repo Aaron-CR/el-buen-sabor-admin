@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="app-container">
+  <div class="wrap-login">
+    <form novalidate [formGroup]="loginFormGroup">
+      <div class="app-logo mb-3">
+        <img src="assets/images/logos/angular.png" alt="LOGO" class="w-100">
+      </div>
+      <span class="app-title mb-4">
+        INGRESE A SU CUENTA
+      </span>
+      <mat-form-field class="w-100">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput type="email" required formControlName="email" placeholder="Ingrese su correo electrónico.">
+      </mat-form-field>
+      <mat-form-field class="pb-2 w-100">
+        <mat-label>Contraseña</mat-label>
+        <input matInput required [type]="hide ? 'password' : 'text'" formControlName="password"
+          placeholder="Ingrese su contraseña.">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+      <button mat-flat-button color="primary" class="w-100 mb-4" [routerLink]="['/cashier']" routerLinkActive="router-link-active" >INGRESAR</button>
+    </form>
+  </div>
+</div>

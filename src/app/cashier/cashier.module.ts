@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CashierRoutingModule } from './cashier-routing.module';
 import { CashierTableComponent } from './cashier-table/cashier-table.component';
 import { CashierDialogComponent } from './cashier-dialog/cashier-dialog.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CashierDialogComponent } from './cashier-dialog/cashier-dialog.componen
   ],
   imports: [
     CommonModule,
-    CashierRoutingModule
+    CashierRoutingModule,
+    SharedModule
   ]
 })
 export class CashierModule { }
