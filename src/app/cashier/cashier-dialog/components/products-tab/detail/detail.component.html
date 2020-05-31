@@ -1,0 +1,20 @@
+<span class="d-flex align-items-center my-3 subtitle">
+  <mat-icon class="mr-1">list_alt</mat-icon>
+  Detalle
+</span>
+<mat-table [dataSource]="detailDataSource" class="mb-4">
+
+  <ng-container *ngFor="let def of detailColumns" [matColumnDef]="def" [ngSwitch]="def">
+    <ng-container *ngSwitchCase="'imagen'">
+      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <img [src]="row[def]" /> </mat-cell>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row[def]}} </mat-cell>
+    </ng-container>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="detailColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: detailColumns"></mat-row>
+</mat-table>

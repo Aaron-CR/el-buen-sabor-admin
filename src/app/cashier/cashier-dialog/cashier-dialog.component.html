@@ -1,30 +1,23 @@
-<div class="container">
-<span class="d-flex align-items-center">
-  <mat-icon class="mr-1">account_circle</mat-icon>
-  Cliente
-</span>
-<table style="width:100%">
-  <tr>
-    <th>Nombre</th>
-    <th>Email</th>
-    <th>Telefono</th>
-  </tr>
-  <tr>
-    <td>Nombre Apellido</td>
-    <td>cliente@email.com</td>
-    <td>+54 (0) 261 423 4234</td>
-  </tr>
-</table>
-<span class="d-flex align-items-center">
-  <mat-icon class="mr-1">access_time</mat-icon>
-  Estado de la orden
-</span>
-<span class="d-flex align-items-center">
-  <mat-icon class="mr-1">credit_card</mat-icon>
-  Pago
-</span>
-<span class="d-flex align-items-center">
-  <mat-icon class="mr-1">local_shipping</mat-icon>
-  Envío
-</span>
+<div mat-dialog-title class="d-flex justify-content-between align-items-end app-dialog">
+  <span class="app-dialog-title"> Orden 1.000.000 </span>
+  <button mat-button mat-icon-button (click)="onCancel()">
+    <mat-icon> close </mat-icon>
+  </button>
 </div>
+<mat-dialog-content class="app-content mx-0">
+  <mat-tab-group>
+    <mat-tab label="Detalles">
+      <app-customer></app-customer>
+      <app-status></app-status>
+      <app-payment></app-payment>
+      <app-shipping></app-shipping>
+    </mat-tab>
+    <mat-tab label="Productos">
+      <app-notes></app-notes>
+      <app-detail></app-detail>
+    </mat-tab>
+    <mat-tab label="Factura">
+      <app-invoice></app-invoice>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>

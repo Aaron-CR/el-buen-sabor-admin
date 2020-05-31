@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CashierDialogComponent } from '../cashier-dialog/cashier-dialog.component';
 
 @Component({
   selector: 'app-cashier-table',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CashierTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog() {
+    this.dialog.open(CashierDialogComponent, {
+      panelClass: 'app-dialog',
+      disableClose: true,
+      width: '70%',
+    });
   }
 
 }

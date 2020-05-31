@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CashierTableComponent } from './cashier-table/cashier-table.component';
-import { CashierDialogComponent } from './cashier-dialog/cashier-dialog.component';
-
 
 const routes: Routes = [
-  { path: '', component: CashierDialogComponent }
+  { path: '', component: CashierTableComponent }
 ];
 
 @NgModule({

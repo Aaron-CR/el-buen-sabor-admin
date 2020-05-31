@@ -1,0 +1,27 @@
+.app-form-field {
+  height: 50px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  background-color: white;
+  padding: 5px 20px;
+  border-radius: 15px;
+}
+
+.app-form-field:hover {
+  border-width: 2px;
+  border-color: grey;
+}
+
+.app-form-field:active {
+  border-width: 2px;
+  border-color: #ffb300;
+}
+
+/* BUTTON */
+.mat-flat-button {
+  height: 42px;
+  padding: 0 30px;
+  border-radius: 25px;
+  font-size: 18px;
+}
