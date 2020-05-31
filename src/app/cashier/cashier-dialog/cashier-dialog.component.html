@@ -1,10 +1,4 @@
-<div mat-dialog-title class="d-flex justify-content-between align-items-end app-dialog">
-  <span class="app-dialog-title"> Orden 1.000.000 </span>
-  <button mat-button mat-icon-button (click)="onCancel()">
-    <mat-icon> close </mat-icon>
-  </button>
-</div>
-<mat-dialog-content class="app-content mx-0">
+<app-dialog [title]="'Orden 1.000.000'">
   <mat-tab-group>
     <mat-tab label="Detalles">
       <app-customer></app-customer>
@@ -20,4 +14,4 @@
       <app-invoice></app-invoice>
     </mat-tab>
   </mat-tab-group>
-</mat-dialog-content>
+</app-dialog>

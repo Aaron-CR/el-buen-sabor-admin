@@ -1,4 +1,55 @@
-<p>admin-panel works!</p>
-<button mat-raised-button color="primary" routerLink="/admin/customers">Customers</button>
-<button mat-raised-button color="primary" routerLink="employees">Employees</button>
-<button mat-raised-button color="primary" routerLink="invoices">Invoices</button>
+<div class="container my3">
+  <!-- Cards -->
+  <div class="d-flex justify-content-around flex-wrap">
+    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 m-2 app-card" routerLink="/admin/customers">
+      <button mat-mini-fab disabled class="mr-3">
+        <mat-icon>people</mat-icon>
+      </button>
+      <h1> Customers </h1>
+    </div>
+    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 m-2 app-card" routerLink="employees">
+      <button mat-mini-fab disabled class="mr-3">
+        <mat-icon>work_outline</mat-icon>
+      </button>
+      <h1> Employees </h1>
+    </div>
+    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 m-2 app-card" routerLink="invoices">
+      <button mat-mini-fab disabled class="mr-3">
+        <mat-icon>receipt</mat-icon>
+      </button>
+      <h1> Invoices </h1>
+    </div>
+  </div>
+  <!-- Stock -->
+  <div class="d-flex">
+    <div class="flex-fill m-2 app-card" style="height: 300px;">
+
+    </div>
+  </div>
+  <!-- Stock -->
+  <div class="d-flex justify-content-around  flex-wrap">
+    <div class="d-flex flex-fill flex-row px-3 py-4 m-2 app-card" style="height: 300px;">
+    </div>
+    <div class="d-flex flex-row px-3 py-4 m-2 app-card w-25" style="height: 300px;">
+    </div>
+  </div>
+</div>
+
+<!--
+  <div>
+    <div>Ingresos</div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+ -->

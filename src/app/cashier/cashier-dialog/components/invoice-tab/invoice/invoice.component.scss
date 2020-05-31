@@ -24,7 +24,7 @@
 .invoice-number .number {
   font-size: 18px;
   padding-left: 6px;
-  color: rgba(0, 0, 0, 0.87);
+  color: #000000de;
 }
 
 .accent {
@@ -36,7 +36,7 @@
   width: 96px;
   padding: 0 8px;
   align-self: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.54);
+  border-right: 1px solid #0000008a;
 }
 
 img {
@@ -52,7 +52,7 @@ img {
 
 .mat-footer-cell {
   font-size: 24px !important;
-  color: black;
+  color: rgba(0, 0, 0, 0.87);
   padding-top: 24px;
   padding-bottom: 24px;
 }
