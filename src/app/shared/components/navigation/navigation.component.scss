@@ -51,3 +51,7 @@ mat-icon.s-16 {
   width: 1px;
   background: rgba(0, 0, 0, 0.12);
 }
+
+.mat-menu-item:active {
+  background-color: #ffc107 !important;
+}

@@ -11,7 +11,6 @@ const ORDER_STATUS_DATA: OrderStatus[] = [
   { estado: 'Cancelado', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
   { estado: 'En proceso', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
   { estado: 'Demorado', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
-  { estado: 'Listo', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
   { estado: 'Terminado', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
   { estado: 'En camino', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' },
   { estado: 'Entregado', actualizadoEl: 'Apr 2, 2018 12:34:32', actualizadoPor: 'Nombre Apellido' }
@@ -37,7 +36,7 @@ export class StatusComponent implements OnInit {
     { value: '2', viewValue: 'Cancelado' },
     { value: '3', viewValue: 'En proceso' },
     { value: '4', viewValue: 'Demorado' },
-    { value: '5', viewValue: 'Listo' },
+    { value: '5', viewValue: 'Terminado' },
     { value: '6', viewValue: 'En camino' },
     { value: '7', viewValue: 'Entregado' }
   ];
@@ -53,7 +52,6 @@ export class StatusComponent implements OnInit {
       case 'Cancelado': { return 'cancelado'; }
       case 'En proceso': { return 'en-proceso'; }
       case 'Demorado': { return 'demorado'; }
-      // case 'Listo': { return 'listo'; }
       case 'Terminado': { return 'listo'; }
       case 'En camino': { return 'en-camino'; }
       case 'Entregado': { return 'entregado'; }

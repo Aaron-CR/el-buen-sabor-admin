@@ -23,11 +23,8 @@
       <mat-panel-title>
         Portador
       </mat-panel-title>
-      <!-- <mat-panel-description>
-        Nombre Apellido
-      </mat-panel-description> -->
     </mat-expansion-panel-header>
-    <mat-table [dataSource]="carrierDataSource" class="mat-elevation-z3">
+    <mat-table [dataSource]="carrierDataSource">
       <ng-container *ngFor="let def of carrierColumns" [matColumnDef]="def">
         <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row[def]}} </mat-cell>
