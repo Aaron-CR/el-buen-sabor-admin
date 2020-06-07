@@ -22,8 +22,10 @@
   </div>
   <!-- Stock -->
   <div class="d-flex">
-    <div class="flex-fill m-2 app-card" style="height: 300px;">
-
+    <div class="flex-fill m-2 app-card" style="height: 300px; width: 100%;">
+      <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
     </div>
   </div>
   <!-- Stock -->
