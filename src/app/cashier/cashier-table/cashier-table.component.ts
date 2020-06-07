@@ -18,7 +18,7 @@ export class CashierTableComponent implements OnInit {
     this.dialog.open(CashierDialogComponent, {
       panelClass: 'app-dialog',
       disableClose: true,
-      width: '70%',
+      width: '70%'
     });
   }
 

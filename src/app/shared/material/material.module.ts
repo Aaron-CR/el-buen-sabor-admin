@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
+
+// Saturn Datepicker
+import { SatDatepickerModule } from 'saturn-datepicker';
+import { SatNativeDateModule } from 'saturn-datepicker';
+
 // Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -49,10 +55,14 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   exports: [
+    // Saturn Datepicker
+    SatDatepickerModule,
+    SatNativeDateModule,
     // Form Controls
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -90,6 +100,7 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule
-  ]
+  ],
+  providers: [MatDatepickerModule]
 })
 export class MaterialModule { }

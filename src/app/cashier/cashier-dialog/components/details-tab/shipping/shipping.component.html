@@ -3,7 +3,7 @@
   Envío
 </span>
 <mat-accordion>
-  <mat-expansion-panel [disabled]="!shipping">
+  <mat-expansion-panel [disabled]="!shipping" [class]="!shipping ? 'mb-4' : ''">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{shipping ? 'Envío: A domicilio' : 'Envío: A retirar'}}

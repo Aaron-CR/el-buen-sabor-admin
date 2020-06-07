@@ -1,1 +1,10 @@
 <p>customers-dialog works!</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Choose a date" [satDatepicker]="picker2" formControlName="date">
+    <sat-datepicker #picker2 [rangeMode]="true">
+    </sat-datepicker>
+    <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
+  </mat-form-field>
+  {{ form.value | json  }}
+</form>
