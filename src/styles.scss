@@ -46,6 +46,15 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* BUTTONS */
+button:not(.mat-menu-item) {
+  border-radius: 5em !important;
+}
+
+.mat-menu-item:active {
+  background-color: #ffe8a3 !important;
+}
+
 /* DIALOGS */
 .app-dialog .mat-dialog-container {
   padding: 0;
@@ -67,7 +76,7 @@ body {
   font-size: 14px;
   font-weight: 500;
   padding: 7px 16px;
-  border-radius: 16px;
+  border-radius: 5em;
   text-align: center;
   align-items: center;
   background-color: whitesmoke;
@@ -112,7 +121,7 @@ body {
   color: #000000bb;
 }
 
-// reset
+/* RESET */
 button:focus {
   outline: 0 !important;
 }
@@ -122,7 +131,7 @@ button:focus {
   border: 0 !important;
 } */
 
-// scrollbar
+/* CHROME SCROLLBAR */
 ::-webkit-scrollbar {
   width: 8px;
   // display: none;

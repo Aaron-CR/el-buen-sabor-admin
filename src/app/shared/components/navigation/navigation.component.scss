@@ -10,7 +10,7 @@
   background: inherit;
 }
 
-.mat-toolbar.mat-primary {
+.mat-toolbar {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -50,8 +50,4 @@ mat-icon.s-16 {
   height: 64px;
   width: 1px;
   background: rgba(0, 0, 0, 0.12);
-}
-
-.mat-menu-item:active {
-  background-color: #ffc107 !important;
 }
