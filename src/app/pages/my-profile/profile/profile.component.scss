@@ -1,0 +1,26 @@
+.card {
+  min-height: 85%;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 25px;
+  border-color: #d3d3d3;
+  background-color: white;
+}
+
+.card .title {
+  font-size: 25px;
+  font-weight: 500;
+  padding: 25px 40px;
+  margin: 0 -15px;
+  background-color: #e4e4e4;
+  border-radius: 25px 25px 0 0;
+}
+
+.avatar {
+  width: 144px;
+  min-width: 144px;
+  height: 144px;
+  line-height: 144px;
+  border-radius: 50%;
+  text-align: center;
+}
