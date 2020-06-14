@@ -6,6 +6,9 @@
   width: 200px;
 }
 
+.mat-toolbar {
+  background-color: #fff;
+}
 .sidenav .mat-toolbar {
   background: inherit;
 }
@@ -21,6 +24,7 @@
 }
 
 .toolbar-button {
+  border-radius: 0px !important;
   min-width: 64px;
   height: 64px;
 }

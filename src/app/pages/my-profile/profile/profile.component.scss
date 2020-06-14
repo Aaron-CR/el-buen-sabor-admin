@@ -1,3 +1,5 @@
+@import "src/variables.scss";
+
 .card {
   min-height: 85%;
   border-style: solid;
@@ -7,20 +9,42 @@
   background-color: white;
 }
 
-.card .title {
-  font-size: 25px;
-  font-weight: 500;
-  padding: 25px 40px;
+.title {
+  font-size: 30px;
+  color: #fff;
+  padding: 20px 40px;
   margin: 0 -15px;
-  background-color: #e4e4e4;
   border-radius: 25px 25px 0 0;
+  background-image: url("src/assets/images/backgrounds/dark-material-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .avatar {
-  width: 96px;
-  min-width: 96px;
-  height: 96px;
-  line-height: 96px;
+  width: 86px;
+  min-width: 86px;
+  height: 86px;
+  line-height: 86px;
+  margin-right: 24px;
   border-radius: 50%;
   text-align: center;
+}
+
+mat-card {
+  border-radius: 6px;
+}
+
+mat-card-title {
+  color: #000000bb;
+  background-color: $accent;
+  font-size: 17px;
+  border-radius: 6px 6px 0 0;
+  margin: -16px -16px 0 -16px !important;
+  padding: 16px;
+}
+
+h4 {
+  margin-bottom: 4px;
+  font-weight: 500;
 }

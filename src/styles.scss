@@ -11,16 +11,18 @@
 // Saturn Datepicker
 @import "~saturn-datepicker/theming";
 
+@import "src/variables.scss";
+
 // Common styles for Angular Material, include this mixin once!
 @include mat-core();
 
 // https://material.io/design/color/
 // Primary palette
-$el-buen-sabor-admin-primary: mat-palette($mat-amber);
+$el-buen-sabor-admin-primary: mat-palette($app-primary);
 // Accent palette
-$el-buen-sabor-admin-accent: mat-palette($mat-indigo);
+$el-buen-sabor-admin-accent: mat-palette($app-accent, 300);
 // Warn palette (defaults to red).
-$el-buen-sabor-admin-warn: mat-palette($mat-red);
+$el-buen-sabor-admin-warn: mat-palette($app-warn);
 
 // El Buen Sabor theme (a Sass map containing all of the palettes).
 $el-buen-sabor-admin-theme: mat-light-theme(
@@ -42,7 +44,6 @@ body {
 body {
   margin: 0;
   color: #00000096;
-  background-color: #f3f7f8;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 

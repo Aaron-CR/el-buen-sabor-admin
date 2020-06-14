@@ -1,65 +1,105 @@
 <div class="container my-4 card">
   <div class="title">
-    <span>Mi Perfil</span>
-  </div>
-  <div class="d-flex flex-wrap  m-4" *ngIf="!edit; else editForm">
-    <img src="assets/images/users/cashier.png" class="avatar">
-    <div class="flex-row ml-4 mt-4">
-      <h2>
-        Nombre Apellido
-      </h2>
-      <span>
-        nombreapellido@gmail.com
-      </span>
-      <button mat-stroked-button color="accent" class="ml-3" (click)="toggleEdit()">
-        Editar datos
-      </button>
-    </div>
-  </div>
-  <ng-template #editForm>
-    <div class="d-flex flex-wrap justify-content-center">
-      <div class="m-4 flex-row">
+    <div class="d-flex flex-row justify-content-between align-items-end">
+      <div>
         <img src="assets/images/users/cashier.png" class="avatar">
+        <span>Nombre Apellido</span>
       </div>
-      <div class="m-4 flex-row flex-grow-1">
-        <mat-form-field class="w-100">
-          <mat-label>Nombre</mat-label>
-          <input matInput disabled value="Nombre Apellido">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput disabled value="nombreapellido@gmail.com">
-        </mat-form-field>
-        <div class="d-flex">
-          <div class="flex-grow-1">
-            <mat-form-field class="w-100">
-              <mat-label>Telefono</mat-label>
-              <input matInput disabled value="+54 9 2614567890">
-            </mat-form-field>
-          </div>
-          <div>
-            <button mat-stroked-button color="accent" class="ml-3">
-              <mat-icon [inline]="true">edit</mat-icon> Editar
-            </button>
-          </div>
-        </div>
-        <div class="d-flex">
-          <div class="flex-grow-1">
-            <mat-form-field class="w-100">
-              <mat-label>Contraseña</mat-label>
-              <input matInput type="password" disabled value="•••••••••••••">
-            </mat-form-field>
-          </div>
-          <div>
-            <button mat-stroked-button color="accent" class="ml-3">
-              <mat-icon [inline]="true">edit</mat-icon> Editar
-            </button>
-          </div>
-        </div>
-        <button mat-stroked-button color="accent" (click)="toggleEdit()">
-          Cancelar
+      <div>
+        <button mat-raised-button color="accent" class="ml-3" *ngIf="!edit" (click)="toggleEdit()">
+          Editar datos
         </button>
       </div>
+    </div>
+  </div>
+  <div class="m-3" *ngIf="!edit; else editForm">
+
+    <div class="p-2">
+      <mat-card>
+        <mat-card-title> Información general </mat-card-title>
+        <div class="mt-3">
+          <h4> Fecha de registro </h4>
+          <p> February 30th, 1974 </p>
+        </div>
+        <div class="mt-3">
+          <h4> Ubicacion </h4>
+          <p> San Martín 454, Mendoza, Mendoza </p>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap">
+
+      <div class="p-2 d-flex flex-fill">
+        <mat-card class="w-100">
+          <mat-card-title> Trabajo </mat-card-title>
+          <div class="mt-3">
+            <h4> Ocupación </h4>
+            <p> Cajero </p>
+          </div>
+          <div class="mt-3">
+            <h4> Horarios </h4>
+            <p> Lunes a Viernes de 20:00 a 12:00 <br>Sábados y Domingos de 11:00 a 15:00. </p>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="p-2 d-flex flex-fill">
+        <mat-card class="w-100">
+          <mat-card-title> Contacto </mat-card-title>
+          <div class="mt-3">
+            <h4> Teléfono </h4>
+            <p> +54 9 2614567890 </p>
+          </div>
+          <div class="mt-3">
+            <h4> Correo electrónico </h4>
+            <p> empleado@gmail.com </p>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #editForm>
+    <div class="m-4">
+      <mat-form-field class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput disabled value="Nombre Apellido">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput disabled value="empleado@gmail.com">
+      </mat-form-field>
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          <mat-form-field class="w-100">
+            <mat-label>Telefono</mat-label>
+            <input matInput disabled value="+54 9 2614567890">
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="accent" class="ml-3">
+            <mat-icon [inline]="true">edit</mat-icon> Editar
+          </button>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          <mat-form-field class="w-100">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" disabled value="•••••••••••••">
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="accent" class="ml-3">
+            <mat-icon [inline]="true">edit</mat-icon> Editar
+          </button>
+        </div>
+      </div>
+      <button mat-raised-button color="accent" (click)="toggleEdit()">
+        Cancelar
+      </button>
     </div>
   </ng-template>
 </div>
