@@ -1,6 +1,6 @@
-export class Base {
+export interface Base {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deleted: boolean;
+  ultimaActualizacion: Date;
+  oculto: boolean;
+  eliminado: boolean;
 }

@@ -1,6 +1,6 @@
-import { Base } from './base';
+import { Base } from '../base';
 
-export class Article extends Base {
+export interface Article extends Base {
   name: string;
   category: string;
   unitPrice: number;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CashierDialogComponent } from '../cashier-dialog/cashier-dialog.component';
-import { Article } from 'src/app/core/models/article';
+import { Article } from 'src/app/core/models/temporal/article';
 
 @Component({
   selector: 'app-cashier-table',
