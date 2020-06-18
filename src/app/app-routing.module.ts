@@ -3,23 +3,64 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'index', pathMatch: 'full' },
-  { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
-  { path: 'cashier', loadChildren: () => import('./pages/cashier/cashier.module').then(m => m.CashierModule) },
-  { path: 'categories', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
-  { path: 'kitchen', loadChildren: () => import('./pages/kitchen/kitchen.module').then(m => m.KitchenModule) },
-  { path: 'manufactured', loadChildren: () => import('./pages/manufactured/manufactured.module').then(m => m.ManufacturedModule) },
-  { path: 'my-profile', loadChildren: () => import('./pages/my-profile/my-profile.module').then(m => m.MyProfileModule) },
-  { path: 'supplies', loadChildren: () => import('./pages/supplies/supplies.module').then(m => m.SuppliesModule) },
   {
-    path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule),
-    data: { visible: false }
+    path: '',
+    redirectTo: 'index', pathMatch: 'full'
   },
   {
-    path: 'index', loadChildren: () => import('./pages/index/index.module').then(m => m.IndexModule),
-    data: { visible: false }
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module')
+      .then(m => m.AdminModule)
   },
-  { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
+  {
+    path: 'cashier',
+    loadChildren: () => import('./pages/cashier/cashier.module')
+      .then(m => m.CashierModule)
+  },
+  {
+    path: 'kitchen',
+    loadChildren: () => import('./pages/kitchen/kitchen.module')
+      .then(m => m.KitchenModule)
+  },
+  {
+    path: 'manufactured',
+    loadChildren: () => import('./pages/manufactured/manufactured.module')
+      .then(m => m.ManufacturedModule)
+  },
+  {
+    path: 'manufactured-categories',
+    loadChildren: () => import('./pages/manufactured-categories/manufactured-categories.module')
+      .then(m => m.ManufacturedCategoriesModule)
+  },
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./pages/my-profile/my-profile.module')
+      .then(m => m.MyProfileModule)
+  },
+  {
+    path: 'supplies',
+    loadChildren: () => import('./pages/supplies/supplies.module')
+      .then(m => m.SuppliesModule)
+  },
+  {
+    path: 'supplies-categories',
+    loadChildren: () => import('./pages/supplies-categories/supplies-categories.module')
+      .then(m => m.SuppliesCategoriesModule)
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module')
+      .then(m => m.NotFoundModule), data: { visible: false }
+  },
+  {
+    path: 'index',
+    loadChildren: () => import('./pages/index/index.module')
+      .then(m => m.IndexModule), data: { visible: false }
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found', pathMatch: 'full'
+  },
 ];
 
 @NgModule({

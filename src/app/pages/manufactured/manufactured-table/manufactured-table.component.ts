@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Manufacturado } from 'src/app/core/models/articulos/manufacturado';
-import { ManufacturedDialogComponent } from '../manufactured-dialog/manufactured-dialog.component';
+import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
+import { ManufacturedDetailComponent } from '../manufactured-detail/manufactured-detail.component';
+import { ManufacturedFormComponent } from '../manufactured-form/manufactured-form.component';
 
 @Component({
   selector: 'app-manufactured-table',
@@ -9,17 +10,17 @@ import { ManufacturedDialogComponent } from '../manufactured-dialog/manufactured
 })
 export class ManufacturedTableComponent implements OnInit {
 
-  public detailDialog = ManufacturedDialogComponent;
+  public formDialog = ManufacturedFormComponent;
+  public detailDialog = ManufacturedDetailComponent;
   public path = 'http://localhost:8080/api/v1/manufacturados';
   public title = 'Manufacturados';
   public icon = 'storefront';
-  public actions = true;
   public tableColumns = [
-    { columnDef: 'imagen', header: 'Imagen', cell: (manufacturado: Manufacturado) => `${manufacturado.imagen}` },
-    { columnDef: 'denominacion', header: 'Denominación', cell: (manufacturado: Manufacturado) => `${manufacturado.denominacion}` },
-    { columnDef: 'categoria', header: 'Categoria', cell: (manufacturado: Manufacturado) => `${manufacturado.categoria.denominacion}` },
-    { columnDef: 'precio', header: 'Precio', cell: (manufacturado: Manufacturado) => `${manufacturado.precio}` },
-    { columnDef: 'oculto', header: 'Publico', cell: (manufacturado: Manufacturado) => `${manufacturado.oculto}` }
+    { columnDef: 'imagen', header: 'Imagen', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.imagen}` },
+    { columnDef: 'denominacion', header: 'Denominación', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.denominacion}` },
+    { columnDef: 'categoria', header: 'Categoria', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.categoria.denominacion}` },
+    // { columnDef: 'precio', header: 'Precio', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.precio}` },
+    { columnDef: 'oculto', header: 'Publico', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.oculto}` }
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);
 

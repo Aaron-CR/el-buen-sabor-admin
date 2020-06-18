@@ -1,0 +1,82 @@
+<app-dialog [title]="'Añadir Manufacturado'">
+  <mat-vertical-stepper linear="true" #stepper>
+    <!-- <mat-step [stepControl]="firstFormGroup"> -->
+    <mat-step>
+      <!-- <form [formGroup]="firstFormGroup"> -->
+      <ng-template matStepLabel>Información básica</ng-template>
+
+      <div class="mt-3">
+        <div class="d-flex">
+          <mat-form-field class="w-100 mr-3">
+            <mat-label>Titulo</mat-label>
+            <input matInput required placeholder="Ex. Pizza">
+          </mat-form-field>
+
+          <mat-form-field class="flex-shrink-1">
+            <mat-label>Precio de venta</mat-label>
+            <input matInput currencyMask required placeholder="$ 0,00">
+          </mat-form-field>
+        </div>
+        <mat-form-field class="w-100">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput placeholder="Agrega una descripción"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Información detallada</ng-template>
+
+      <div class="mt-3">
+
+        <div class="mb-4">
+          <mat-label>Tiempo de preparación: 15m.</mat-label>
+        </div>
+        <mat-slider class="w-100" [displayWith]="formatLabel" max="90" min="0" step="5" thumbLabel="true"
+          tickInterval="3">
+        </mat-slider>
+
+        <mat-form-field class="w-100">
+          <mat-label>Categoría</mat-label>
+          <mat-select required>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+              {{ categoria.imagen }} | {{categoria.denominacion}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div>
+        <button mat-button matStepperPrevious>Volver</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Especifica los ingredientes</ng-template>
+
+      <div>
+        <button mat-button matStepperPrevious>Volver</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Agrega una imagen</ng-template>
+      <div class="mt-3">
+        <mat-form-field class="w-100">
+          <mat-label>URL de imagen</mat-label>
+          <input matInput required>
+        </mat-form-field>
+
+      </div>
+
+      <div>
+        <button mat-button matStepperPrevious>Volver</button>
+        <button mat-button (click)="stepper.reset()">Guardar</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</app-dialog>

@@ -1,4 +1,4 @@
-import { Base } from '../temporal/base';
+import { Base } from '../base';
 import { Pais } from './pais';
 
 export interface Provincia extends Base {

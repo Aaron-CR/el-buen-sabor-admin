@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,6 +14,16 @@ import { StatusComponent } from './components/details-tab/status/status.componen
 import { InvoiceComponent } from './components/invoice-tab/invoice/invoice.component';
 import { DetailComponent } from './components/products-tab/detail/detail.component';
 import { NotesComponent } from './components/products-tab/notes/notes.component';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: 'left',
+  allowNegative: true,
+  thousands: '.',
+  decimal: ',',
+  precision: 2,
+  prefix: '$ ',
+  suffix: ''
+};
 
 @NgModule({
   declarations: [
@@ -33,6 +44,7 @@ import { NotesComponent } from './components/products-tab/notes/notes.component'
   ],
   exports: [
     ReactiveFormsModule,
+    CurrencyMaskModule,
     MaterialModule,
     DialogComponent,
     NavigationComponent,
@@ -43,6 +55,9 @@ import { NotesComponent } from './components/products-tab/notes/notes.component'
     InvoiceComponent,
     DetailComponent,
     NotesComponent
-  ]
+  ],
+  providers: [
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+  ],
 })
 export class SharedModule { }

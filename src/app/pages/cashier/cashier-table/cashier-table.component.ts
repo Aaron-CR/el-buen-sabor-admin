@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CashierDialogComponent } from '../cashier-dialog/cashier-dialog.component';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
+import { CashierDetailComponent } from '../cashier-detail/cashier-detail.component';
 
 @Component({
   selector: 'app-cashier-table',
@@ -10,7 +10,7 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 })
 export class CashierTableComponent implements OnInit {
 
-  public detailDialog = CashierDialogComponent;
+  public detailDialog = CashierDetailComponent;
   public path = 'http://localhost:8080/api/v1/orden';
   public title = 'Cajero';
   public icon = 'point_of_sale';
@@ -30,7 +30,7 @@ export class CashierTableComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(CashierDialogComponent, {
+    this.dialog.open(CashierDetailComponent, {
       panelClass: 'app-dialog',
       disableClose: true,
       width: '70%'

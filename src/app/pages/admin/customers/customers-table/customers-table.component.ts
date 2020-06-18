@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomersDialogComponent } from '../customers-dialog/customers-dialog.component';
 import { Cliente } from 'src/app/core/models/usuarios/cliente';
+import { CustomersDetailComponent } from '../customers-detail/customers-detail.component';
 
 @Component({
   selector: 'app-customers-table',
@@ -10,7 +10,7 @@ import { Cliente } from 'src/app/core/models/usuarios/cliente';
 })
 export class CustomersTableComponent implements OnInit {
 
-  public detailDialog = CustomersDialogComponent;
+  public detailDialog = CustomersDetailComponent;
   public path = 'http://localhost:8080/api/v1/clientes';
   public title = 'Clientes';
   public icon = 'people';
@@ -30,7 +30,7 @@ export class CustomersTableComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(CustomersDialogComponent, {
+    this.dialog.open(CustomersDetailComponent, {
       panelClass: 'app-dialog',
       disableClose: true,
       width: '70%',

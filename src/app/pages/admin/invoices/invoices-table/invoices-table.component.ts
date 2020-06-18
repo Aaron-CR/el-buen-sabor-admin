@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoicesDialogComponent } from '../invoices-dialog/invoices-dialog.component';
 import { Factura } from 'src/app/core/models/comprobantes/factura';
+import { InvoicesDetailComponent } from '../invoices-detail/invoices-detail.component';
 
 @Component({
   selector: 'app-invoices-table',
@@ -9,7 +9,7 @@ import { Factura } from 'src/app/core/models/comprobantes/factura';
 })
 export class InvoicesTableComponent implements OnInit {
 
-  public detailDialog = InvoicesDialogComponent;
+  public detailDialog = InvoicesDetailComponent;
   public path = 'http://localhost:8080/api/v1/facturas';
   public title = 'Facturas';
   public icon = 'receipt';

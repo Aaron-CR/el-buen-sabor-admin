@@ -2,14 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KitchenRoutingModule } from './kitchen-routing.module';
-import { KitchenTableComponent } from './kitchen-table/kitchen-table.component';
-import { KitchenDialogComponent } from './kitchen-dialog/kitchen-dialog.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { DataTableModule } from 'src/app/shared/data-table/data-table.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { KitchenDetailComponent } from './kitchen-detail/kitchen-detail.component';
+import { KitchenTableComponent } from './kitchen-table/kitchen-table.component';
 
 
 @NgModule({
-  declarations: [KitchenTableComponent, KitchenDialogComponent],
+  declarations: [
+    KitchenDetailComponent,
+    KitchenTableComponent
+  ],
   imports: [
     CommonModule,
     KitchenRoutingModule,

@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { AdminComponent } from './admin.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AdminComponent } from './admin.component';
 
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     CommonModule,

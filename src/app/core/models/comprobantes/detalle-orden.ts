@@ -1,8 +1,10 @@
 import { Base } from '../base';
-import { Articulo } from '../articulos/articulo';
+import { ArticuloInsumo  } from '../articulos/articulo-insumo';
+import { ArticuloManufacturado } from '../articulos/articulo-manufacturado';
 
 export interface DetalleOrden extends Base {
   cantidad: number;
   precioTotal: number;
-  articulo: Articulo;
+  insumo: ArticuloInsumo;
+  articuloManufacturado: ArticuloManufacturado;
 }

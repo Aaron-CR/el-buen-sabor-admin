@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SuppliesDialogComponent } from '../supplies-dialog/supplies-dialog.component';
-import { Insumo } from 'src/app/core/models/articulos/insumo';
+import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
+import { SuppliesDetailComponent } from '../supplies-detail/supplies-detail.component';
+import { SuppliesFormComponent } from '../supplies-form/supplies-form.component';
 
 @Component({
   selector: 'app-supplies-table',
@@ -9,17 +10,17 @@ import { Insumo } from 'src/app/core/models/articulos/insumo';
 })
 export class SuppliesTableComponent implements OnInit {
 
-  public detailDialog = SuppliesDialogComponent;
+  public detailDialog = SuppliesDetailComponent;
+  public formDialog = SuppliesFormComponent;
   public path = 'http://localhost:8080/api/v1/insumos';
   public title = 'Insumos';
   public icon = 'shopping_basket';
-  public actions = true;
   public tableColumns = [
-    { columnDef: 'imagen', header: 'Imagen', cell: (insumo: Insumo) => `${insumo.imagen}` },
-    { columnDef: 'denominacion', header: 'Denominación', cell: (insumo: Insumo) => `${insumo.denominacion}` },
-    { columnDef: 'rubro', header: 'Rubro', cell: (insumo: Insumo) => `${insumo.rubro.denominacion}` },
-    { columnDef: 'precio', header: 'Precio', cell: (insumo: Insumo) => `${insumo.precio}` },
-    { columnDef: 'oculto', header: 'Publico', cell: (insumo: Insumo) => `${insumo.oculto}` }
+    { columnDef: 'imagen', header: 'Imagen', cell: (insumo: ArticuloInsumo) => `${insumo.imagen}` },
+    { columnDef: 'denominacion', header: 'Denominación', cell: (insumo: ArticuloInsumo) => `${insumo.denominacion}` },
+    { columnDef: 'rubro', header: 'Rubro', cell: (insumo: ArticuloInsumo) => `${insumo.rubro.denominacion}` },
+    { columnDef: 'precio', header: 'Precio', cell: (insumo: ArticuloInsumo) => `${insumo.precio}` },
+    { columnDef: 'oculto', header: 'Publico', cell: (insumo: ArticuloInsumo) => `${insumo.oculto}` }
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);
 

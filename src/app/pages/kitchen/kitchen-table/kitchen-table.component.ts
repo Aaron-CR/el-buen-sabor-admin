@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { KitchenDialogComponent } from '../kitchen-dialog/kitchen-dialog.component';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
+import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.component';
 
 @Component({
   selector: 'app-kitchen-table',
@@ -10,7 +10,7 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 })
 export class KitchenTableComponent implements OnInit {
 
-  public detailDialog = KitchenDialogComponent;
+  public detailDialog = KitchenDetailComponent;
   public path = 'http://localhost:8080/api/v1/orden';
   public title = 'Cocina';
   public icon = 'restaurant';
@@ -30,7 +30,7 @@ export class KitchenTableComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(KitchenDialogComponent, {
+    this.dialog.open(KitchenDetailComponent, {
       panelClass: 'app-dialog',
       disableClose: true,
       width: '70%'
