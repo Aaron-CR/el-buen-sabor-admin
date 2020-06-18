@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: 'categories', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
   { path: 'kitchen', loadChildren: () => import('./pages/kitchen/kitchen.module').then(m => m.KitchenModule) },
   { path: 'manufactured', loadChildren: () => import('./pages/manufactured/manufactured.module').then(m => m.ManufacturedModule) },
-  { path: 'menu', loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuModule) },
   { path: 'my-profile', loadChildren: () => import('./pages/my-profile/my-profile.module').then(m => m.MyProfileModule) },
   { path: 'supplies', loadChildren: () => import('./pages/supplies/supplies.module').then(m => m.SuppliesModule) },
   {

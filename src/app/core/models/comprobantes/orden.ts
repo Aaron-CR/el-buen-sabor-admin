@@ -4,7 +4,7 @@ import { DireccionDelivery } from '../direccion/direccion-delivery';
 import { Empleado } from '../usuarios/empleado';
 
 export interface Orden extends Comprobante {
-  delivery;
+  delivery: boolean;
   horarioEntrega: Date;
   cliente: Cliente;
   direccionEntrega: DireccionDelivery;

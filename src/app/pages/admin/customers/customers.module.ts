@@ -5,6 +5,8 @@ import { CustomersRoutingModule } from './customers-routing.module';
 import { CustomersTableComponent } from './customers-table/customers-table.component';
 import { CustomersDialogComponent } from './customers-dialog/customers-dialog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MaterialModule } from 'src/app/shared/material/material.module';
+import { DataTableModule } from 'src/app/shared/data-table/data-table.module';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     CustomersRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    DataTableModule
   ]
 })
 export class CustomersModule { }
