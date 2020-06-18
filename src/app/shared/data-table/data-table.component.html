@@ -4,19 +4,24 @@
     <!-- Title -->
     <div class="row d-flex align-items-center">
       <button mat-mini-fab disabled class="mr-3">
-        <mat-icon>{{ icon }}</mat-icon>
+        <mat-icon class="material-icons-outlined">{{ icon }}</mat-icon>
       </button>
       <h1>{{ title }}</h1>
+      <!-- Button -->
+      <button mat-stroked-button class="ml-3" *ngIf="router" [routerLink]="[router]">
+        Categorias
+      </button>
     </div>
+
     <div class="row d-flex align-items-center">
       <!-- Search -->
       <div class="app-search ml-3">
         <input matInput placeholder="Buscar..." #input>
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon class="material-icons-outlined" matSuffix>search</mat-icon>
       </div>
       <!-- Button -->
-      <button mat-flat-button color="primary" class="ml-3" *ngIf="createAction" (click)="onSubmit({})">
-        <mat-icon [inline]="true">add</mat-icon> Añadir
+      <button mat-flat-button color="primary" class="ml-3" *ngIf="formDialog" (click)="onSubmit({})">
+        <mat-icon class="material-icons-outlined" [inline]="true">add</mat-icon> Añadir
       </button>
     </div>
   </div>
@@ -64,32 +69,32 @@
       </ng-container>
 
       <!-- Action column -->
-      <ng-container matColumnDef="actions" *ngIf="showActions">
+      <ng-container matColumnDef="actions" *ngIf="formDialog">
         <mat-header-cell *matHeaderCellDef> ACTIONS </mat-header-cell>
         <mat-cell *matCellDef="let item" (click)="$event.stopPropagation()">
           <!-- Action Button -->
           <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
-            <mat-icon>more_horiz</mat-icon>
+            <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
           </button>
           <mat-menu #menu="matMenu" xPosition="before" class="px-1">
             <!-- Update Button -->
             <button mat-menu-item (click)="onSubmit(item)">
-              <mat-icon class="app-menu-icon">mode_edit</mat-icon>
+              <mat-icon class="material-icons-outlined app-menu-icon">mode_edit</mat-icon>
               <span>Update</span>
             </button>
             <!-- Delete Button -->
             <button mat-menu-item (click)="onDelete(item)">
-              <mat-icon class="app-menu-icon">delete</mat-icon>
+              <mat-icon class="material-icons-outlined app-menu-icon">delete</mat-icon>
               <span>Delete</span>
             </button>
           </mat-menu>
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="showActions ? displayedColumns.concat('actions') : displayedColumns">
+      <mat-header-row *matHeaderRowDef="formDialog ? displayedColumns.concat('actions') : displayedColumns">
       </mat-header-row>
       <mat-row class="table-row"
-        *matRowDef="let item; columns: showActions ? displayedColumns.concat('actions') : displayedColumns"
+        *matRowDef="let item; columns: formDialog ? displayedColumns.concat('actions') : displayedColumns"
         (click)="onRead(item)">
       </mat-row>
     </mat-table>

@@ -13,6 +13,7 @@ export class SuppliesTableComponent implements OnInit {
   public detailDialog = SuppliesDetailComponent;
   public formDialog = SuppliesFormComponent;
   public path = 'http://localhost:8080/api/v1/insumos';
+  public router = '/supplies-categories';
   public title = 'Insumos';
   public icon = 'shopping_basket';
   public tableColumns = [

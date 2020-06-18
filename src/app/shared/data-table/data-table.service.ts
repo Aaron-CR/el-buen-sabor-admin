@@ -48,15 +48,8 @@ export class DataTableService {
   }
 
   private handleError(err) {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      errorMessage = 'An error occurred, please try again.';
-    } else {
-      // The backend returned an unsuccessful response code.
-      errorMessage = `${err.status} - An error occurred, please try again.`;
-    }
-    this.snackBar.open(errorMessage, 'OK', { duration: 10000 });
-    return throwError(errorMessage);
+    let errorMessage = 'Ocurrió un error. intente nuevamente más tarde';
+    this.snackBar.open(errorMessage, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+    return throwError(`${errorMessage} (${err.status})`);
   }
 }

@@ -16,13 +16,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DataTableComponent implements OnInit, AfterViewInit {
 
   @Input() path: string;
+  @Input() router: string;
   @Input() formDialog: TemplateRef<any>;
   @Input() detailDialog: TemplateRef<any>;
   @Input() displayedColumns: any[];
   @Input() title = 'Table';
   @Input() icon = 'table_chart';
-  @Input() createAction = true;
-  @Input() showActions = true;
   @Input() tableColumns: any[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -83,19 +82,19 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
   create(object: any) {
     this.dataTableService.create(this.path, object).subscribe(() => {
-      this.successMessage('Added!');
+      this.successMessage('Añadido! Se ha añadido correctamente.');
     });
   }
 
   update(object: any) {
     this.dataTableService.update(this.path, object, object.id).subscribe(() => {
-      this.successMessage('Updated!');
+      this.successMessage('Actualizado! Se ha actualizado correctamente.');
     });
   }
 
   onDelete(object: any) {
     this.dataTableService.delete(this.path, object, object.id).subscribe(() => {
-      this.deleteMessage('Deleted!', object);
+      this.deleteMessage('Eliminado! Se ha eliminado correctamente.', object);
     });
   }
 
@@ -106,12 +105,12 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   }
 
   successMessage(text: string) {
-    this.snackBar.open(text, 'OK', { duration: 10000 });
+    this.snackBar.open(text, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
     this.loadPage();
   }
 
   deleteMessage(text: string, object: object) {
-    this.snackBar.open(text, 'UNDO', { duration: 10000 })
+    this.snackBar.open(text, 'DESHACER', { duration: 10000, panelClass: ['app-snackbar'] })
       .onAction().subscribe(() => this.undo(object));
     this.loadPage();
   }

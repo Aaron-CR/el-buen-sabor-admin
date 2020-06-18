@@ -14,7 +14,6 @@ export class CashierTableComponent implements OnInit {
   public path = 'http://localhost:8080/api/v1/orden';
   public title = 'Cajero';
   public icon = 'point_of_sale';
-  public actions = false;
   public tableColumns = [
     { columnDef: 'id', header: 'Orden', cell: (orden: Orden) => `${orden.id}` },
     { columnDef: 'cliente', header: 'Cliente', cell: (orden: Orden) => `${orden.cliente.nombre} ${orden.cliente.apellido}` },

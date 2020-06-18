@@ -11,18 +11,21 @@
 // Saturn Datepicker
 @import "~saturn-datepicker/theming";
 
-@import "src/variables.scss";
-
-// Common styles for Angular Material, include this mixin once!
-@include mat-core();
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$custom-typography: mat-typography-config(
+  $font-family: '"Poppins", sans-serif;',
+);
+@include mat-core($custom-typography);
 
 // https://material.io/design/color/
 // Primary palette
-$el-buen-sabor-admin-primary: mat-palette($app-primary);
+$el-buen-sabor-admin-primary: mat-palette($mat-amber);
 // Accent palette
-$el-buen-sabor-admin-accent: mat-palette($app-accent, 300);
+$el-buen-sabor-admin-accent: mat-palette($mat-indigo, 900);
 // Warn palette (defaults to red).
-$el-buen-sabor-admin-warn: mat-palette($app-warn);
+$el-buen-sabor-admin-warn: mat-palette($mat-red);
 
 // El Buen Sabor theme (a Sass map containing all of the palettes).
 $el-buen-sabor-admin-theme: mat-light-theme(
@@ -36,24 +39,32 @@ $el-buen-sabor-admin-theme: mat-light-theme(
 // Saturn Datepicker theme
 @include sat-datepicker-theme($el-buen-sabor-admin-theme);
 
+/* RESET */
+button:focus {
+  outline: 0 !important;
+}
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
 /* GLOBAL STYLES */
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  color: #00000096;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* BUTTONS */
 button:not(.mat-menu-item) {
-  border-radius: 5em !important;
-}
-
-.mat-menu-item:active {
-  background-color: #ffe8a3 !important;
+  border-radius: 4em !important;
+  font-weight: 600 !important;
 }
 
 /* DIALOGS */
@@ -71,7 +82,15 @@ button:not(.mat-menu-item) {
   font-size: 30px;
 }
 
-/* TABLES */
+/* SNACKBAR */
+.app-snackbar {
+  background: whitesmoke;
+  color: #00000096;
+  font-weight: 600;
+  border-radius: 20px !important;
+}
+
+/* CHIPS */
 .status-chip {
   min-height: 32px;
   font-size: 14px;
@@ -107,7 +126,7 @@ button:not(.mat-menu-item) {
   color: white;
 }
 
-.listo {
+.terminado {
   background-color: #8bc34a;
   color: #000000bb;
 }
@@ -118,19 +137,9 @@ button:not(.mat-menu-item) {
 }
 
 .entregado {
-  background-color: #ffb300;
+  background-color: #ffc107;
   color: #000000bb;
 }
-
-/* RESET */
-button:focus {
-  outline: 0 !important;
-}
-
-/* *:focus {
-  outline: none !important;
-  border: 0 !important;
-} */
 
 /* CHROME SCROLLBAR */
 ::-webkit-scrollbar {

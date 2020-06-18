@@ -13,6 +13,7 @@ export class ManufacturedTableComponent implements OnInit {
   public formDialog = ManufacturedFormComponent;
   public detailDialog = ManufacturedDetailComponent;
   public path = 'http://localhost:8080/api/v1/manufacturados';
+  public router = '/manufactured-categories';
   public title = 'Manufacturados';
   public icon = 'storefront';
   public tableColumns = [

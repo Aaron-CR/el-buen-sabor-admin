@@ -4,6 +4,7 @@ import { DataTableComponent } from './data-table.component';
 import { DataTableService } from './data-table.service';
 import { SharedModule } from '../shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
     DataTableComponent

@@ -13,7 +13,6 @@ export class InvoicesTableComponent implements OnInit {
   public path = 'http://localhost:8080/api/v1/facturas';
   public title = 'Facturas';
   public icon = 'receipt';
-  public actions = false;
   public tableColumns = [
     { columnDef: 'id', header: 'N° Factura', cell: (factura: Factura) => `${factura.id}` },
     { columnDef: 'fecha', header: 'Fecha', cell: (factura: Factura) => `${factura.fecha}` },

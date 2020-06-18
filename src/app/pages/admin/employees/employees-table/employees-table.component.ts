@@ -15,7 +15,6 @@ export class EmployeesTableComponent implements OnInit {
   public path = 'http://localhost:8080/api/v1/empleados';
   public title = 'Empleados';
   public icon = 'work_outline';
-  public actions = true;
   public tableColumns = [
     { columnDef: 'nombre', header: 'Nombre', cell: (empleado: Empleado) => `${empleado.nombre} ${empleado.apellido}` },
     { columnDef: 'email', header: 'Email', cell: (empleado: Empleado) => `${empleado.email}` },
