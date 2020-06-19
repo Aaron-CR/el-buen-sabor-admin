@@ -1,1 +1,31 @@
-<p>supplies-categories-form works!</p>
+<app-dialog title=" {{ action }} Rubro ">
+  <form [formGroup]="suppliesCategoriesForm" novalidate>
+    <h2 class="mt-3 mb-2">Información básica</h2>
+    <!-- Denominación Input -->
+    <mat-form-field class="w-100 pb-2">
+      <mat-label>Denominación</mat-label>
+      <input matInput placeholder="Por favor indique la denominación." formControlName="denominacion" required>
+      <mat-error *ngIf="errorHandling('denominacion', 'required')">
+        Denominación es <strong>obligatorio</strong>.
+      </mat-error>
+    </mat-form-field>
+    <!-- Rubro padre Select -->
+    <mat-form-field class="w-100 pb-2">
+      <mat-label>Seleccione rubro padre</mat-label>
+      <mat-select formControlName="rubroPadre">
+        <mat-option *ngFor="let rubro of rubros" [value]="rubro">
+          {{rubro.denominacion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Oculto Checkbox -->
+    <mat-checkbox class="w-100" formControlName="oculto">¿Desea que el rubro sea público?
+    </mat-checkbox>
+  </form>
+  <mat-dialog-actions align="end" class="mb-3">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!suppliesCategoriesForm.valid"
+      (click)="onAction()"> {{ action }}
+    </button>
+  </mat-dialog-actions>
+</app-dialog>

@@ -16,8 +16,8 @@ export class SuppliesCategoriesTableComponent implements OnInit {
   public title = 'Rubros';
   public icon = 'list_alt';
   public tableColumns = [
-    { columnDef: 'imagen', header: 'Imagen', cell: (rubro: Rubro) => `${rubro.imagen}` },
     { columnDef: 'denominacion', header: 'Denominación', cell: (rubro: Rubro) => `${rubro.denominacion}` },
+    { columnDef: 'rubroPadre', header: 'Rubro Padre', cell: (rubro: Rubro) => `${rubro.rubroPadre}` },
     { columnDef: 'oculto', header: 'Público', cell: (rubro: Rubro) => `${rubro.oculto}` }
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);

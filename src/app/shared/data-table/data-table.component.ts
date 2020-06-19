@@ -72,9 +72,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       data: object,
       width: '50%',
     }).afterClosed().subscribe(result => {
-      if (result.event === 'Add') {
+      if (result.event === 'Añadir') {
         this.create(result.data);
-      } else if (result.event === 'Update') {
+      } else if (result.event === 'Editar') {
         this.update(result.data);
       }
     });
