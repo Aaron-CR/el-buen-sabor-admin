@@ -44,10 +44,18 @@
         </ng-container>
         <!-- SwitchCase currency -->
         <ng-container
-          *ngSwitchCase="column.columnDef ==='price' || column.columnDef === 'unitPrice' || column.columnDef === 'totalAmount'">
+          *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'unitPrice' || column.columnDef === 'totalAmount'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | currency }} </mat-cell>
         </ng-container>
+        <!-- SwitchCase imagen -->
+        <ng-container *ngSwitchCase="column.columnDef ==='imagen'">
+          <mat-header-cell *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <img onerror="this.src='assets/images/cards/card.jpg'" [src]="column.cell(row)">
+          </mat-cell>
+        </ng-container>
+
         <!-- SwitchCase date -->
         <ng-container *ngSwitchCase="column.columnDef === 'createdAt'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
@@ -76,8 +84,8 @@
       </ng-container>
 
       <!-- Action column -->
-      <ng-container matColumnDef="actions" *ngIf="formDialog">
-        <mat-header-cell *matHeaderCellDef> ACTIONS </mat-header-cell>
+      <ng-container matColumnDef="acciones" *ngIf="formDialog">
+        <mat-header-cell *matHeaderCellDef> ACCIONES </mat-header-cell>
         <mat-cell *matCellDef="let item" (click)="$event.stopPropagation()">
           <!-- Action Button -->
           <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
@@ -87,21 +95,21 @@
             <!-- Update Button -->
             <button mat-menu-item (click)="onSubmit(item)">
               <mat-icon class="material-icons-round app-menu-icon">edit</mat-icon>
-              <span>Update</span>
+              <span>Editar</span>
             </button>
             <!-- Delete Button -->
             <button mat-menu-item (click)="onDelete(item)">
               <mat-icon class="material-icons-round app-menu-icon">delete</mat-icon>
-              <span>Delete</span>
+              <span>Eliminar</span>
             </button>
           </mat-menu>
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="formDialog ? displayedColumns.concat('actions') : displayedColumns">
+      <mat-header-row *matHeaderRowDef="formDialog ? displayedColumns.concat('acciones') : displayedColumns">
       </mat-header-row>
       <mat-row class="table-row"
-        *matRowDef="let item; columns: formDialog ? displayedColumns.concat('actions') : displayedColumns"
+        *matRowDef="let item; columns: formDialog ? displayedColumns.concat('acciones') : displayedColumns"
         (click)="onRead(item)">
       </mat-row>
     </mat-table>

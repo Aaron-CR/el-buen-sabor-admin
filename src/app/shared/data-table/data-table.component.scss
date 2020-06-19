@@ -39,8 +39,28 @@ h1 {
   min-height: 440px;
 }
 
-.mat-column-actions {
+.mat-column-acciones {
   flex: 0 0 90px !important;
+}
+
+.mat-column-imagen {
+  flex: 0 0 100px !important;
+}
+
+.mat-column-oculto {
+  flex: 0 0 90px !important;
+}
+
+.mat-column-id {
+  flex: 0 0 120px !important;
+}
+
+.mat-column-precio {
+  flex: 0 0 120px !important;
+}
+
+.mat-column-rubro {
+  flex: 0 0 170px !important;
 }
 
 .table-row:hover {
@@ -61,4 +81,12 @@ h1 {
 
 .app-menu-icon {
   font-size: 20px;
+}
+
+img {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
 }

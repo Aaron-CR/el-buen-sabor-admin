@@ -89,7 +89,7 @@
     <mat-form-field class="w-100 pb-2">
       <mat-label>Seleccione el rubro</mat-label>
       <mat-select formControlName="rubro">
-        <mat-option *ngFor="let rubro of rubros" [value]="rubro.denominacion">
+        <mat-option *ngFor="let rubro of rubros" [value]="rubro">
           {{rubro.denominacion}}
         </mat-option>
       </mat-select>
@@ -114,13 +114,11 @@
         </mat-form-field>
       </div>
     </div>
-
-
-
   </form>
+  {{ suppliesForm.value | json }}
   <mat-dialog-actions align="end" class="mb-3">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!suppliesForm.valid" (click)="onAction()">
+    <button mat-flat-button color="primary" [disabled]="!suppliesForm.valid" (click)="onAction()">
       {{ action }}
     </button>
   </mat-dialog-actions>

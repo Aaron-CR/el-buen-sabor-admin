@@ -3,6 +3,7 @@ import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 
 export interface UnidadMedida {
   abreviatura: string;
@@ -33,13 +34,7 @@ const UNIDADES_DATA: UnidadMedida[] = [
 })
 export class SuppliesFormComponent implements OnInit {
 
-  /* TEMPORAL */
-  rubros: Rubro[] = [
-    { id: 1, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Carnes', rubroPadre: null },
-    { id: 2, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Lácteos', rubroPadre: null },
-    { id: 3, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Harinas', rubroPadre: null },
-  ];
-
+  public rubros: Array<Rubro>;
   public unidades = UNIDADES_DATA;
   public localData: ArticuloInsumo;
   public action: string;
@@ -52,7 +47,8 @@ export class SuppliesFormComponent implements OnInit {
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloInsumo,
     public dialogRef: MatDialogRef<SuppliesFormComponent>,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private http: HttpClient
   ) {
     this.localData = { ...data };
   }
@@ -60,6 +56,7 @@ export class SuppliesFormComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.setAction();
+    this.getCategories();
   }
 
   buildForm() {
@@ -77,9 +74,14 @@ export class SuppliesFormComponent implements OnInit {
       stockMaximo: [this.localData.stockMaximo, [Validators.required]],
       stockMinimo: [this.localData.stockMinimo, [Validators.required]],
       unidadMedida: [this.localData.unidadMedida, [Validators.required]],
-      historialStock: [this.localData.historialStock],
+      historialStock: [this.localData.historialStock ? this.localData.historialStock : []],
       rubro: [this.localData.rubro, [Validators.required]],
     });
+  }
+
+  getCategories() {
+    return this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+      .subscribe((data: Array<Rubro>) => this.rubros = data);
   }
 
   setAction() {
