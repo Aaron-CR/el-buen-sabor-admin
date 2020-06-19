@@ -84,7 +84,20 @@
       </mat-form-field>
     </div>
 
-    <h2>Especifica una imagen</h2>
+    <h2>Especifica el rubro y la imagen</h2>
+    <!-- Rubro Select -->
+    <mat-form-field class="w-100 pb-2">
+      <mat-label>Seleccione el rubro</mat-label>
+      <mat-select formControlName="rubro">
+        <mat-option *ngFor="let rubro of rubros" [value]="rubro.denominacion">
+          {{rubro.denominacion}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="errorHandling('rubro', 'required')">
+        El rubro es <strong>obligatorio</strong>.
+      </mat-error>
+    </mat-form-field>
+
     <div class="d-flex pb-2">
       <div class="w-25">
         <img onerror="this.src='assets/images/cards/card.jpg'" [src]="imagen.value">
@@ -102,19 +115,7 @@
       </div>
     </div>
 
-    <h2>Especifica las categorías</h2>
-    <!-- Rubro Select -->
-    <mat-form-field class="w-100 pb-2">
-      <mat-label>Seleccione el rubro</mat-label>
-      <mat-select formControlName="rubro">
-        <mat-option *ngFor="let rubro of rubros" [value]="rubro.denominacion">
-          {{rubro.denominacion}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="errorHandling('rubro', 'required')">
-        El rubro es <strong>obligatorio</strong>.
-      </mat-error>
-    </mat-form-field>
+
 
   </form>
   <mat-dialog-actions align="end" class="mb-3">
