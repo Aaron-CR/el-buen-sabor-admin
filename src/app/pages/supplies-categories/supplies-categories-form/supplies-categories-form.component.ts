@@ -2,6 +2,8 @@ import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-supplies-categories-form',
@@ -10,13 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class SuppliesCategoriesFormComponent implements OnInit {
 
-  /* TEMPORAL */
-  rubros: Rubro[] = [
-    { id: 1, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Carnes', rubroPadre: null },
-    { id: 2, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Lácteos', rubroPadre: null },
-    { id: 3, ultimaActualizacion: null, oculto: false, eliminado: false, denominacion: 'Harinas', rubroPadre: null },
-  ];
-
+  public rubros: Array<Rubro>;
   public localData: Rubro;
   public action: string;
   public suppliesCategoriesForm: FormGroup;
@@ -24,7 +20,8 @@ export class SuppliesCategoriesFormComponent implements OnInit {
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Rubro,
     public dialogRef: MatDialogRef<SuppliesCategoriesFormComponent>,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private http: HttpClient
   ) {
     this.localData = { ...data };
   }
@@ -32,6 +29,7 @@ export class SuppliesCategoriesFormComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.setAction();
+    this.getCategories();
   }
 
   buildForm() {
@@ -42,6 +40,11 @@ export class SuppliesCategoriesFormComponent implements OnInit {
       denominacion: [this.localData.denominacion, [Validators.required]],
       rubroPadre: [this.localData.rubroPadre]
     });
+  }
+
+  getCategories() {
+    return this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+      .subscribe((data: Array<Rubro>) => this.rubros = data);
   }
 
   setAction() {

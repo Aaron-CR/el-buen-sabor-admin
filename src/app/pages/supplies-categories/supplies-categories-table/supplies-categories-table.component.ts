@@ -12,12 +12,13 @@ export class SuppliesCategoriesTableComponent implements OnInit {
 
   public detailDialog = SuppliesCategoriesDetailComponent;
   public formDialog = SuppliesCategoriesFormComponent;
-  public path = 'http://localhost:8080/api/v1/rubros';
+  public path = 'http://localhost:8080/api/v1/articulos/rubros';
   public title = 'Rubros';
   public icon = 'list_alt';
   public tableColumns = [
+    { columnDef: 'id', header: 'Código', cell: (rubro: Rubro) => rubro.rubroPadre ? `${rubro.rubroPadre.id}.${rubro.id}` : `${rubro.id}` },
     { columnDef: 'denominacion', header: 'Denominación', cell: (rubro: Rubro) => `${rubro.denominacion}` },
-    { columnDef: 'rubroPadre', header: 'Rubro Padre', cell: (rubro: Rubro) => `${rubro.rubroPadre}` },
+    { columnDef: 'rubroPadre', header: 'Rubro Padre', cell: (rubro: Rubro) => rubro.rubroPadre ? `${rubro.rubroPadre.denominacion}` : 'No tiene' },
     { columnDef: 'oculto', header: 'Público', cell: (rubro: Rubro) => `${rubro.oculto}` }
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);

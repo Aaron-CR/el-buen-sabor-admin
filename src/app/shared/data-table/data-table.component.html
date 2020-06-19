@@ -53,6 +53,13 @@
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'dd-MM-yyyy' }} </mat-cell>
         </ng-container>
+        <!-- SwitchCase public -->
+        <ng-container *ngSwitchCase="column.columnDef === 'oculto'">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <app-public [data]="column.cell(row)"></app-public>
+          </mat-cell>
+        </ng-container>
         <!-- SwitchCase category -->
         <ng-container *ngSwitchCase="column.columnDef === 'category' || column.columnDef === 'payment'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
@@ -79,12 +86,12 @@
           <mat-menu #menu="matMenu" xPosition="before" class="px-1">
             <!-- Update Button -->
             <button mat-menu-item (click)="onSubmit(item)">
-              <mat-icon class="material-icons-outlined app-menu-icon">mode_edit</mat-icon>
+              <mat-icon class="material-icons-round app-menu-icon">edit</mat-icon>
               <span>Update</span>
             </button>
             <!-- Delete Button -->
             <button mat-menu-item (click)="onDelete(item)">
-              <mat-icon class="material-icons-outlined app-menu-icon">delete</mat-icon>
+              <mat-icon class="material-icons-round app-menu-icon">delete</mat-icon>
               <span>Delete</span>
             </button>
           </mat-menu>

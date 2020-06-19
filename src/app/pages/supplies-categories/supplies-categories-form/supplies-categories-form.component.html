@@ -24,8 +24,8 @@
   </form>
   <mat-dialog-actions align="end" class="mb-3">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!suppliesCategoriesForm.valid"
-      (click)="onAction()"> {{ action }}
+    <button mat-flat-button color="primary" [disabled]="!suppliesCategoriesForm.valid" (click)="onAction()">
+      {{ action }}
     </button>
   </mat-dialog-actions>
 </app-dialog>
