@@ -1,9 +1,10 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Component, OnInit, Optional, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { MatHorizontalStepper } from '@angular/material/stepper';
 
 export interface UnidadMedida {
   abreviatura: string;
@@ -32,7 +33,7 @@ const UNIDADES_DATA: UnidadMedida[] = [
   templateUrl: './supplies-form.component.html',
   styleUrls: ['./supplies-form.component.scss']
 })
-export class SuppliesFormComponent implements OnInit {
+export class SuppliesFormComponent implements OnInit, AfterViewInit {
 
   public rubros: Array<Rubro>;
   public unidades = UNIDADES_DATA;
@@ -43,6 +44,8 @@ export class SuppliesFormComponent implements OnInit {
   get imagen(): FormControl {
     return this.suppliesForm.get('imagen') as FormControl;
   }
+
+  @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper;
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloInsumo,
@@ -57,6 +60,10 @@ export class SuppliesFormComponent implements OnInit {
     this.buildForm();
     this.setAction();
     this.getCategories();
+  }
+
+  ngAfterViewInit() {
+    this.stepper._getIndicatorType = () => 'number';
   }
 
   buildForm() {

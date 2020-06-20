@@ -12,7 +12,7 @@ export class ManufacturedCategoriesTableComponent implements OnInit {
 
   public detailDialog = ManufacturedCategoriesDetailComponent;
   public formDialog = ManufacturedCategoriesFormComponent;
-  public path = 'http://localhost:8080/api/v1/categorias';
+  public path = 'http://localhost:8080/api/v1/articulos/categorias';
   public title = 'Categorías';
   public icon = 'list_alt';
   public tableColumns = [

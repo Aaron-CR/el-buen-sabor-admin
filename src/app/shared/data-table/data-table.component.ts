@@ -17,6 +17,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
   @Input() path: string;
   @Input() router: string;
+  @Input() routerText: string;
   @Input() formDialog: TemplateRef<any>;
   @Input() detailDialog: TemplateRef<any>;
   @Input() displayedColumns: any[];

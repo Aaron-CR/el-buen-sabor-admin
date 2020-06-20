@@ -9,10 +9,9 @@
       <h1>{{ title }}</h1>
       <!-- Button -->
       <button mat-stroked-button class="ml-3" *ngIf="router" [routerLink]="[router]">
-        Categorias
+        {{ routerText }}
       </button>
     </div>
-
     <div class="row d-flex align-items-center">
       <!-- Search -->
       <div class="app-search ml-3">
@@ -38,13 +37,13 @@
       <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef" [ngSwitch]="true">
         <!-- SwitchCase number -->
         <ng-container
-          *ngSwitchCase="column.columnDef === 'stockUnits' || column.columnDef === 'fein' || column.columnDef === 'id'">
+          *ngSwitchCase="column.columnDef === 'telefono' || column.columnDef === 'ordenes' || column.columnDef === 'id'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | number }} </mat-cell>
         </ng-container>
         <!-- SwitchCase currency -->
         <ng-container
-          *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'unitPrice' || column.columnDef === 'totalAmount'">
+          *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'costo' || column.columnDef === 'monto'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | currency }} </mat-cell>
         </ng-container>
@@ -55,9 +54,8 @@
             <img onerror="this.src='assets/images/cards/card.jpg'" [src]="column.cell(row)">
           </mat-cell>
         </ng-container>
-
         <!-- SwitchCase date -->
-        <ng-container *ngSwitchCase="column.columnDef === 'createdAt'">
+        <ng-container *ngSwitchCase="column.columnDef === 'fecha'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'dd-MM-yyyy' }} </mat-cell>
         </ng-container>
@@ -69,17 +67,17 @@
           </mat-cell>
         </ng-container>
         <!-- SwitchCase category -->
-        <ng-container *ngSwitchCase="column.columnDef === 'category' || column.columnDef === 'payment'">
+        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <!-- <span class="status-chip" [class]="getClass(row)"> {{ row[def] }} </span> -->
-            <span class="status-chip"> {{ column.cell(row) }} </span>
+            <span class="status-chip ml-1"> {{ column.cell(row) }} </span>
           </mat-cell>
         </ng-container>
         <!-- SwitchCase default -->
         <ng-container *ngSwitchDefault>
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{column.cell(row)}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{ column.cell(row) }} </mat-cell>
         </ng-container>
       </ng-container>
 
@@ -114,8 +112,8 @@
       </mat-row>
     </mat-table>
 
-    <mat-paginator [length]="dataSource.length$ | async" [pageSize]="8" [pageSizeOptions]="[4, 8, 12]"
-      showFirstLastButtons>
+    <mat-paginator showFirstLastButtons [length]="dataSource.length$ | async" [pageSize]="8"
+      [pageSizeOptions]="[4, 8, 12]">
     </mat-paginator>
   </div>
 </div>

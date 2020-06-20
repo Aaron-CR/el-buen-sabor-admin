@@ -110,7 +110,8 @@
     </mat-form-field>
 
     <!-- Oculto Checkbox -->
-    <mat-checkbox class="w-100 pb-2" formControlName="oculto">¿Desea que el articulo sea público?
+    <mat-checkbox class="w-100 pb-2" formControlName="oculto">
+      ¿Desea que el articulo sea público?
     </mat-checkbox>
 
     <h2>Especifica la categoría y la imagen</h2>
@@ -154,10 +155,55 @@
       El tiempo estimado de preparación es <strong>obligatorio</strong>.
     </mat-error>
 
+    <mat-table [dataSource]="detallesReceta.value">
+      <!-- Insumo Column -->
+      <ng-container matColumnDef="insumo">
+        <mat-header-cell *matHeaderCellDef> INSUMO </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.insumo.denominacion }} </mat-cell>
+        <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+      </ng-container>
+      <!-- Cantidad Column -->
+      <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef> CANTIDAD </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.cantidad | number }} </mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+      </ng-container>
+      <!-- Public Column -->
+      <ng-container matColumnDef="oculto">
+        <mat-header-cell *matHeaderCellDef> PUBLICO </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <!-- <app-public [data]="row.oculto"></app-public> -->
+          {{ row.oculto }}
+        </mat-cell>
+      </ng-container>
+      <!-- Action column -->
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> ACCIONES </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <!-- Edit Button -->
+          <button mat-button mat-icon-button matTooltip="Editar" (click)="onSubmit(row)">
+            <mat-icon class="material-icons-round" color="primary"> edit </mat-icon>
+          </button>
+          <!-- Delete Button -->
+          <button mat-button mat-icon-button matTooltip="Eliminar" (click)="onDelete(row)">
+            <mat-icon class="material-icons-round" color="warn"> delete </mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <!-- Boton añadir -->
+    <div class="py-3 d-flex flex-row-reverse">
+      <button mat-raised-button color="primary" (click)="onSubmit({})">
+        <mat-icon [inline]="true" class="material-icons-round mr-2"> add </mat-icon>
+        Agregar detalle
+      </button>
+    </div>
   </form>
   <mat-dialog-actions align="end" class="mb-3">
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!manufacturedForm.valid" (click)="onAction()">
+    <button mat-flat-button color="primary" [disabled]="!manufacturedForm.valid" (click)="onAction()">
       {{ action }}
     </button>
   </mat-dialog-actions>

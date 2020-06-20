@@ -7,13 +7,15 @@ import { DataTableModule } from 'src/app/shared/data-table/data-table.module';
 import { ManufacturedDetailComponent } from './manufactured-detail/manufactured-detail.component';
 import { ManufacturedFormComponent } from './manufactured-form/manufactured-form.component';
 import { ManufacturedTableComponent } from './manufactured-table/manufactured-table.component';
+import { DetailFormComponent } from './manufactured-form/detail-form/detail-form.component';
 
 
 @NgModule({
   declarations: [
     ManufacturedDetailComponent,
     ManufacturedFormComponent,
-    ManufacturedTableComponent
+    ManufacturedTableComponent,
+    DetailFormComponent
   ],
   imports: [
     CommonModule,

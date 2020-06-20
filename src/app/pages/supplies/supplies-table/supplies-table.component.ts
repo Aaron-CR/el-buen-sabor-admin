@@ -14,13 +14,16 @@ export class SuppliesTableComponent implements OnInit {
   public formDialog = SuppliesFormComponent;
   public path = 'http://localhost:8080/api/v1/articulos/insumos';
   public router = '/supplies-categories';
+  public routerText = 'Rubros';
   public title = 'Insumos';
   public icon = 'shopping_basket';
   public tableColumns = [
     { columnDef: 'imagen', header: 'Imagen', cell: (insumo: ArticuloInsumo) => `${insumo.imagen}` },
     { columnDef: 'denominacion', header: 'Denominación', cell: (insumo: ArticuloInsumo) => `${insumo.denominacion}` },
     { columnDef: 'rubro', header: 'Rubro', cell: (insumo: ArticuloInsumo) => `${insumo.rubro.denominacion}` },
+    { columnDef: 'costo', header: 'Costo', cell: (insumo: ArticuloInsumo) => `${insumo.costo}` },
     { columnDef: 'precio', header: 'Precio', cell: (insumo: ArticuloInsumo) => `${insumo.precio}` },
+    { columnDef: 'stockActual', header: 'Disponibilidad', cell: (insumo: ArticuloInsumo) => `${insumo.stockActual}` },
     { columnDef: 'oculto', header: 'Publico', cell: (insumo: ArticuloInsumo) => `${insumo.oculto}` }
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);

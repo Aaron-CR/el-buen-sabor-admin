@@ -21,7 +21,8 @@ import { PublicComponent } from './components/public/public.component';
     RouterModule
   ],
   exports: [
-    DataTableComponent
+    DataTableComponent,
+    PublicComponent
   ],
   providers: [
     DataTableService

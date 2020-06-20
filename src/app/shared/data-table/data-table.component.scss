@@ -51,7 +51,15 @@ h1 {
   flex: 0 0 90px !important;
 }
 
+.mat-column-cantidad {
+  flex: 0 0 140px !important;
+}
+
 .mat-column-id {
+  flex: 0 0 120px !important;
+}
+
+.mat-column-costo {
   flex: 0 0 120px !important;
 }
 
@@ -61,6 +69,10 @@ h1 {
 
 .mat-column-rubro {
   flex: 0 0 170px !important;
+}
+
+.mat-column-rubroPadre {
+  flex: 0 0 180px !important;
 }
 
 .table-row:hover {
