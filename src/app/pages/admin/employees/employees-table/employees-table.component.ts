@@ -12,7 +12,7 @@ export class EmployeesTableComponent implements OnInit {
 
   public formDialog = EmployeesFormComponent;
   public detailDialog = EmployeesDetailComponent;
-  public path = 'http://localhost:8080/api/v1/empleados';
+  public path = 'http://localhost:8080/api/v1/usuarios/empleados';
   public title = 'Empleados';
   public icon = 'work_outline';
   public tableColumns = [

@@ -11,7 +11,7 @@ import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.compone
 export class KitchenTableComponent implements OnInit {
 
   public detailDialog = KitchenDetailComponent;
-  public path = 'http://localhost:8080/api/v1/orden';
+  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes';
   public title = 'Cocina';
   public icon = 'restaurant';
   public tableColumns = [

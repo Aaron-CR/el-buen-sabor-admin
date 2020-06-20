@@ -11,7 +11,7 @@ import { CustomersDetailComponent } from '../customers-detail/customers-detail.c
 export class CustomersTableComponent implements OnInit {
 
   public detailDialog = CustomersDetailComponent;
-  public path = 'http://localhost:8080/api/v1/clientes';
+  public path = 'http://localhost:8080/api/v1/usuarios/clientes';
   public title = 'Clientes';
   public icon = 'people';
   public tableColumns = [

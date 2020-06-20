@@ -31,10 +31,6 @@
           <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
 
-        <!-- Oculto Checkbox -->
-        <mat-checkbox class="w-100 pb-2" formControlName="oculto">
-          ¿Desea que el articulo sea público?
-        </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
@@ -49,7 +45,8 @@
           <mat-label>Seleccione la categoría</mat-label>
           <mat-select formControlName="categoria">
             <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-              {{ categoria.imagen }} | {{categoria.denominacion}}
+              <img onerror="this.src='assets/images/cards/card.jpg'" [src]="categoria.imagen" class="select-img">
+              {{categoria.denominacion}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="errorHandling('categoria', 'required')">
@@ -157,6 +154,11 @@
     <!-- PASO 4 -->
     <mat-step label="Paso 4">
       <h2>Revisa la información y guarda el artículo</h2>
+
+      <!-- Oculto Checkbox -->
+      <mat-checkbox class="w-100 pb-2" formControlName="oculto">
+        ¿Desea que el articulo sea público?
+      </mat-checkbox>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" [disabled]="!manufacturedForm.valid" (click)="onAction()">
           {{ action }}

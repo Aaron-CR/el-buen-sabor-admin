@@ -19,16 +19,10 @@
             formControlName="descripcion"></textarea>
           <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
-        <div class="pb-2">
-          <!-- Es Insumo Checkbox -->
-          <mat-checkbox class="w-100 mr-3" formControlName="esInsumo">
-            ¿Es insumo?
-          </mat-checkbox>
-          <!-- Oculto Checkbox -->
-          <mat-checkbox class="w-100" formControlName="oculto">
-            ¿Desea que el articulo sea público?
-          </mat-checkbox>
-        </div>
+        <!-- Es Insumo Checkbox -->
+        <mat-checkbox class="w-100 pb-2" formControlName="esInsumo">
+          ¿Es insumo?
+        </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
@@ -142,6 +136,10 @@
     <!-- PASO 4 -->
     <mat-step label="Paso 4">
       <h2>Revisa la información y guarda el artículo</h2>
+      <!-- Oculto Checkbox -->
+      <mat-checkbox class="w-100 pb-2" formControlName="oculto">
+        ¿Desea que el articulo sea público?
+      </mat-checkbox>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" [disabled]="!suppliesForm.valid" (click)="onAction()">
           {{ action }}

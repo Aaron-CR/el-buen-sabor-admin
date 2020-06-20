@@ -11,7 +11,7 @@ import { CashierDetailComponent } from '../cashier-detail/cashier-detail.compone
 export class CashierTableComponent implements OnInit {
 
   public detailDialog = CashierDetailComponent;
-  public path = 'http://localhost:8080/api/v1/orden';
+  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes';
   public title = 'Cajero';
   public icon = 'point_of_sale';
   public tableColumns = [

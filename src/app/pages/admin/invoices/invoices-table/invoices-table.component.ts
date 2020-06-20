@@ -10,7 +10,7 @@ import { InvoicesDetailComponent } from '../invoices-detail/invoices-detail.comp
 export class InvoicesTableComponent implements OnInit {
 
   public detailDialog = InvoicesDetailComponent;
-  public path = 'http://localhost:8080/api/v1/facturas';
+  public path = 'http://localhost:8080/api/v1/comprobantes/facturas';
   public title = 'Facturas';
   public icon = 'receipt';
   public tableColumns = [
