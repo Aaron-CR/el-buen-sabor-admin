@@ -1,7 +1,27 @@
 img {
-  width: 100%;
-  max-height: 110px;
-  line-height: 110px;
-  border-radius: 20px;
-  text-align: center;
+  width: 110px;
+  min-width: 110px;
+  height: 110px;
+  min-height: 110px;
+  border-radius: 50%;
+}
+
+.mat-column-cantidad {
+  flex: 0 0 90px !important;
+}
+
+.mat-column-oculto {
+  flex: 0 0 90px !important;
+}
+
+.mat-column-acciones {
+  flex: 0 0 90px !important;
+}
+
+.edit {
+  color: #43a047 !important;
+}
+
+.delete {
+  color: #e53935 !important;
 }

@@ -15,7 +15,9 @@
         <!-- Descripción Textarea -->
         <mat-form-field class="w-100 pb-2">
           <mat-label>Descripción</mat-label>
-          <textarea matInput placeholder="Escribe una descripción." formControlName="descripcion"></textarea>
+          <textarea matInput #descripcion maxlength="255" placeholder="Escribe una descripción."
+            formControlName="descripcion"></textarea>
+          <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
         <div class="pb-2">
           <!-- Es Insumo Checkbox -->
@@ -115,15 +117,16 @@
           </mat-error>
         </mat-form-field>
         <div class="d-flex pb-2">
-          <div class="w-25">
+          <div class="flex-shrink-1">
             <img onerror="this.src='assets/images/cards/card.jpg'" [src]="imagen.value">
           </div>
           <!-- Imagen URL Textarea -->
-          <div class="w-75 ml-3">
+          <div class="flex-grow-1 ml-3">
             <mat-form-field class="w-100">
               <mat-label>Imagen URL</mat-label>
-              <textarea matInput required placeholder="Por favor indique la url de la imagen."
+              <textarea matInput #imagen maxlength="255" required placeholder="Por favor indique la url de la imagen."
                 formControlName="imagen"></textarea>
+              <mat-hint align="end">{{imagen.value?.length || 0}}/255</mat-hint>
               <mat-error *ngIf="errorHandling('imagen', 'required')">
                 La URL de la imagen es <strong>obligatorio</strong>.
               </mat-error>

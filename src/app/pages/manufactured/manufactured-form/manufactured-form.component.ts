@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Component, OnInit, Optional, Inject, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Categoria } from 'src/app/core/models/articulos/categoria';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
@@ -6,13 +6,15 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dial
 import { HttpClient } from '@angular/common/http';
 import { DetailFormComponent } from './detail-form/detail-form.component';
 import { DetalleReceta } from 'src/app/core/models/articulos/detalle-receta';
+import { MatHorizontalStepper } from '@angular/material/stepper';
+import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 
 @Component({
   selector: 'app-manufactured-form',
   templateUrl: './manufactured-form.component.html',
   styleUrls: ['./manufactured-form.component.scss']
 })
-export class ManufacturedFormComponent implements OnInit {
+export class ManufacturedFormComponent implements OnInit, AfterViewInit {
 
   public categorias: Array<Categoria>;
   public localData: ArticuloManufacturado;
@@ -32,6 +34,8 @@ export class ManufacturedFormComponent implements OnInit {
     return this.manufacturedForm.get('detallesReceta') as FormArray;
   }
 
+  @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper;
+
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloManufacturado,
     public dialogRef: MatDialogRef<ManufacturedFormComponent>,
@@ -46,6 +50,10 @@ export class ManufacturedFormComponent implements OnInit {
     this.buildForm();
     this.setAction();
     this.getCategories();
+  }
+
+  ngAfterViewInit() {
+    this.stepper._getIndicatorType = () => 'number';
   }
 
   buildForm() {
@@ -104,7 +112,7 @@ export class ManufacturedFormComponent implements OnInit {
   }
 
   onDelete(item: any) {
-    this.delete(item.id);
+    this.delete(item);
   }
 
   create(result: DetalleReceta) {
@@ -113,8 +121,8 @@ export class ManufacturedFormComponent implements OnInit {
   }
 
   update(result: DetalleReceta) {
-    this.detallesReceta.value.filter((value) => {
-      if (value.id === result.id) {
+    this.detallesReceta.value.filter((value: DetalleReceta) => {
+      if (value.insumo === result.insumo) {
         const index = this.detallesReceta.value.indexOf(value);
         this.detallesReceta.value[index] = result;
       }
@@ -122,9 +130,9 @@ export class ManufacturedFormComponent implements OnInit {
     this.notifyTable();
   }
 
-  delete(id: number) {
-    const newValue = this.detallesReceta.value.filter((value) =>
-      value.id !== id
+  delete(result: DetalleReceta) {
+    const newValue = this.detallesReceta.value.filter((value: DetalleReceta) =>
+      value !== result
     );
     this.manufacturedForm.setControl('detallesReceta', this.formBuilder.array(newValue));
   }

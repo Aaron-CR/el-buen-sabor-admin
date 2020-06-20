@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "el-buen-sabor-admin"
+    }
+  },
+  "defaultProject": "el-buen-sabor-admin",
+  "cli": {
+    "analytics": false
+  }
 }
