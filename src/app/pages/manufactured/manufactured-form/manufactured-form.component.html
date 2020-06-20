@@ -113,22 +113,29 @@
           <ng-container matColumnDef="oculto">
             <mat-header-cell *matHeaderCellDef> PUBLICO </mat-header-cell>
             <mat-cell *matCellDef="let row">
-              <!-- <app-public [data]="row.oculto"></app-public> -->
-              {{ row.oculto }}
+              <mat-icon class="material-icons" [class]="getPublicClass(row)">stop_circle</mat-icon>
             </mat-cell>
           </ng-container>
           <!-- Action column -->
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef> ACCIONES </mat-header-cell>
             <mat-cell *matCellDef="let row">
-              <!-- Edit Button -->
-              <button mat-button mat-icon-button matTooltip="Editar" (click)="onSubmit(row)">
-                <mat-icon class="material-icons-round edit"> edit </mat-icon>
+              <!-- Action Button -->
+              <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
+                <mat-icon class="material-icons-outlined">more_horiz</mat-icon>
               </button>
-              <!-- Delete Button -->
-              <button mat-button mat-icon-button matTooltip="Eliminar" (click)="onDelete(row)">
-                <mat-icon class="material-icons-round delete"> delete </mat-icon>
-              </button>
+              <mat-menu #menu="matMenu" xPosition="before" class="px-1">
+                <!-- Update Button -->
+                <button mat-menu-item (click)="onSubmit(row)">
+                  <mat-icon class="material-icons app-menu-icon">edit</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <!-- Delete Button -->
+                <button mat-menu-item (click)="onDelete(row)">
+                  <mat-icon class="material-icons app-menu-icon">delete</mat-icon>
+                  <span>Eliminar</span>
+                </button>
+              </mat-menu>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -137,7 +144,7 @@
         <!-- Boton añadir -->
         <div class="py-3">
           <button mat-raised-button color="primary" (click)="onSubmit({})">
-            <mat-icon [inline]="true" class="material-icons-round mr-2"> add </mat-icon>
+            <mat-icon [inline]="true" class="material-icons mr-2"> add </mat-icon>
             Agregar detalle
           </button>
         </div>

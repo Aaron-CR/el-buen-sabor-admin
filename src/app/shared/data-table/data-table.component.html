@@ -63,14 +63,13 @@
         <ng-container *ngSwitchCase="column.columnDef === 'oculto'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <app-public [data]="column.cell(row)"></app-public>
+            <mat-icon class="material-icons" [class]="getPublicClass(row)">stop_circle</mat-icon>
           </mat-cell>
         </ng-container>
         <!-- SwitchCase category -->
         <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <!-- <span class="status-chip" [class]="getClass(row)"> {{ row[def] }} </span> -->
             <span class="status-chip ml-1"> {{ column.cell(row) }} </span>
           </mat-cell>
         </ng-container>
@@ -92,12 +91,12 @@
           <mat-menu #menu="matMenu" xPosition="before" class="px-1">
             <!-- Update Button -->
             <button mat-menu-item (click)="onSubmit(item)">
-              <mat-icon class="material-icons-round app-menu-icon">edit</mat-icon>
+              <mat-icon class="material-icons app-menu-icon">edit</mat-icon>
               <span>Editar</span>
             </button>
             <!-- Delete Button -->
             <button mat-menu-item (click)="onDelete(item)">
-              <mat-icon class="material-icons-round app-menu-icon">delete</mat-icon>
+              <mat-icon class="material-icons app-menu-icon">delete</mat-icon>
               <span>Eliminar</span>
             </button>
           </mat-menu>

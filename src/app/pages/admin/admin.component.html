@@ -1,19 +1,19 @@
 <div class="container my-4">
   <!-- Cards -->
   <div class="d-flex justify-content-around flex-wrap">
-    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 mr-3 app-card" routerLink="/admin/customers">
+    <div class="app-button" routerLink="/admin/customers">
       <button mat-mini-fab disabled class="mr-3">
         <mat-icon class="material-icons-outlined">people</mat-icon>
       </button>
       <h1> Clientes </h1>
     </div>
-    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 app-card" routerLink="employees">
+    <div class="app-button" routerLink="employees">
       <button mat-mini-fab disabled class="mr-3">
         <mat-icon class="material-icons-outlined">work_outline</mat-icon>
       </button>
       <h1> Empleados </h1>
     </div>
-    <div class="d-flex flex-fill flex-row align-items-end px-3 py-4 ml-3 app-card" routerLink="invoices">
+    <div class="app-button" routerLink="invoices">
       <button mat-mini-fab disabled class="mr-3">
         <mat-icon class="material-icons-outlined">receipt</mat-icon>
       </button>
@@ -22,6 +22,27 @@
   </div>
   <!-- Ingresos -->
   <div class="mt-3 app-card" style="height: 150px; width: 100%;">
+    <!-- Action Button -->
+    <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
+      <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before" class="px-1">
+      <!-- Diario Button -->
+      <button mat-menu-item>
+        <mat-icon class="material-icons app-menu-icon">calendar_today</mat-icon>
+        <span>Diario</span>
+      </button>
+      <!-- Mensual Button -->
+      <button mat-menu-item>
+        <mat-icon class="material-icons app-menu-icon">calendar_today</mat-icon>
+        <span>Mensual</span>
+      </button>
+      <!-- Exportar Button -->
+      <button mat-menu-item>
+        <mat-icon class="material-icons app-menu-icon">reply</mat-icon>
+        <span>Exportar</span>
+      </button>
+    </mat-menu>
     <ngx-charts-number-card [results]="ingresos" [scheme]="ingresosColorScheme" [valueFormatting]="format"
       [innerPadding]="0" [cardColor]="'#f2f2f2'">
     </ngx-charts-number-card>

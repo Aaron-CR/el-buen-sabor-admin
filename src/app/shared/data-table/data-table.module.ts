@@ -5,14 +5,11 @@ import { DataTableService } from './data-table.service';
 import { SharedModule } from '../shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { PublicComponent } from './components/public/public.component';
-
 
 
 @NgModule({
   declarations: [
-    DataTableComponent,
-    PublicComponent
+    DataTableComponent
   ],
   imports: [
     CommonModule,
@@ -21,8 +18,7 @@ import { PublicComponent } from './components/public/public.component';
     RouterModule
   ],
   exports: [
-    DataTableComponent,
-    PublicComponent
+    DataTableComponent
   ],
   providers: [
     DataTableService

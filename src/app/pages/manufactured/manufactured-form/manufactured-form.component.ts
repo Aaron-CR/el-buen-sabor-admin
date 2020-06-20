@@ -149,4 +149,8 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
     return value + 'm';
   }
 
+  getPublicClass(row) {
+    return row.oculto ? 'public' : 'private';
+  }
+
 }

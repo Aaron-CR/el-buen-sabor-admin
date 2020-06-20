@@ -124,4 +124,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getPublicClass(row) {
+    return row.oculto ? 'public' : 'private';
+  }
+
 }
