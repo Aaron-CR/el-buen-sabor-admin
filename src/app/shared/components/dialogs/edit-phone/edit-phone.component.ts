@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-edit-phone',
+  templateUrl: './edit-phone.component.html',
+  styleUrls: ['./edit-phone.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class EditPhoneComponent implements OnInit {
 
-  public loginFormGroup: FormGroup;
+  public editPhoneForm: FormGroup;
   public hide = true;
 
   constructor(public formBuilder: FormBuilder) { }
@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   }
 
   buildForm() {
-    this.loginFormGroup = this.formBuilder.group({
-      email: ['', Validators.required],
+    this.editPhoneForm = this.formBuilder.group({
       password: ['', Validators.required],
+      telefono: ['', Validators.required],
     });
   }
 

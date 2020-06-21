@@ -5,7 +5,7 @@ import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { DialogComponent } from './components/dialog/dialog.component';
+import { BaseComponent } from './components/dialogs/base/base.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { CustomerComponent } from './components/details-tab/customer/customer.component';
 import { PaymentComponent } from './components/details-tab/payment/payment.component';
@@ -14,6 +14,9 @@ import { StatusComponent } from './components/details-tab/status/status.componen
 import { InvoiceComponent } from './components/invoice-tab/invoice/invoice.component';
 import { DetailComponent } from './components/products-tab/detail/detail.component';
 import { NotesComponent } from './components/products-tab/notes/notes.component';
+import { EditPhoneComponent } from './components/dialogs/edit-phone/edit-phone.component';
+import { EditPasswordComponent } from './components/dialogs/edit-password/edit-password.component';
+import { DialogService } from './components/dialogs/dialog.service';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -27,7 +30,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
 @NgModule({
   declarations: [
-    DialogComponent,
+    BaseComponent,
     NavigationComponent,
     CustomerComponent,
     PaymentComponent,
@@ -35,7 +38,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     StatusComponent,
     InvoiceComponent,
     DetailComponent,
-    NotesComponent
+    NotesComponent,
+    EditPhoneComponent,
+    EditPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ReactiveFormsModule,
     CurrencyMaskModule,
     MaterialModule,
-    DialogComponent,
+    BaseComponent,
     NavigationComponent,
     CustomerComponent,
     PaymentComponent,
@@ -57,7 +62,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NotesComponent
   ],
   providers: [
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    DialogService
   ],
 })
 export class SharedModule { }
