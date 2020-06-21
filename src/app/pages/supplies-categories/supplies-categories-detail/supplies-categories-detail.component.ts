@@ -21,4 +21,8 @@ export class SuppliesCategoriesDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getPublicClass(oculto: boolean) {
+    return oculto ? 'public' : 'private';
+  }
+
 }
