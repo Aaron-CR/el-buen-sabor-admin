@@ -1,4 +1,4 @@
-<app-dialog [title]="'Orden 1.000.000'">
+<app-dialog title="Orden 1.000.000">
   <mat-tab-group>
     <mat-tab label="Detalles">
       <app-customer></app-customer>
@@ -14,4 +14,5 @@
       <app-invoice></app-invoice>
     </mat-tab>
   </mat-tab-group>
+  {{ localData | json}}
 </app-dialog>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Categoria } from 'src/app/core/models/articulos/categoria';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manufactured-categories-detail',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManufacturedCategoriesDetailComponent implements OnInit {
 
-  constructor() { }
+  public localData: Categoria;
+
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Categoria,
+    public dialogRef: MatDialogRef<ManufacturedCategoriesDetailComponent>
+  ) {
+    this.localData = { ...data };
+  }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Factura } from 'src/app/core/models/comprobantes/factura';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-invoices-detail',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoicesDetailComponent implements OnInit {
 
-  constructor() { }
+  public localData: Factura;
+
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Factura,
+    public dialogRef: MatDialogRef<InvoicesDetailComponent>
+  ) {
+    this.localData = { ...data };
+  }
 
   ngOnInit(): void {
   }
