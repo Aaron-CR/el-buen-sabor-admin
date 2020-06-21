@@ -16,11 +16,11 @@
       <!-- Search -->
       <div class="app-search ml-3">
         <input matInput placeholder="Buscar..." #input>
-        <mat-icon class="material-icons-outlined" matSuffix>search</mat-icon>
+        <mat-icon class="material-icons" matSuffix>search</mat-icon>
       </div>
       <!-- Button -->
       <button mat-flat-button color="primary" class="ml-3" *ngIf="formDialog" (click)="onSubmit({})">
-        <mat-icon class="material-icons-outlined" [inline]="true">add</mat-icon> Añadir
+        <mat-icon class="material-icons" [inline]="true">add</mat-icon> Añadir
       </button>
     </div>
   </div>
@@ -45,7 +45,7 @@
         <ng-container
           *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'costo' || column.columnDef === 'monto'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{ column.cell(row) | currency }} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{ column.cell(row) | currency:"ARS":"symbol" }} </mat-cell>
         </ng-container>
         <!-- SwitchCase imagen -->
         <ng-container *ngSwitchCase="column.columnDef ==='imagen'">
@@ -57,7 +57,7 @@
         <!-- SwitchCase date -->
         <ng-container *ngSwitchCase="column.columnDef === 'fecha'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'dd-MM-yyyy' }} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'short' }} </mat-cell>
         </ng-container>
         <!-- SwitchCase public -->
         <ng-container *ngSwitchCase="column.columnDef === 'oculto'">

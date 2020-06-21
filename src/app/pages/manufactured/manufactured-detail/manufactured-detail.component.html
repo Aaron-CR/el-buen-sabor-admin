@@ -12,15 +12,15 @@
   <div class="d-flex justify-content-around">
     <div class="d-flex flex-column app-card align-items-center">
       <span class="head">Precio venta</span>
-      <span class="number">{{ localData.precio | currency }}</span>
+      <span class="number">{{ localData.precio | currency:"ARS":"symbol" }}</span>
     </div>
     <div class="d-flex flex-column app-card align-items-center">
       <span class="head">Costo</span>
-      <span class="number">{{ costo | currency }}</span>
+      <span class="number">{{ costo | currency:"ARS":"symbol" }}</span>
     </div>
     <div class="d-flex flex-column app-card align-items-center">
       <span class="head">Ganancia</span>
-      <span class="number">{{ (localData.precio - costo) | currency }}</span>
+      <span class="number">{{ (localData.precio - costo) | currency:"ARS":"symbol" }}</span>
     </div>
   </div>
   <h2 class="mt-2">Detalle de preparación</h2>
@@ -40,18 +40,18 @@
     <!-- Costo Unitario Column -->
     <ng-container matColumnDef="costoUnitario">
       <mat-header-cell *matHeaderCellDef> COSTO UNITARIO </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.insumo.costo | currency }} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.insumo.costo | currency:"ARS":"symbol" }} </mat-cell>
       <mat-footer-cell *matFooterCellDef></mat-footer-cell>
     </ng-container>
     <!-- Costo Total Column -->
     <ng-container matColumnDef="costoTotal">
       <mat-header-cell *matHeaderCellDef> COSTO TOTAL </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ costoTotal(row) | currency }} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ costoTotal(row) | currency:"ARS":"symbol" }} </mat-cell>
       <mat-footer-cell *matFooterCellDef></mat-footer-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
-  <div class="table-footer">Última modificación: {{ localData.ultimaActualizacion | date }}</div>
+  <div class="table-footer">Última modificación: {{ localData.ultimaActualizacion | date:'medium' }}</div>
 </app-dialog>

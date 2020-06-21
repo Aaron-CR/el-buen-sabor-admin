@@ -11,6 +11,8 @@ export class SuppliesDetailComponent implements OnInit {
 
   public localData: ArticuloInsumo;
 
+  public displayedColumns = ['fechaMovimiento', 'cantidad', 'operacion'];
+
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloInsumo,
     public dialogRef: MatDialogRef<SuppliesDetailComponent>

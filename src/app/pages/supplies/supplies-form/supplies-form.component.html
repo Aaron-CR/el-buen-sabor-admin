@@ -66,7 +66,8 @@
           <!-- Stock actual Input -->
           <mat-form-field class="w-100 mr-3">
             <mat-label>Stock actual</mat-label>
-            <input matInput placeholder="Por favor indique el stock actual." formControlName="stockActual" required>
+            <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }"
+              placeholder="Por favor indique el stock actual." formControlName="stockActual" required>
             <mat-error *ngIf="errorHandling('stockActual', 'required')">
               El stock actual es <strong>obligatorio</strong>.
             </mat-error>
@@ -74,7 +75,8 @@
           <!-- Stock maximo Input -->
           <mat-form-field class="w-100 mr-3">
             <mat-label>Stock maximo</mat-label>
-            <input matInput placeholder="Por favor indique el stock maximo." formControlName="stockMaximo" required>
+            <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }"
+              placeholder="Por favor indique el stock maximo." formControlName="stockMaximo" required>
             <mat-error *ngIf="errorHandling('stockMaximo', 'required')">
               El stock maximo es <strong>obligatorio</strong>.
             </mat-error>
@@ -82,7 +84,8 @@
           <!-- Stock minimo Input -->
           <mat-form-field class="w-100">
             <mat-label>Stock minimo</mat-label>
-            <input matInput placeholder="Por favor indique el stock minimo." formControlName="stockMinimo" required>
+            <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }"
+              placeholder="Por favor indique el stock minimo." formControlName="stockMinimo" required>
             <mat-error *ngIf="errorHandling('stockMinimo', 'required')">
               El stock minimo es <strong>obligatorio</strong>.
             </mat-error>

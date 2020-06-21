@@ -17,7 +17,8 @@
       <!-- Cantidad Input -->
       <mat-form-field class="flex-shrink-1 mr-3">
         <mat-label>Cantidad</mat-label>
-        <input matInput placeholder="Por favor indique la cantidad." formControlName="cantidad" required>
+        <input matInput currencyMask [options]="{ prefix: '', precision: 3, thousands: '.', decimal: ',' }"
+          placeholder="Por favor indique la cantidad." formControlName="cantidad" required>
         <mat-hint> {{ unidad }} </mat-hint>
         <mat-error *ngIf="errorHandling('cantidad', 'required')">
           La cantidad es <strong>obligatorio</strong>.
