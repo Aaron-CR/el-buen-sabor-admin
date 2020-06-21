@@ -32,8 +32,14 @@
       <mat-progress-bar mode="query" *ngIf="dataSource.loading$ | async"></mat-progress-bar>
     </div>
 
-    <mat-table matSort matSortDisableClear="true" [dataSource]="dataSource">
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="(dataSource.length$ | async) === 0">
+      <mat-icon class="material-icons">{{ icon }}</mat-icon>
+      <span>No se encontraron datos</span>
+    </div>
 
+    <mat-table matSort matSortDisableClear="true" [dataSource]="dataSource"
+      [ngClass]="{'d-none': (dataSource.length$ | async) === 0}">
       <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef" [ngSwitch]="true">
         <!-- SwitchCase number -->
         <ng-container
