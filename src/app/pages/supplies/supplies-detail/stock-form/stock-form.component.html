@@ -1,0 +1,35 @@
+<app-dialog title=" Añadir existencia ">
+  <div class="row py-3 mx-2">
+    <img onerror="this.src='assets/images/cards/card.jpg'" [src]="localData.imagen">
+    <div class="d-flex flex-column align-self-center ml-3">
+      <div>Codigo {{ localData.id | number }}</div>
+      <h1>{{ localData.denominacion }}</h1>
+      <div>
+        <span class="status-chip mr-3">
+          {{ localData.rubro.denominacion }}
+        </span>
+        <span class="status-chip" *ngIf="localData.rubro.rubroPadre">
+          {{ localData.rubro.rubroPadre.denominacion }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="stockForm" novalidate>
+    <!-- Cantidad Input -->
+    <mat-form-field class="w-100 mt-3">
+      <mat-label>Cantidad</mat-label>
+      <input matInput currencyMask [options]="{ prefix: '', precision: 3, thousands: '.', decimal: ',' }"
+        placeholder="Por favor indique la cantidad a ingresar." formControlName="cantidad" required>
+      <mat-hint> {{ localData.unidadMedida }} </mat-hint>
+      <mat-error *ngIf="errorHandling('cantidad', 'required')">
+        La cantidad a ingresar es <strong>obligatoria</strong>.
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <mat-dialog-actions align="end" class="mb-3">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-flat-button color="primary" [disabled]="!stockForm.valid" (click)="onAction()">
+      Añadir
+    </button>
+  </mat-dialog-actions>
+</app-dialog>

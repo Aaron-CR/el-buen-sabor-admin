@@ -48,7 +48,7 @@ export class DataTableService {
   }
 
   private handleError(err) {
-    let errorMessage = 'Ocurrió un error. intente nuevamente más tarde';
+    const errorMessage = 'Ocurrió un error. intente nuevamente más tarde';
     this.snackBar.open(errorMessage, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
     return throwError(`${errorMessage} (${err.status})`);
   }
