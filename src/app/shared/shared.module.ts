@@ -18,6 +18,11 @@ import { EditPhoneComponent } from './components/dialogs/edit-phone/edit-phone.c
 import { EditPasswordComponent } from './components/dialogs/edit-password/edit-password.component';
 import { DialogService } from './components/dialogs/dialog.service';
 
+/* FIREBASE */
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from './../../environments/environment';
+
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
   allowNegative: true,
@@ -45,7 +50,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   exports: [
     ReactiveFormsModule,
@@ -63,7 +69,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
-    DialogService
+    DialogService,
+    AngularFireAuth
   ],
 })
 export class SharedModule { }

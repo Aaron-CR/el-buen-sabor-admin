@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyCcVf7VISioriT8I7gyGB9Tgxng6ETdQGo',
+    authDomain: 'elbuensabor-delivery.firebaseapp.com',
+    databaseURL: 'https://elbuensabor-delivery.firebaseio.com',
+    projectId: 'elbuensabor-delivery',
+    storageBucket: 'elbuensabor-delivery.appspot.com',
+    messagingSenderId: '126762949811',
+    appId: '1:126762949811:web:3ba76911a129e0980624c6',
+    measurementId: 'G-KPGDR9W0VD'
+  }
 };
 
 /*
