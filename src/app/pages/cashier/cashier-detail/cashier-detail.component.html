@@ -3,7 +3,7 @@
     <mat-tab label="Detalles">
       <app-customer [data]="localData.cliente"></app-customer>
       <app-status [data]="localData.estado"></app-status>
-      <app-payment></app-payment>
+      <app-payment [data]="localData"></app-payment>
       <app-shipping></app-shipping>
     </mat-tab>
     <mat-tab label="Productos">
