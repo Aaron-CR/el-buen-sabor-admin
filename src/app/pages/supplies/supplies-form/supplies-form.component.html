@@ -20,8 +20,12 @@
           <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
         <!-- Es Insumo Checkbox -->
-        <mat-checkbox class="w-100 pb-2" formControlName="esInsumo">
+        <mat-checkbox class="w-100 pb-2 mr-3" formControlName="esInsumo">
           ¿Venta al publico?
+        </mat-checkbox>
+        <!-- Oculto Checkbox -->
+        <mat-checkbox class="w-100 pb-2" formControlName="oculto">
+          ¿Desea que el articulo sea público?
         </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
@@ -121,20 +125,6 @@
             </mat-form-field>
           </div>
         </div>
-      </form>
-      <div class="d-flex flex-row-reverse">
-        <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
-        <button mat-button class="mr-2" matStepperPrevious>Volver</button>
-      </div>
-    </mat-step>
-    <!-- PASO 4 -->
-    <mat-step label="Paso 4">
-      <h2>Revisa la información y guarda el artículo</h2>
-      <form [formGroup]="suppliesForm" novalidate>
-        <!-- Oculto Checkbox -->
-        <mat-checkbox class="w-100 pb-2" formControlName="oculto">
-          ¿Desea que el articulo sea público?
-        </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" [disabled]="!suppliesForm.valid" (click)="onAction()">

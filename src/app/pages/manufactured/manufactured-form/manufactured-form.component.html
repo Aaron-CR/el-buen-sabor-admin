@@ -22,7 +22,6 @@
             </mat-error>
           </mat-form-field>
         </div>
-
         <!-- Descripción Textarea -->
         <mat-form-field class="w-100 pb-2">
           <mat-label>Descripción</mat-label>
@@ -30,7 +29,10 @@
             formControlName="descripcion"></textarea>
           <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
-
+        <!-- Oculto Checkbox -->
+        <mat-checkbox class="w-100 pb-2" formControlName="oculto">
+          ¿Desea que el articulo sea público?
+        </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
@@ -53,7 +55,6 @@
             La categoría es <strong>obligatorio</strong>.
           </mat-error>
         </mat-form-field>
-
         <div class="d-flex pb-2">
           <div class="flex-shrink-1">
             <img onerror="this.src='assets/images/cards/card.jpg'" [src]="imagen.value">
@@ -92,7 +93,6 @@
         <mat-error *ngIf="errorHandling('tiempoEstimadoCocina', 'required')">
           El tiempo estimado de preparación es <strong>obligatorio</strong>.
         </mat-error>
-
         <mat-table [dataSource]="detallesReceta.value">
           <!-- Insumo Column -->
           <ng-container matColumnDef="insumo">
@@ -145,20 +145,6 @@
             Agregar detalle
           </button>
         </div>
-      </form>
-      <div class="d-flex flex-row-reverse">
-        <button mat-flat-button color="primary" matStepperNext>Siguiente</button>
-        <button mat-button class="mr-2" matStepperPrevious>Volver</button>
-      </div>
-    </mat-step>
-    <!-- PASO 4 -->
-    <mat-step label="Paso 4">
-      <h2>Revisa la información y guarda el artículo</h2>
-      <form [formGroup]="manufacturedForm" novalidate>
-        <!-- Oculto Checkbox -->
-        <mat-checkbox class="w-100 pb-2" formControlName="oculto">
-          ¿Desea que el articulo sea público?
-        </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" [disabled]="!manufacturedForm.valid" (click)="onAction()">
