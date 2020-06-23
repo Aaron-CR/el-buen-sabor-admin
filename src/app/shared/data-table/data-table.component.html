@@ -72,6 +72,13 @@
             <mat-icon class="material-icons" [class]="getPublicClass(row)">stop_circle</mat-icon>
           </mat-cell>
         </ng-container>
+        <!-- SwitchCase status -->
+        <ng-container *ngSwitchCase="column.columnDef === 'estado'">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <span class="status-chip ml-1" [class]="getStatusClass(row)"> {{ column.cell(row) | titlecase }} </span>
+          </mat-cell>
+        </ng-container>
         <!-- SwitchCase category -->
         <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
