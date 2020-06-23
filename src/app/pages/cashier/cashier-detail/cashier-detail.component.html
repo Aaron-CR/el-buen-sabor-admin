@@ -4,7 +4,7 @@
       <app-customer [data]="localData.cliente"></app-customer>
       <app-status [data]="localData.estado"></app-status>
       <app-payment [data]="localData"></app-payment>
-      <app-shipping></app-shipping>
+      <app-shipping [data]="localData"></app-shipping>
     </mat-tab>
     <mat-tab label="Productos">
       <app-notes></app-notes>
@@ -14,5 +14,4 @@
       <app-invoice></app-invoice>
     </mat-tab>
   </mat-tab-group>
-  {{ localData | json}}
 </app-dialog>

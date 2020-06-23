@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Orden } from 'src/app/core/models/comprobantes/orden';
 
 export interface Carrier {
   nombre: string;
@@ -17,14 +18,17 @@ const CARRIER_DATA: Carrier[] = [
 })
 export class ShippingComponent implements OnInit {
 
+  @Input()
+  public data: Orden;
+  public zoom = 17;
   carrierColumns: string[] = ['nombre', 'email', 'teléfono'];
   carrierDataSource = CARRIER_DATA;
-  address = 'San Martín 454, Mendoza, Mendoza San Martín 454, Mendoza, Mendoza';
-  shipping = true;
+  public address = '';
 
   constructor() { }
 
   ngOnInit(): void {
+    this.address = `${this.data.direccionEntrega.calle} ${this.data.direccionEntrega.numero}, ${this.data.direccionEntrega.localidad.nombre}, ${this.data.direccionEntrega.localidad.provincia.nombre}`;
   }
 
 }
