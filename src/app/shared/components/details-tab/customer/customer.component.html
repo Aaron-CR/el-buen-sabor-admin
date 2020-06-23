@@ -6,19 +6,19 @@
   <!-- Nombre Column -->
   <ng-container matColumnDef="nombre">
     <mat-header-cell *matHeaderCellDef> NOMBRE </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.nombre  }} {{ row.apellido }}</mat-cell>
+    <mat-cell *matCellDef="let row"> {{ row.nombre  }} {{ row.apellido }} </mat-cell>
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
   <!-- Email Column -->
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef> EMAIL </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.email }}</mat-cell>
+    <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
   <!-- Teléfono Column -->
   <ng-container matColumnDef="telefono">
     <mat-header-cell *matHeaderCellDef> TELÉFONO </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.telefono }}</mat-cell>
+    <mat-cell *matCellDef="let row"> {{ row.telefono }} </mat-cell>
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="customerColumns"></mat-header-row>

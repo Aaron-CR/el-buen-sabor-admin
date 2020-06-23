@@ -1,18 +1,18 @@
 <div class="p-5">
   <div class="app-card mat-elevation-z8">
     <div class="header">
-      <div class="invoice-date">2018/04/25 02:07:59</div>
+      <div class="invoice-date"> {{ data.fecha | date:'short' }}</div>
       <div class="d-flex">
         <div class="customer flex-fill">
           <div class="invoice-number">
             <span class="title">INVOICE</span>
-            <span class="number strong">70d4d7d0</span>
+            <span class="number strong"> {{ data.id }} </span>
           </div>
           <div class="info">
-            <div class="title"> Dollie Bullock </div>
-            <div class="address"> 704 6th Ave, New York, NY 10010, USA </div>
-            <div class="phone">+1-202-555-0175</div>
-            <div class="email">abbott@withinpixels.com</div>
+            <div class="title"> {{ data.cliente.nombre  }} {{ data.cliente.apellido }} </div>
+            <div class="address"> {{ address }} </div>
+            <div class="phone"> {{ data.cliente.telefono }} </div>
+            <div class="email"> {{ data.cliente.email }} </div>
           </div>
         </div>
         <div class="issuer accent flex-fill">
@@ -21,10 +21,10 @@
               <img src="assets/images/logos/angular.png">
             </div>
             <div class="info flex-fill">
-              <div class="title">EL BUEN SABOR.</div>
-              <div class="address">2810 Country Club Road Cranford, NJ 07016 </div>
-              <div class="phone">+66 123 455 87</div>
-              <div class="email">hello@fuseinc.com</div>
+              <div class="title">EL BUEN SABOR</div>
+              <div class="address">San Martin 454, Mendoza, 5500 </div>
+              <div class="phone">+54 261 458 7494</div>
+              <div class="email">elbuensabor-delivery@outlook.com</div>
               <div class="website">www.elbuensabor-delivery.web.app</div>
             </div>
           </div>
@@ -32,35 +32,35 @@
       </div>
     </div>
     <div class="pt-5">
-      <mat-table [dataSource]="invoiceDataSource">
+      <mat-table [dataSource]="data.detalles">
         <!-- Product Column -->
         <ng-container matColumnDef="producto">
           <mat-header-cell *matHeaderCellDef> PRODUCTO </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.producto}} </mat-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
+          </mat-cell>
           <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
         </ng-container>
-
         <!-- Precio Column -->
         <ng-container matColumnDef="precio">
           <mat-header-cell *matHeaderCellDef> PRECIO </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.precio | currency}} </mat-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.articuloManufacturado ? ( row.articuloManufacturado.precio | currency:"ARS":"symbol" ) : ( row.insumo.precio  | currency:"ARS":"symbol" ) }}
+          </mat-cell>
           <mat-footer-cell *matFooterCellDef></mat-footer-cell>
         </ng-container>
-
         <!-- Cantidad Column -->
         <ng-container matColumnDef="cantidad">
           <mat-header-cell *matHeaderCellDef> CANTIDAD </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.cantidad}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{ row.cantidad }} </mat-cell>
           <mat-footer-cell *matFooterCellDef></mat-footer-cell>
         </ng-container>
-
         <!-- Total Column -->
         <ng-container matColumnDef="total">
           <mat-header-cell *matHeaderCellDef> TOTAL </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.total | currency}} </mat-cell>
-          <mat-footer-cell *matFooterCellDef> {{getTotal() | currency}} </mat-footer-cell>
+          <mat-cell *matCellDef="let row"> {{ row.precioTotal | currency:"ARS":"symbol" }} </mat-cell>
+          <mat-footer-cell *matFooterCellDef> {{ data.total | currency:"ARS":"symbol" }} </mat-footer-cell>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="invoiceColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: invoiceColumns"></mat-row>
         <mat-footer-row *matFooterRowDef="invoiceColumns"></mat-footer-row>
