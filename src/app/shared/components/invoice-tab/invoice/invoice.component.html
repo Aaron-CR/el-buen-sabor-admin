@@ -39,7 +39,6 @@
           <mat-cell *matCellDef="let row">
             {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
           </mat-cell>
-          <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
         </ng-container>
         <!-- Precio Column -->
         <ng-container matColumnDef="precio">
@@ -47,24 +46,34 @@
           <mat-cell *matCellDef="let row">
             {{ row.articuloManufacturado ? ( row.articuloManufacturado.precio | currency:"ARS":"symbol" ) : ( row.insumo.precio  | currency:"ARS":"symbol" ) }}
           </mat-cell>
-          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
         </ng-container>
         <!-- Cantidad Column -->
         <ng-container matColumnDef="cantidad">
           <mat-header-cell *matHeaderCellDef> CANTIDAD </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ row.cantidad }} </mat-cell>
-          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
         </ng-container>
         <!-- Total Column -->
         <ng-container matColumnDef="total">
           <mat-header-cell *matHeaderCellDef> TOTAL </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ row.precioTotal | currency:"ARS":"symbol" }} </mat-cell>
-          <mat-footer-cell *matFooterCellDef> {{ data.total | currency:"ARS":"symbol" }} </mat-footer-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="invoiceColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: invoiceColumns"></mat-row>
-        <mat-footer-row *matFooterRowDef="invoiceColumns"></mat-footer-row>
       </mat-table>
+      <div class="d-flex justify-content-between footer-border">
+        <div class="d-flex flex-column">
+          <div class="discount-text"> SUBTOTAL </div>
+          <div class="discount-text"> DESCUENTO </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="discount-text"> {{ getTotal() | currency:"ARS":"symbol" }} </div>
+          <div class="discount-text"> -{{ data.montoDescuento | currency:"ARS":"symbol" }} </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between footer">
+        <div class="total-text"> TOTAL </div>
+        <div class="total-text"> {{ data.total | currency:"ARS":"symbol" }} </div>
+      </div>
     </div>
     <div class="footer pt-5">
       <div class="mb-4">Gracias por tu compra. </div>

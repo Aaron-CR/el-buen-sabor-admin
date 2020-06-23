@@ -21,4 +21,9 @@ export class InvoiceComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /** Gets the total cost of all rows. */
+  getTotal() {
+    return this.data.detalles.map(t => t.precioTotal).reduce((acc, value) => acc + value, 0);
+  }
+
 }
