@@ -1,7 +1,7 @@
 <app-dialog title="Orden 1.000.000">
   <mat-tab-group>
     <mat-tab label="Detalles">
-      <app-customer></app-customer>
+      <app-customer [data]="localData.cliente"></app-customer>
       <app-status></app-status>
       <app-payment></app-payment>
       <app-shipping></app-shipping>

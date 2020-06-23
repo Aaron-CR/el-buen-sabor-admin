@@ -1,14 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Customer {
-  nombre: string;
-  email: string;
-  teléfono: string;
-}
-
-const CUSTOMER_DATA: Customer[] = [
-  { nombre: 'Nombre Apellido', email: 'cliente@email.com', teléfono: '+54 (0) 261 423 4234' }
-];
+import { Component, OnInit, Input } from '@angular/core';
+import { Cliente } from 'src/app/core/models/usuarios/cliente';
 
 @Component({
   selector: 'app-customer',
@@ -17,12 +8,16 @@ const CUSTOMER_DATA: Customer[] = [
 })
 export class CustomerComponent implements OnInit {
 
-  customerColumns: string[] = ['nombre', 'email', 'teléfono'];
-  customerDataSource = CUSTOMER_DATA;
+  @Input()
+  public data: Cliente;
+  public dataSource: Array<Cliente> = [];
+  public customerColumns: string[] = ['nombre', 'email', 'telefono'];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.dataSource.push(this.data);
   }
 
 }

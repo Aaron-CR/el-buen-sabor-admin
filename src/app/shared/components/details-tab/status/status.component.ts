@@ -52,7 +52,7 @@ export class StatusComponent implements OnInit {
       case 'Cancelado': { return 'cancelado'; }
       case 'En proceso': { return 'en-proceso'; }
       case 'Demorado': { return 'demorado'; }
-      case 'Terminado': { return 'listo'; }
+      case 'Terminado': { return 'terminado'; }
       case 'En camino': { return 'en-camino'; }
       case 'Entregado': { return 'entregado'; }
       default: { return ''; }
