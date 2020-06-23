@@ -1,7 +1,7 @@
 <app-dialog title="Orden N° {{ localData.id | number }}">
   <mat-tab-group>
     <mat-tab label="Detalles">
-      <app-customer [data]="localData.cliente"></app-customer>
+      <app-user-info [data]="localData.cliente" title='Cliente'></app-user-info>
       <app-status [data]="localData.estado"></app-status>
       <app-payment [data]="localData"></app-payment>
       <app-shipping [data]="localData"></app-shipping>

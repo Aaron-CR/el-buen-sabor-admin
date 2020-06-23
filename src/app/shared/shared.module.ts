@@ -8,7 +8,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import { BaseComponent } from './components/dialogs/base/base.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { CustomerComponent } from './components/details-tab/customer/customer.component';
 import { PaymentComponent } from './components/details-tab/payment/payment.component';
 import { ShippingComponent } from './components/details-tab/shipping/shipping.component';
 import { StatusComponent } from './components/details-tab/status/status.component';
@@ -18,6 +17,7 @@ import { NotesComponent } from './components/products-tab/notes/notes.component'
 import { EditPhoneComponent } from './components/dialogs/edit-phone/edit-phone.component';
 import { EditPasswordComponent } from './components/dialogs/edit-password/edit-password.component';
 import { DialogService } from './components/dialogs/dialog.service';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -33,7 +33,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   declarations: [
     BaseComponent,
     NavigationComponent,
-    CustomerComponent,
     PaymentComponent,
     ShippingComponent,
     StatusComponent,
@@ -41,7 +40,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DetailComponent,
     NotesComponent,
     EditPhoneComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +58,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MaterialModule,
     BaseComponent,
     NavigationComponent,
-    CustomerComponent,
+    UserInfoComponent,
     PaymentComponent,
     ShippingComponent,
     StatusComponent,
