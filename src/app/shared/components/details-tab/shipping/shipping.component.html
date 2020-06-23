@@ -23,45 +23,34 @@
       <mat-panel-title>
         Portador
       </mat-panel-title>
+      <mat-panel-description>
+        {{data.repartidor ? repartidor : ''}}
+      </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-table [dataSource]="carrierDataSource">
-      <ng-container *ngFor="let def of carrierColumns" [matColumnDef]="def">
-        <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row[def]}} </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="carrierColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: carrierColumns"></mat-row>
-    </mat-table>
+    <div class="d-flex flex-fill align-items-center mb-4" *ngIf="!data.repartidor">
+      <div class="mr-2 flex-grow-1">
+        <mat-form-field appearance="outline" class="w-100 no-padding">
+          <mat-label>Repartidor</mat-label>
+          <mat-select>
+            <!-- <mat-option *ngFor="let carrier of carriers" [value]="carrier">
+              {{ carrier.nombre }} {{ carrier.apellido }}
+            </mat-option> -->
+            <mat-option value="carrier">
+              A completar
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" class="ml-3">
+          <mat-icon class="material-icons-outlined">refresh</mat-icon> Actualizar
+        </button>
+      </div>
+    </div>
+    <div *ngIf="data.repartidor">
+      <p class="text-muted">
+        Teléfono: {{ data.repartidor.telefono }} - Correo electrónico: {{ data.repartidor.email }}
+      </p>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>
-
-<!--
-  "direccionEntrega": {
-    "id": 3,
-    "ultimaActualizacion": null,
-    "oculto": false,
-    "eliminado": false,
-    "calle": "San Martin",
-    "departamento": null,
-    "localidad": {
-      "id": 1,
-      "ultimaActualizacion": null,
-      "nombre": "Mendoza",
-      "provincia": {
-        "id": 1,
-        "nombre": "Mendoza",
-        "pais": {
-          "id": 1,
-          "nombre": "Argentina"
-        }
-      }
-    },
-    "numero": 1254,
-    "piso": null,
-    "aclaraciones": "Casa roja de rejas negras",
-    "alias": "Casa",
-    "latitud": 0,
-    "longitud": 0
-  },
-  "repartidor": null
-} -->

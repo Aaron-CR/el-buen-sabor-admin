@@ -60,6 +60,11 @@
             <img onerror="this.src='assets/images/cards/card.jpg'" [src]="column.cell(row)">
           </mat-cell>
         </ng-container>
+        <!-- SwitchCase shortTime -->
+        <ng-container *ngSwitchCase="column.columnDef === 'horarioEntrega'">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'shortTime' }} </mat-cell>
+        </ng-container>
         <!-- SwitchCase date -->
         <ng-container *ngSwitchCase="column.columnDef === 'fecha'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
@@ -80,10 +85,10 @@
           </mat-cell>
         </ng-container>
         <!-- SwitchCase category -->
-        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro'">
+        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro' || column.columnDef === 'formaPago'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <span class="status-chip ml-1"> {{ column.cell(row) }} </span>
+            <span class="status-chip ml-1"> {{ column.cell(row) | titlecase }} </span>
           </mat-cell>
         </ng-container>
         <!-- SwitchCase default -->
