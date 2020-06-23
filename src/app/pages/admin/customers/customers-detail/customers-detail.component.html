@@ -1,3 +1,16 @@
-<app-dialog title="Detalle cliente">
+<app-dialog [title]="customerName">
+  <app-customer [data]="localData"></app-customer>
+  <div class="d-flex justify-content-between my-3">
+    <span class="d-flex align-items-center my-3 subtitle">
+      <mat-icon class="material-icons-outlined mr-1">list_alt</mat-icon>
+      Órdenes por periodo
+    </span>
+    <mat-form-field>
+      <input matInput placeholder="Elige las fechas" [satDatepicker]="picker">
+      <sat-datepicker #picker [rangeMode]="true">
+      </sat-datepicker>
+      <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+    </mat-form-field>
+  </div>
   {{ localData | json}}
 </app-dialog>

@@ -21,7 +21,7 @@
         </mat-form-field>
         <!-- Es Insumo Checkbox -->
         <mat-checkbox class="w-100 pb-2" formControlName="esInsumo">
-          ¿Es insumo?
+          ¿Venta al publico?
         </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
@@ -42,15 +42,17 @@
             </mat-error>
           </mat-form-field>
           <!-- Precio Input -->
-          <mat-form-field class="w-100 mr-3">
+          <mat-form-field class="w-100">
             <mat-label>Precio</mat-label>
             <input matInput currencyMask placeholder="Por favor indique la precio." formControlName="precio" required>
             <mat-error *ngIf="errorHandling('precio', 'required')">
               El precio es <strong>obligatorio</strong>.
             </mat-error>
           </mat-form-field>
+        </div>
+        <div class="d-flex pb-2">
           <!-- Unidad de medida Select -->
-          <mat-form-field class="w-100">
+          <mat-form-field class="w-100 mr-3">
             <mat-label>Unidad de medida</mat-label>
             <mat-select formControlName="unidadMedida" required>
               <mat-option *ngFor="let unidad of unidades" [value]="unidad.denominacion">
@@ -59,17 +61,6 @@
             </mat-select>
             <mat-error *ngIf="errorHandling('unidadMedida', 'required')">
               La unidad de medida es <strong>obligatoria</strong>.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="d-flex pb-2">
-          <!-- Stock actual Input -->
-          <mat-form-field class="w-100 mr-3">
-            <mat-label>Stock actual</mat-label>
-            <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }"
-              placeholder="Por favor indique el stock actual." formControlName="stockActual" required>
-            <mat-error *ngIf="errorHandling('stockActual', 'required')">
-              El stock actual es <strong>obligatorio</strong>.
             </mat-error>
           </mat-form-field>
           <!-- Stock maximo Input -->

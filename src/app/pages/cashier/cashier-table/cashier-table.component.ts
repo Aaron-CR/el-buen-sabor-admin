@@ -19,7 +19,7 @@ export class CashierTableComponent implements OnInit {
     { columnDef: 'cliente', header: 'Cliente', cell: (orden: Orden) => `${orden.cliente.nombre} ${orden.cliente.apellido}` },
     { columnDef: 'formaPago', header: 'Forma de Pago', cell: (orden: Orden) => `${orden.formaPago}` },
     { columnDef: 'horarioEntrega', header: 'Hora de Entrega', cell: (orden: Orden) => `${orden.horarioEntrega}` },
-    { columnDef: 'delivery', header: 'Envío', cell: (orden: Orden) => `${orden.delivery}` },
+    { columnDef: 'delivery', header: 'Envío', cell: (orden: Orden) => orden.delivery ? 'Si' : 'No' },
     { columnDef: 'estado', header: 'Estado', cell: (orden: Orden) => `${orden.estado.denominacion}` },
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);

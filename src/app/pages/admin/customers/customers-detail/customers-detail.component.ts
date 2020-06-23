@@ -11,6 +11,10 @@ export class CustomersDetailComponent implements OnInit {
 
   public localData: Cliente;
 
+  get customerName() {
+    return `${this.localData.nombre} ${this.localData.apellido}`;
+  }
+
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Cliente,
     public dialogRef: MatDialogRef<CustomersDetailComponent>

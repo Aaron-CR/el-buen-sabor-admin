@@ -10,8 +10,6 @@ export class EditPasswordComponent implements OnInit {
 
   public editPasswordForm: FormGroup;
   public hideCurrentPassword = true;
-  public hideNewPassword = true;
-  public hideConfirmPassword = true;
 
   constructor(public formBuilder: FormBuilder) { }
 
