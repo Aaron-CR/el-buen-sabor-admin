@@ -5,3 +5,8 @@ img {
   line-height: 40px;
   border-radius: 50%;
 }
+
+.mat-column-imagen,
+.mat-column-cantidad {
+  flex: 0 0 100px !important;
+}

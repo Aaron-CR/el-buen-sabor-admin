@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-notes',
@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesComponent implements OnInit {
 
-  _notes: string;
-  // _notes = 'Extra ketchup';
+  @Input()
+  public data: string;
 
   get notes() {
-    return this._notes ? this._notes : 'Este pedido no tiene aclaraciones...';
+    return this.data ? this.data : 'Este pedido no tiene aclaraciones...';
   }
 
   constructor() { }

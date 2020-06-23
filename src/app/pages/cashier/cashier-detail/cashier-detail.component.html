@@ -7,8 +7,8 @@
       <app-shipping [data]="localData"></app-shipping>
     </mat-tab>
     <mat-tab label="Productos">
-      <app-notes></app-notes>
-      <app-detail></app-detail>
+      <app-notes [data]="localData.aclaraciones"></app-notes>
+      <app-detail [data]="localData.detalles"></app-detail>
     </mat-tab>
     <mat-tab label="Factura">
       <app-invoice></app-invoice>
