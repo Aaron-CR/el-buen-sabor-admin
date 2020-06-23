@@ -48,16 +48,13 @@ h1 {
   border-top-right-radius: 15px;
 }
 
-.mat-column-cantidad {
-  flex: 0 0 140px !important;
-}
-
-.mat-column-costoUnitario {
-  flex: 0 0 130px !important;
-}
-
+.mat-column-costoUnitario,
 .mat-column-costoTotal {
   flex: 0 0 130px !important;
+}
+
+.mat-column-cantidad {
+  flex: 0 0 140px !important;
 }
 
 .table-footer {

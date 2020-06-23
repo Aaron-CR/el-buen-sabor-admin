@@ -4,6 +4,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: lightgray;
+  background-color: #ffffff;
 }
 
 /* HEADER */
@@ -67,28 +68,22 @@ h1 {
   justify-content: center;
 }
 
-.mat-column-imagen {
-  flex: 0 0 100px !important;
-}
-
 .mat-column-oculto {
   flex: 0 0 90px !important;
 }
 
-.mat-column-cantidad {
-  flex: 0 0 140px !important;
+.mat-column-imagen {
+  flex: 0 0 100px !important;
 }
 
-.mat-column-id {
-  flex: 0 0 120px !important;
-}
-
-.mat-column-costo {
-  flex: 0 0 120px !important;
-}
-
+.mat-column-id,
+.mat-column-costo,
 .mat-column-precio {
   flex: 0 0 120px !important;
+}
+
+.mat-column-cantidad {
+  flex: 0 0 140px !important;
 }
 
 .table-row:hover {
