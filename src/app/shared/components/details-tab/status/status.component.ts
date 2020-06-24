@@ -16,17 +16,12 @@ export class StatusComponent implements OnInit {
 
   @Input()
   public data: Estado;
+  @Input()
   public statuses: Array<Estado>;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getStatuses();
-  }
-
-  getStatuses() {
-    return this.http.get(`http://localhost:8080/api/v1/comprobantes/estados/all`).pipe()
-      .subscribe((data: Array<Estado>) => this.statuses = data);
   }
 
   getStatusClass(status: string) {

@@ -67,8 +67,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NotesComponent
   ],
   providers: [
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
-    DialogService
+    DialogService,
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
 })
 export class SharedModule { }

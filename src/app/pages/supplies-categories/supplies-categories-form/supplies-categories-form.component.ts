@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
@@ -16,6 +16,10 @@ export class SuppliesCategoriesFormComponent implements OnInit {
   public localData: Rubro;
   public action: string;
   public suppliesCategoriesForm: FormGroup;
+
+  get imagen(): FormControl {
+    return this.suppliesCategoriesForm.get('imagen') as FormControl;
+  }
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Rubro,
@@ -38,7 +42,8 @@ export class SuppliesCategoriesFormComponent implements OnInit {
       ultimaActualizacion: [this.localData.ultimaActualizacion],
       oculto: [this.localData.oculto],
       denominacion: [this.localData.denominacion, [Validators.required]],
-      rubroPadre: [this.localData.rubroPadre]
+      rubroPadre: [this.localData.rubroPadre],
+      imagen: [this.localData.imagen, [Validators.required]]
     });
   }
 

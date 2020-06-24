@@ -10,7 +10,8 @@ export class InvoiceComponent implements OnInit {
 
   @Input()
   public data: Orden;
-  invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
+  public invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
+  public total: number;
 
   get address() {
     return `${this.data.direccionEntrega.calle} ${this.data.direccionEntrega.numero}, ${this.data.direccionEntrega.localidad.nombre}, ${this.data.direccionEntrega.localidad.provincia.nombre}`;
@@ -19,6 +20,7 @@ export class InvoiceComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.total = this.getTotal();
   }
 
   /** Gets the total cost of all rows. */
