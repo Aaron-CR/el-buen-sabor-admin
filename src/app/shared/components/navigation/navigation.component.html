@@ -4,7 +4,8 @@
   <span class="mx-2">El Buen Sabor</span>
   <!-- Spacer -->
   <div class="mr-auto"></div>
-  <!-- User Button -->
+  <div *ngIf="userExists">
+    <!-- User Button -->
   <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
     <div class="mat-button-wrapper">
       <img src="assets/images/avatars/cashier.png" class="avatar">
@@ -47,5 +48,6 @@
       <span>Cerrar sesión</span>
     </button>
   </mat-menu>
+  </div>
 </mat-toolbar>
 <!-- Toolbar End -->

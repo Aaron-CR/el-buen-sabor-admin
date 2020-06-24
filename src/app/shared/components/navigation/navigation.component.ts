@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../../authentication/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,9 +10,18 @@ export class NavigationComponent implements OnInit {
 
   @Input() visible: boolean;
 
-  constructor() { }
+  public userExists = false;
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService){
+
+  }
+
+  ngOnInit(){
+    this.authService.user.subscribe((user) => {
+      if (!!user){
+        this.userExists = true;
+      }
+    });
   }
 
 }
