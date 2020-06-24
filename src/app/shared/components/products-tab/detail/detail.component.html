@@ -2,19 +2,29 @@
   <mat-icon class="material-icons-outlined mr-1">list_alt</mat-icon>
   Detalle
 </span>
-<mat-table [dataSource]="detailDataSource" class="mb-4">
-
-  <ng-container *ngFor="let def of detailColumns" [matColumnDef]="def" [ngSwitch]="def">
-    <ng-container *ngSwitchCase="'imagen'">
-      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> <img [src]="row[def]" /> </mat-cell>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row[def]}} </mat-cell>
-    </ng-container>
+<mat-table [dataSource]="data" class="mb-4">
+  <!-- Imagen Column -->
+  <ng-container matColumnDef="imagen">
+    <mat-header-cell *matHeaderCellDef> IMAGEN </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <img onerror="this.src='assets/images/cards/card.jpg'" [src]="row.articuloManufacturado ? row.articuloManufacturado.imagen : row.insumo.imagen">
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
-
+  <!-- Denominación Column -->
+  <ng-container matColumnDef="denominacion">
+    <mat-header-cell *matHeaderCellDef> DENOMINACIÓN </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.articuloManufacturado ? row.articuloManufacturado.denominacion : row.insumo.denominacion }}
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+  <!-- Cantidad Column -->
+  <ng-container matColumnDef="cantidad">
+    <mat-header-cell *matHeaderCellDef> CANTIDAD </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.cantidad }}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
   <mat-header-row *matHeaderRowDef="detailColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: detailColumns"></mat-row>
 </mat-table>

@@ -124,6 +124,10 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getStatusClass(row) {
+    return row.estado.denominacion.replace(/\s+/g, '-');
+  }
+
   getPublicClass(row) {
     return row.oculto ? 'public' : 'private';
   }

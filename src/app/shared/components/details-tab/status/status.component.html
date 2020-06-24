@@ -1,34 +1,19 @@
-<span class="d-flex align-items-center my-3 subtitle">
-  <mat-icon class="material-icons-outlined mr-1">access_time</mat-icon>
-  Estado de la orden
-</span>
-<mat-table [dataSource]="orderStatusDataSource" class="mb-3">
-  <ng-container *ngFor="let def of orderStatusColumns" [matColumnDef]="def" [ngSwitch]="def">
-    <!-- SwitchCase estado -->
-    <ng-container *ngSwitchCase="'estado'">
-      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <span class="status-chip" [class]="getClass(row)"> {{row[def]}} </span>
-      </mat-cell>
-    </ng-container>
-    <!-- SwitchCase default -->
-    <ng-container *ngSwitchDefault>
-      <mat-header-cell *matHeaderCellDef> {{ def | uppercase }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row[def]}} </mat-cell>
-    </ng-container>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="orderStatusColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: orderStatusColumns"></mat-row>
-
-</mat-table>
-<div class="d-flex flex-fill align-items-center mb-4">
+<div class="d-flex align-items-center my-3">
+  <span class="d-flex align-items-center subtitle mr-3">
+    <mat-icon class="material-icons-outlined mr-1">access_time</mat-icon>
+    Estado de la orden:
+  </span>
+  <div>
+    <span class="status-chip" [class]="getStatusClass(data.denominacion)"> {{ data.denominacion | titlecase }} </span>
+  </div>
+</div>
+<div class="d-flex flex-fill align-items-center my-4">
   <div class="mr-2 flex-grow-1">
-    <mat-form-field appearance="none" class="w-100 app-form-field">
+    <mat-form-field appearance="outline" class="w-100 no-padding">
       <mat-label>Estado</mat-label>
       <mat-select>
-        <mat-option *ngFor="let status of statuses" [value]="status.value">
-          {{status.viewValue}}
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status.denominacion | titlecase }}
         </mat-option>
       </mat-select>
     </mat-form-field>

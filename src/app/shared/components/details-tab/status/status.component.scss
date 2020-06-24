@@ -1,21 +1,5 @@
-.app-form-field {
-  height: 50px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: lightgrey;
-  background-color: white;
-  padding: 5px 20px;
-  border-radius: 15px;
-}
-
-.app-form-field:hover {
-  border-width: 2px;
-  border-color: grey;
-}
-
-.app-form-field:active {
-  border-width: 2px;
-  border-color: #ffb300;
+::ng-deep .no-padding .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
 }
 
 /* BUTTON */

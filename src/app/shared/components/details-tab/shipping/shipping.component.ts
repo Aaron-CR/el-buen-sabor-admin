@@ -1,14 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Carrier {
-  nombre: string;
-  email: string;
-  teléfono: string;
-}
-
-const CARRIER_DATA: Carrier[] = [
-  { nombre: 'Nombre Apellido', email: 'cliente@email.com', teléfono: '+54 (0) 261 423 4234' }
-];
+import { Component, OnInit, Input } from '@angular/core';
+import { Orden } from 'src/app/core/models/comprobantes/orden';
 
 @Component({
   selector: 'app-shipping',
@@ -17,10 +8,17 @@ const CARRIER_DATA: Carrier[] = [
 })
 export class ShippingComponent implements OnInit {
 
-  carrierColumns: string[] = ['nombre', 'email', 'teléfono'];
-  carrierDataSource = CARRIER_DATA;
-  address = 'San Martín 454, Mendoza, Mendoza San Martín 454, Mendoza, Mendoza';
-  shipping = true;
+  @Input()
+  public data: Orden;
+  public zoom = 18;
+
+  get address() {
+    return `${this.data.direccionEntrega.calle} ${this.data.direccionEntrega.numero}, ${this.data.direccionEntrega.localidad.nombre}, ${this.data.direccionEntrega.localidad.provincia.nombre}`;
+  }
+
+  get repartidor() {
+    return `${this.data.repartidor.nombre} ${this.data.repartidor.apellido}`;
+  }
 
   constructor() { }
 

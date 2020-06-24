@@ -8,5 +8,4 @@ export interface Comprobante extends Base {
   montoDescuento: number;
   total: number;
   estado: Estado;
-  detalles: Array<DetalleOrden>;
 }

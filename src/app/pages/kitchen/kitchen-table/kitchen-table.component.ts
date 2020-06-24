@@ -11,15 +11,15 @@ import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.compone
 export class KitchenTableComponent implements OnInit {
 
   public detailDialog = KitchenDetailComponent;
-  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes';
+  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes/cocina';
   public title = 'Cocina';
   public icon = 'restaurant';
   public tableColumns = [
     { columnDef: 'id', header: 'Orden', cell: (orden: Orden) => `${orden.id}` },
     { columnDef: 'cliente', header: 'Cliente', cell: (orden: Orden) => `${orden.cliente.nombre} ${orden.cliente.apellido}` },
-    { columnDef: 'horarioEntrega', header: 'Tiempo', cell: (orden: Orden) => `${orden.horarioEntrega}` },
-    { columnDef: 'delivery', header: 'Envío', cell: (orden: Orden) => `${orden.delivery}` },
-    { columnDef: 'estado', header: 'Estado', cell: (orden: Orden) => `${orden.estado}` },
+    { columnDef: 'tiempoTotalPreparacion', header: 'Tiempo', cell: (orden: Orden) => `${orden.tiempoTotalPreparacion} min.` },
+    { columnDef: 'horarioEntrega', header: 'Hora de Entrega', cell: (orden: Orden) => `${orden.horarioEntrega}` },
+    { columnDef: 'estado', header: 'Estado', cell: (orden: Orden) => `${orden.estado.denominacion}` },
   ];
   public displayedColumns = this.tableColumns.map(c => c.columnDef);
 

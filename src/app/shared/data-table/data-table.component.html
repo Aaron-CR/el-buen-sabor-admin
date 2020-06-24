@@ -43,7 +43,7 @@
       <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef" [ngSwitch]="true">
         <!-- SwitchCase number -->
         <ng-container
-          *ngSwitchCase="column.columnDef === 'telefono' || column.columnDef === 'ordenes' || column.columnDef === 'id'">
+          *ngSwitchCase="column.columnDef === 'cuil' || column.columnDef === 'ordenes' || column.columnDef === 'id'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | number }} </mat-cell>
         </ng-container>
@@ -60,8 +60,13 @@
             <img onerror="this.src='assets/images/cards/card.jpg'" [src]="column.cell(row)">
           </mat-cell>
         </ng-container>
+        <!-- SwitchCase shortTime -->
+        <ng-container *ngSwitchCase="column.columnDef === 'horarioEntrega'">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'shortTime' }} </mat-cell>
+        </ng-container>
         <!-- SwitchCase date -->
-        <ng-container *ngSwitchCase="column.columnDef === 'fecha'">
+        <ng-container *ngSwitchCase="column.columnDef === 'fecha' || column.columnDef === 'fechaAlta'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | date:'short' }} </mat-cell>
         </ng-container>
@@ -72,11 +77,18 @@
             <mat-icon class="material-icons" [class]="getPublicClass(row)">stop_circle</mat-icon>
           </mat-cell>
         </ng-container>
-        <!-- SwitchCase category -->
-        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro'">
+        <!-- SwitchCase status -->
+        <ng-container *ngSwitchCase="column.columnDef === 'estado'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <span class="status-chip ml-1"> {{ column.cell(row) }} </span>
+            <span class="status-chip ml-1" [class]="getStatusClass(row)"> {{ column.cell(row) | titlecase }} </span>
+          </mat-cell>
+        </ng-container>
+        <!-- SwitchCase category -->
+        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro' || column.columnDef === 'formaPago' || column.columnDef === 'rol'">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <span class="status-chip ml-1"> {{ column.cell(row) | titlecase }} </span>
           </mat-cell>
         </ng-container>
         <!-- SwitchCase default -->

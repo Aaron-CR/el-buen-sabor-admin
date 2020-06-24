@@ -1,17 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Invoice {
-  producto: string;
-  precio: number;
-  cantidad: number;
-  total: number;
-}
-
-const INVOICE_DATA: Invoice[] = [
-  { producto: 'Item 1', precio: 10.24, cantidad: 1, total: 10.24 },
-  { producto: 'Item 2', precio: 24.62, cantidad: 1, total: 24.62 },
-  { producto: 'Item 3', precio: 49.29, cantidad: 1, total: 49.29 }
-];
+import { Component, OnInit, Input } from '@angular/core';
+import { Orden } from 'src/app/core/models/comprobantes/orden';
 
 @Component({
   selector: 'app-invoice',
@@ -20,17 +8,24 @@ const INVOICE_DATA: Invoice[] = [
 })
 export class InvoiceComponent implements OnInit {
 
-  invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
-  invoiceDataSource = INVOICE_DATA;
+  @Input()
+  public data: Orden;
+  public invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
+  public total: number;
+
+  get address() {
+    return `${this.data.direccionEntrega.calle} ${this.data.direccionEntrega.numero}, ${this.data.direccionEntrega.localidad.nombre}, ${this.data.direccionEntrega.localidad.provincia.nombre}`;
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    this.total = this.getTotal();
   }
 
   /** Gets the total cost of all rows. */
   getTotal() {
-    return this.invoiceDataSource.map(t => t.total).reduce((acc, value) => acc + value, 0);
+    return this.data.detalles.map(t => t.precioTotal).reduce((acc, value) => acc + value, 0);
   }
 
 }

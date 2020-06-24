@@ -13,6 +13,11 @@ h1 {
   font-weight: 500;
 }
 
+h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
 .app-card {
   display: flex;
   width: 100%;
@@ -48,13 +53,10 @@ h1 {
   border-top-right-radius: 15px;
 }
 
-.mat-column-costoUnitario,
-.mat-column-costoTotal {
-  flex: 0 0 130px !important;
-}
-
-.mat-column-cantidad {
-  flex: 0 0 140px !important;
+.mat-column-operacion {
+  flex: 0 0 100px !important;
+  text-align: center;
+  justify-content: center;
 }
 
 .table-footer {

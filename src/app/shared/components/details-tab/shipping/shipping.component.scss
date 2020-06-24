@@ -1,0 +1,8 @@
+agm-map {
+  height: 250px;
+  width: 100%;
+}
+
+::ng-deep .no-padding .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}

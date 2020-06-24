@@ -7,13 +7,15 @@ import { DataTableModule } from 'src/app/shared/data-table/data-table.module';
 import { SuppliesDetailComponent } from './supplies-detail/supplies-detail.component';
 import { SuppliesFormComponent } from './supplies-form/supplies-form.component';
 import { SuppliesTableComponent } from './supplies-table/supplies-table.component';
+import { StockFormComponent } from './supplies-detail/stock-form/stock-form.component';
 
 
 @NgModule({
   declarations: [
     SuppliesDetailComponent,
     SuppliesFormComponent,
-    SuppliesTableComponent
+    SuppliesTableComponent,
+    StockFormComponent
   ],
   imports: [
     CommonModule,
