@@ -1,6 +1,6 @@
 <div class="app-container">
   <div class="wrap-login">
-    <form novalidate [formGroup]="loginFormGroup">
+    <form novalidate [formGroup]="loginFormGroup" (ngSubmit)="onSignIn(loginFormGroup)">
       <div class="app-logo mb-3">
         <img src="assets/images/logos/logo.png" alt="LOGO" class="w-100">
       </div>
@@ -18,8 +18,7 @@
         <mat-icon class="material-icons-outlined" matSuffix (click)="hide = !hide">
           {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <button mat-flat-button color="primary" class="w-100 mb-4" [routerLink]="['/cashier']"
-        routerLinkActive="router-link-active">INGRESAR</button>
+      <button mat-flat-button color="primary" class="w-100 mb-4" type="submit">INGRESAR</button>
     </form>
   </div>
 </div>

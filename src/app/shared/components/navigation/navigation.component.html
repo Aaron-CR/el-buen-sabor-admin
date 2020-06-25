@@ -4,50 +4,60 @@
   <span class="mx-2">El Buen Sabor</span>
   <!-- Spacer -->
   <div class="mr-auto"></div>
-  <div *ngIf="userExists">
+  <div *ngIf="userExists == true" [ngSwitch]="true">
     <!-- User Button -->
-  <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
-    <div class="mat-button-wrapper">
-      <img src="assets/images/avatars/cashier.png" class="avatar">
-      <span class="mx-2"> Nombre Apellido </span>
-      <mat-icon class="material-icons-outlined" class="material-icons-outlined s-16">
-        keyboard_arrow_down</mat-icon>
-    </div>
-    <div matripple="" class="mat-ripple mat-button-ripple"></div>
-    <div class="mat-button-focus-overlay"></div>
-  </button>
-  <!-- User Menu -->
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/cashier">
-      <!-- <mat-icon class="material-icons-outlined">assignment</mat-icon> -->
-      <mat-icon class="material-icons-outlined">point_of_sale</mat-icon>
-      <span>Cajero</span>
+    <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
+      <div class="mat-button-wrapper">
+        <img src="assets/images/avatars/{{this.user.rol.denominacion}}.png" class="avatar">
+        <span class="mx-2"> {{this.user.nombre}} {{this.user.apellido}} </span>
+        <mat-icon class="material-icons-outlined" class="material-icons-outlined s-16">
+          keyboard_arrow_down</mat-icon>
+      </div>
+      <div matripple="" class="mat-ripple mat-button-ripple"></div>
+      <div class="mat-button-focus-overlay"></div>
     </button>
-    <button mat-menu-item routerLink="/kitchen">
-      <mat-icon class="material-icons-outlined">restaurant</mat-icon>
-      <span>Cocina</span>
-    </button>
-    <button mat-menu-item routerLink="/admin">
-      <mat-icon class="material-icons-outlined">insert_chart</mat-icon>
-      <span>Administrador</span>
-    </button>
-    <button mat-menu-item routerLink="/manufactured">
-      <mat-icon class="material-icons-outlined">storefront</mat-icon>
-      <span>Manufacturados</span>
-    </button>
-    <button mat-menu-item routerLink="/supplies">
-      <mat-icon class="material-icons-outlined">shopping_basket</mat-icon>
-      <span>Insumos</span>
-    </button>
-    <button mat-menu-item routerLink="/my-profile">
-      <mat-icon class="material-icons-outlined">account_circle</mat-icon>
-      <span>Mi perfil</span>
-    </button>
-    <button mat-menu-item routerLink="/index">
-      <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
-      <span>Cerrar sesión</span>
-    </button>
-  </mat-menu>
+    <!-- User Menu -->
+    <mat-menu #menu="matMenu">
+      <div *ngSwitchCase="userRol === 'cajero' || userRol === 'administrador'">
+        <button mat-menu-item routerLink="/cashier">
+          <!-- <mat-icon class="material-icons-outlined">assignment</mat-icon> -->
+          <mat-icon class="material-icons-outlined">point_of_sale</mat-icon>
+          <span>Cajero</span>
+        </button>
+      </div>
+      <div *ngSwitchCase="userRol === 'cocinero' || userRol === 'administrador'">
+        <button mat-menu-item routerLink="/kitchen">
+          <mat-icon class="material-icons-outlined">restaurant</mat-icon>
+          <span>Cocina</span>
+        </button>
+      </div>
+      <div *ngSwitchCase="userRol === 'administrador'">
+        <button mat-menu-item routerLink="/admin">
+          <mat-icon class="material-icons-outlined">insert_chart</mat-icon>
+          <span>Administrador</span>
+        </button>
+      </div>
+      <div  *ngSwitchCase="userRol === 'cocinero' || userRol === 'administrador'">
+        <button mat-menu-item routerLink="/manufactured">
+          <mat-icon class="material-icons-outlined">storefront</mat-icon>
+          <span>Manufacturados</span>
+        </button>
+      </div>
+      <div  *ngSwitchCase="userRol === 'administrador'">
+        <button mat-menu-item routerLink="/supplies">
+          <mat-icon class="material-icons-outlined">shopping_basket</mat-icon>
+          <span>Insumos</span>
+        </button>
+      </div>
+      <button mat-menu-item routerLink="/my-profile">
+        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+        <span>Mi perfil</span>
+      </button>
+      <button mat-menu-item (click)="onSignOut()">
+        <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>
 <!-- Toolbar End -->

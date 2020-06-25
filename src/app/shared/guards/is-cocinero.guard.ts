@@ -17,7 +17,7 @@ export class IsCocineroGuard implements CanActivate {
 
     return this.authService.user.pipe(
       take(1),
-      map((user) => !!user && (user.rol.denominacion === 'cocinero') ),
+      map((user) => !!user && (user.rol.denominacion === 'cocinero' || user.rol.denominacion === 'administrador') ),
       tap((auth) => {
         if (!auth) {
           this.snackBar.open('Acceso denegado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });

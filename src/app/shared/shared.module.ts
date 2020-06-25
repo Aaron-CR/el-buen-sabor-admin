@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 
+import { HttpClientModule } from '@angular/common/http';
 import { BaseComponent } from './components/dialogs/base/base.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PaymentComponent } from './components/details-tab/payment/payment.component';
@@ -52,6 +53,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CommonModule,
     MaterialModule,
     RouterModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
@@ -62,6 +64,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ReactiveFormsModule,
     CurrencyMaskModule,
     MaterialModule,
+    HttpClientModule,
     BaseComponent,
     NavigationComponent,
     UserInfoComponent,
