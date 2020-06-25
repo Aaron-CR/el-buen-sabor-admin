@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" *ngIf="userExists">
   <div class="header-image">
     <img src="assets/images/backgrounds/background.jpg">
     <div class="bottom-left">Mi perfil</div>
@@ -6,14 +6,14 @@
   <div class="container">
     <div class="d-flex flex-wrap justify-content-center" *ngIf="!edit; else editForm">
       <div class="m-4 d-flex flex-row">
-        <img src="assets/images/avatars/cashier.png" class="avatar">
+        <img src="assets/images/avatars/{{this.user.rol.denominacion}}.png" class="avatar">
       </div>
       <div class="flex-row ml-4 mt-4 mr-auto">
         <h2>
-          Nombre Apellido
+          {{this.user.nombre}} {{this.user.apellido}}
         </h2>
         <span>
-          nombreapellido@gmail.com
+          {{this.user.email}}
         </span>
         <button mat-raised-button color="primary" class="ml-3" (click)="toggleEdit()">
           Editar datos
@@ -23,22 +23,26 @@
     <ng-template #editForm>
       <div class="d-flex flex-wrap justify-content-center">
         <div class="m-4 d-flex flex-row">
-          <img src="assets/images/avatars/cashier.png" class="avatar">
+          <img src="assets/images/avatars/{{this.user.rol.denominacion}}.png" class="avatar">
         </div>
         <div class="m-4 flex-row flex-grow-1">
           <mat-form-field class="w-100">
             <mat-label>Nombre</mat-label>
-            <input matInput disabled value="Nombre Apellido">
+            <input matInput disabled value="{{this.user.nombre}}">
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Apellido</mat-label>
+            <input matInput disabled value="{{this.user.apellido}}">
           </mat-form-field>
           <mat-form-field class="w-100">
             <mat-label>Email</mat-label>
-            <input matInput disabled value="nombreapellido@gmail.com">
+            <input matInput disabled value="{{this.user.email}}">
           </mat-form-field>
           <div class="d-flex">
             <div class="flex-grow-1">
               <mat-form-field class="w-100">
                 <mat-label>Telefono</mat-label>
-                <input matInput disabled value="+54 9 2614567890">
+                <input matInput disabled value="{{this.user.telefono}}">
               </mat-form-field>
             </div>
             <div>

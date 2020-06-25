@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { AuthService } from '../authentication/auth.service';
@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class IsAdminGuard implements CanActivate {
-  constructor(private authService: AuthService,  private snackBar: MatSnackBar) {}
+  constructor(private authService: AuthService,  private snackBar: MatSnackBar, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,7 +20,8 @@ export class IsAdminGuard implements CanActivate {
       map((user) => !!user && (user.rol.denominacion === 'administrador') ),
       tap((auth) => {
         if (!auth) {
-          this.snackBar.open('Acceso denegado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          this.router.navigate(['/not-found']);
+          this.snackBar.open('¡No tienes los permisos necesarios para acceder!', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
         }
       })
     );
