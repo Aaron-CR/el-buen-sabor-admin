@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyCcVf7VISioriT8I7gyGB9Tgxng6ETdQGo',
-    authDomain: 'elbuensabor-delivery.firebaseapp.com',
-    databaseURL: 'https://elbuensabor-delivery.firebaseio.com',
-    projectId: 'elbuensabor-delivery',
-    storageBucket: 'elbuensabor-delivery.appspot.com',
-    messagingSenderId: '126762949811',
-    appId: '1:126762949811:web:3ba76911a129e0980624c6',
-    measurementId: 'G-KPGDR9W0VD'
+    apiKey: 'AIzaSyDZHRmttCMVr-usvy0A8poGxRDgglHfMBU',
+    authDomain: 'elbuensabor-admin.firebaseapp.com',
+    databaseURL: 'https://elbuensabor-admin.firebaseio.com',
+    projectId: 'elbuensabor-admin',
+    storageBucket: 'elbuensabor-admin.appspot.com',
+    messagingSenderId: '984980672664',
+    appId: '1:984980672664:web:0388ade6fe1721a84300ed',
+    measurementId: 'G-3D6FX85VBR'
   }
 };
 
