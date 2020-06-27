@@ -19,7 +19,6 @@ export class EditPasswordComponent implements OnInit {
 
   buildForm() {
     this.editPasswordForm = this.formBuilder.group({
-      currentPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });

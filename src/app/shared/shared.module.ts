@@ -24,6 +24,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
+import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -47,7 +48,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NotesComponent,
     EditPhoneComponent,
     EditPasswordComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARaDrtQwfk6Ql8byHHSJtAAJGswf9ueds',
       libraries: ['places']
-    })
+    }),
+    ReactiveFormsModule
+
   ],
   exports: [
     ReactiveFormsModule,

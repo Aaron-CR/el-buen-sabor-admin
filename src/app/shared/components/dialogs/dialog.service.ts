@@ -1,3 +1,4 @@
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { Injectable } from '@angular/core';
 import { EditPhoneComponent } from './edit-phone/edit-phone.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
@@ -21,6 +22,13 @@ export class DialogService {
     this.matDialog.open(EditPasswordComponent, {
       panelClass: 'app-dialog',
       width: '420px'
+    });
+  }
+
+  forgotPassword() {
+    this.matDialog.open(ForgotPasswordComponent, {
+      panelClass: 'app-dialog',
+      width: '500px'
     });
   }
 

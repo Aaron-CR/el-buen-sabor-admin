@@ -61,7 +61,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   onEditPassword() {
-    this.dialogService.editPassword();
+    this.dialogService.forgotPassword();
   }
 
   toggleEdit() {

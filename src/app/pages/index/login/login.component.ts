@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
     ) { }
 
@@ -61,6 +63,10 @@ export class LoginComponent implements OnInit {
         }
       }
     });
+  }
+
+  onForgotPassword(){
+    this.dialogService.forgotPassword();
   }
 
 }

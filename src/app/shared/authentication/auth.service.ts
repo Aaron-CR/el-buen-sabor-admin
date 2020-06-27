@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../services/error-handler.service';
 import { EmployeeService } from './../services/employee.service';
 import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
@@ -5,6 +6,7 @@ import { auth } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { of, Observable } from 'rxjs';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthService {
 
   public user: Observable<Empleado>;
 
-  constructor(private authService: AngularFireAuth, private employeeService: EmployeeService) {
+  constructor(private authService: AngularFireAuth, private employeeService: EmployeeService, private snackBar: MatSnackBar) {
     this.user = this.authService.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -42,6 +44,24 @@ export class AuthService {
         .then( userData => resolve(userData),
         err => reject(err));
     });
+  }
+
+  resetPassword(email: string){
+    this.authService.sendPasswordResetEmail(email)
+        .then(
+          () => {
+            this.snackBar
+            .open('¡Correo enviado! Revisa tu casilla y sigue los pasos', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          },
+          err => {
+            this.snackBar
+            .open('El email indicado no tiene usuario vinculado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          }
+        );
+  }
+
+  confirmNewPassword(code: string, newPassword: string){
+    return this.authService.confirmPasswordReset(code, newPassword);
   }
 
   logoutUser() {
