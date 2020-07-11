@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
 import { ManufacturedDetailComponent } from '../manufactured-detail/manufactured-detail.component';
 import { ManufacturedFormComponent } from '../manufactured-form/manufactured-form.component';
@@ -8,7 +8,7 @@ import { ManufacturedFormComponent } from '../manufactured-form/manufactured-for
   templateUrl: './manufactured-table.component.html',
   styleUrls: ['./manufactured-table.component.scss']
 })
-export class ManufacturedTableComponent implements OnInit {
+export class ManufacturedTableComponent {
 
   public formDialog = ManufacturedFormComponent;
   public detailDialog = ManufacturedDetailComponent;
@@ -25,11 +25,7 @@ export class ManufacturedTableComponent implements OnInit {
     { columnDef: 'cantidad', header: 'Ingredientes', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.detallesReceta.length} articulos` },
     { columnDef: 'oculto', header: 'Publico', cell: (manufacturado: ArticuloManufacturado) => `${manufacturado.oculto}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -16,12 +16,12 @@ export class LoginComponent implements OnInit {
   public hide = true;
 
   constructor(
-    public formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
     private dialogService: DialogService,
-    private snackBar: MatSnackBar
-    ) { }
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -34,20 +34,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSignIn(signInFormGroup: FormGroup): void{
-    this.authService.loginEmailUser(signInFormGroup.value.email, signInFormGroup.value.password)
-    .then((res) => {
-      this.onSignInRedirect();
-    }).catch( err => {
-      this.snackBar.open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-    });
+  onSignIn(): void {
+    this.authService.loginEmailUser(this.loginFormGroup.value.email, this.loginFormGroup.value.password)
+      .then((res) => {
+        this.onSignInRedirect();
+      }).catch(err => {
+        this.snackBar.open(err.message, 'OK', {
+          panelClass: ['app-snackbar'],
+          duration: 10000
+        });
+      });
   }
 
   onSignInRedirect(): void {
-
     this.authService.user.subscribe((user) => {
-      if (!!user){
-        switch (user.rol.denominacion){
+      if (!!user) {
+        switch (user.rol.denominacion) {
           case 'administrador':
             this.router.navigate(['/admin']);
             break;
@@ -65,7 +67,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onForgotPassword(){
+  onForgotPassword() {
     this.dialogService.forgotPassword();
   }
 

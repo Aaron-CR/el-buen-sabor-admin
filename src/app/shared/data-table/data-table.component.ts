@@ -20,7 +20,6 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   @Input() routerText: string;
   @Input() formDialog: TemplateRef<any>;
   @Input() detailDialog: TemplateRef<any>;
-  @Input() displayedColumns: any[];
   @Input() title = 'Table';
   @Input() icon = 'table_chart';
   @Input() tableColumns: any[];
@@ -30,6 +29,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   @ViewChild('input') input: ElementRef;
 
   public dataSource: TableDataSource;
+  public displayedColumns: any[];
 
   constructor(
     private dataTableService: DataTableService,
@@ -38,6 +38,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    this.displayedColumns = this.tableColumns.map(c => c.columnDef);
     this.dataSource = new TableDataSource(this.dataTableService);
     this.dataSource.loadAll(this.path, '', 0, 8);
   }

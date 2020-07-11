@@ -29,7 +29,7 @@ export class KitchenDetailComponent implements OnInit {
   getStatuses() {
     return this.http.get(`http://localhost:8080/api/v1/comprobantes/estados/all`).pipe()
       .subscribe((data: Array<Estado>) => this.statuses = data
-        .filter(status => status.denominacion === 'demorado' || status.denominacion === 'terminado'));
+        .filter(status => status.denominacion === 'demorado' || status.denominacion === 'listo'));
   }
 
 }

@@ -1,10 +1,11 @@
-import { Component, OnInit, Optional, Inject, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, Optional, Inject, ViewChild } from '@angular/core';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { MatHorizontalStepper } from '@angular/material/stepper';
+import { Subscription } from 'rxjs';
 
 export interface UnidadMedida {
   abreviatura: string;
@@ -33,8 +34,9 @@ const UNIDADES_DATA: UnidadMedida[] = [
   templateUrl: './supplies-form.component.html',
   styleUrls: ['./supplies-form.component.scss']
 })
-export class SuppliesFormComponent implements OnInit, AfterViewInit {
+export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  private subscription: Subscription = new Subscription();
   public rubros: Array<Rubro>;
   public unidades = UNIDADES_DATA;
   public localData: ArticuloInsumo;
@@ -49,17 +51,22 @@ export class SuppliesFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloInsumo,
-    public dialogRef: MatDialogRef<SuppliesFormComponent>,
-    public formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<SuppliesFormComponent>,
+    private formBuilder: FormBuilder,
     private http: HttpClient
   ) {
     this.localData = { ...data };
   }
 
+
   ngOnInit(): void {
     this.buildForm();
     this.setAction();
     this.getCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -87,8 +94,8 @@ export class SuppliesFormComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
-    return this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
-      .subscribe((data: Array<Rubro>) => this.rubros = data);
+    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+      .subscribe((data: Array<Rubro>) => this.rubros = data));
   }
 
   setAction() {
@@ -99,12 +106,12 @@ export class SuppliesFormComponent implements OnInit, AfterViewInit {
     this.dialogRef.close({ event: this.action, data: this.suppliesForm.value });
   }
 
-  onCancel() {
-    this.dialogRef.close({ event: 'Cancel' });
-  }
-
   errorHandling = (control: string, error: string) => {
     return this.suppliesForm.controls[control].hasError(error);
+  }
+
+  compareWith(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 
 }

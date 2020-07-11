@@ -22,7 +22,6 @@ export class CashierTableComponent implements OnInit {
     { columnDef: 'delivery', header: 'Envío', cell: (orden: Orden) => orden.delivery ? 'Si' : 'No' },
     { columnDef: 'estado', header: 'Estado', cell: (orden: Orden) => `${orden.estado.denominacion}` },
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor(public dialog: MatDialog) { }
 

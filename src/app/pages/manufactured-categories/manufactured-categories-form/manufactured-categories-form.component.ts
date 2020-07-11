@@ -1,7 +1,7 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { Categoria } from 'src/app/core/models/articulos/categoria';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Categoria } from 'src/app/core/models/articulos/categoria';
 
 @Component({
   selector: 'app-manufactured-categories-form',
@@ -20,8 +20,8 @@ export class ManufacturedCategoriesFormComponent implements OnInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Categoria,
-    public dialogRef: MatDialogRef<ManufacturedCategoriesFormComponent>,
-    public formBuilder: FormBuilder
+    private dialogRef: MatDialogRef<ManufacturedCategoriesFormComponent>,
+    private formBuilder: FormBuilder
   ) {
     this.localData = { ...data };
   }
@@ -47,10 +47,6 @@ export class ManufacturedCategoriesFormComponent implements OnInit {
 
   onAction() {
     this.dialogRef.close({ event: this.action, data: this.manufacturedCategoriesForm.value });
-  }
-
-  onCancel() {
-    this.dialogRef.close({ event: 'Cancel' });
   }
 
   errorHandling = (control: string, error: string) => {

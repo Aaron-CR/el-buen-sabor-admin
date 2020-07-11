@@ -16,7 +16,7 @@ import { InvoiceComponent } from './components/invoice-tab/invoice/invoice.compo
 import { DetailComponent } from './components/products-tab/detail/detail.component';
 import { NotesComponent } from './components/products-tab/notes/notes.component';
 import { EditPhoneComponent } from './components/dialogs/edit-phone/edit-phone.component';
-import { EditPasswordComponent } from './components/dialogs/edit-password/edit-password.component';
+import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
 import { DialogService } from './components/dialogs/dialog.service';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 
@@ -24,7 +24,6 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { environment } from './../../environments/environment';
-import { ForgotPasswordComponent } from './components/dialogs/forgot-password/forgot-password.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
@@ -47,9 +46,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DetailComponent,
     NotesComponent,
     EditPhoneComponent,
-    EditPasswordComponent,
-    UserInfoComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,

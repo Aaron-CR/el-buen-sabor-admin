@@ -35,10 +35,10 @@ export class CashierDetailComponent implements OnInit {
           case 'cancelado':
             return this.statuses = data.filter(status => status.denominacion === 'pendiente' || status.denominacion === 'en proceso');
           case 'en proceso':
-            return this.statuses = data.filter(status => status.denominacion === 'demorado' || status.denominacion === 'terminado');
+            return this.statuses = data.filter(status => status.denominacion === 'demorado' || status.denominacion === 'listo');
           case 'demorado':
-            return this.statuses = data.filter(status => status.denominacion === 'demorado' || status.denominacion === 'terminado');
-          case 'terminado':
+            return this.statuses = data.filter(status => status.denominacion === 'demorado' || status.denominacion === 'listo');
+          case 'listo':
             return this.statuses = data.filter(status => status.denominacion === 'en camino' || status.denominacion === 'entregado');
           case 'en camino':
             return this.statuses = data.filter(status => status.denominacion === 'entregado');

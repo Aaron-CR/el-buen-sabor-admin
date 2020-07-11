@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Categoria } from 'src/app/core/models/articulos/categoria';
 import { ManufacturedCategoriesDetailComponent } from '../manufactured-categories-detail/manufactured-categories-detail.component';
 import { ManufacturedCategoriesFormComponent } from '../manufactured-categories-form/manufactured-categories-form.component';
@@ -8,7 +8,7 @@ import { ManufacturedCategoriesFormComponent } from '../manufactured-categories-
   templateUrl: './manufactured-categories-table.component.html',
   styleUrls: ['./manufactured-categories-table.component.scss']
 })
-export class ManufacturedCategoriesTableComponent implements OnInit {
+export class ManufacturedCategoriesTableComponent {
 
   public detailDialog = ManufacturedCategoriesDetailComponent;
   public formDialog = ManufacturedCategoriesFormComponent;
@@ -20,11 +20,7 @@ export class ManufacturedCategoriesTableComponent implements OnInit {
     { columnDef: 'denominacion', header: 'Denominación', cell: (categoria: Categoria) => `${categoria.denominacion}` },
     { columnDef: 'oculto', header: 'Público', cell: (categoria: Categoria) => `${categoria.oculto}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

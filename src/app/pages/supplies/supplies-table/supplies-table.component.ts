@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
+import { Component } from '@angular/core';
 import { SuppliesDetailComponent } from '../supplies-detail/supplies-detail.component';
 import { SuppliesFormComponent } from '../supplies-form/supplies-form.component';
+import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 
 @Component({
   selector: 'app-supplies-table',
   templateUrl: './supplies-table.component.html',
   styleUrls: ['./supplies-table.component.scss']
 })
-export class SuppliesTableComponent implements OnInit {
+export class SuppliesTableComponent {
 
   public detailDialog = SuppliesDetailComponent;
   public formDialog = SuppliesFormComponent;
@@ -26,11 +26,7 @@ export class SuppliesTableComponent implements OnInit {
     { columnDef: 'stockActual', header: 'Disponibilidad', cell: (insumo: ArticuloInsumo) => `${insumo.stockActual}` },
     { columnDef: 'oculto', header: 'Publico', cell: (insumo: ArticuloInsumo) => `${insumo.oculto}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

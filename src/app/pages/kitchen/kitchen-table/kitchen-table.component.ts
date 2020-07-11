@@ -21,7 +21,6 @@ export class KitchenTableComponent implements OnInit {
     { columnDef: 'horarioEntrega', header: 'Hora de Entrega', cell: (orden: Orden) => `${orden.horarioEntrega}` },
     { columnDef: 'estado', header: 'Estado', cell: (orden: Orden) => `${orden.estado.denominacion}` },
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor(public dialog: MatDialog) { }
 

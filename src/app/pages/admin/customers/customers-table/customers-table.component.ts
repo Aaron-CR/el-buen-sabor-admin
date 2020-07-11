@@ -21,7 +21,6 @@ export class CustomersTableComponent implements OnInit {
     { columnDef: 'telefono', header: 'Teléfono', cell: (cliente: Cliente) => `${cliente.telefono}` },
     { columnDef: 'fechaAlta', header: 'Fecha de Registro', cell: (cliente: Cliente) => `${cliente.fechaAlta}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor(public dialog: MatDialog) { }
 

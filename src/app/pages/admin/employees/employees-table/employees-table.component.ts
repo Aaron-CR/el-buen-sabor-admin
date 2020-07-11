@@ -22,7 +22,6 @@ export class EmployeesTableComponent implements OnInit {
     { columnDef: 'cuil', header: 'Cuil', cell: (empleado: Empleado) => `${empleado.cuil}` },
     { columnDef: 'rol', header: 'Cargo', cell: (empleado: Empleado) => `${empleado.rol.denominacion}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
 

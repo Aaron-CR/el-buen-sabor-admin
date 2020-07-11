@@ -30,7 +30,7 @@
     </mat-checkbox>
   </form>
   <mat-dialog-actions align="end" class="mb-3">
-    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button [mat-dialog-close]="true">Cancel</button>
     <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!manufacturedCategoriesForm.valid"
       (click)="onAction()"> {{ action }}
     </button>

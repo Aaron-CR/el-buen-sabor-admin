@@ -12,10 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UpdatePasswordComponent implements OnInit {
 
   public editPasswordForm: FormGroup;
-  public hideCurrentPassword = true;
 
   constructor(
-    public formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -34,24 +33,26 @@ export class UpdatePasswordComponent implements OnInit {
     });
   }
 
-  onConfirm(form: FormGroup) {
+  onConfirm() {
     const code = this.activeRoute.snapshot.queryParams['oobCode'];
-    if (form.value.newPassword !== form.value.confirmPassword){
-      this.snackBar
-      .open('¡Las contraseñas deben coincidir!', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+    if (this.editPasswordForm.value.newPassword !== this.editPasswordForm.value.confirmPassword) {
+      this.snackBar.open('¡Las contraseñas deben coincidir!', 'OK', {
+        duration: 10000, panelClass: ['app-snackbar']
+      });
     } else {
-      this.authService.confirmNewPassword(code, form.value.newPassword)
+      this.authService.confirmNewPassword(code, this.editPasswordForm.value.newPassword)
         .then(
           () => {
-            this.snackBar
-            .open('Contraseña actualizada con éxito', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+            this.snackBar.open('Contraseña actualizada con éxito', 'OK', {
+              duration: 10000, panelClass: ['app-snackbar']
+            });
             this.router.navigate(['']);
           },
           err => {
-            this.snackBar
-            .open('Ha ocurrido un error', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-          }
-        );
+            this.snackBar.open('Ha ocurrido un error', 'OK', {
+              duration: 10000, panelClass: ['app-snackbar']
+            });
+          });
     }
   }
 

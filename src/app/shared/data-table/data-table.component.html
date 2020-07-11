@@ -49,7 +49,7 @@
         </ng-container>
         <!-- SwitchCase currency -->
         <ng-container
-          *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'costo' || column.columnDef === 'monto'">
+          *ngSwitchCase="column.columnDef ==='precio' || column.columnDef === 'costo' || column.columnDef === 'total'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{ column.cell(row) | currency:"ARS":"symbol" }} </mat-cell>
         </ng-container>

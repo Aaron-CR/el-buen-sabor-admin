@@ -1,7 +1,8 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SupplyService } from 'src/app/shared/services/supply.service';
 @Component({
   selector: 'app-stock-form',
   templateUrl: './stock-form.component.html',
@@ -9,15 +10,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class StockFormComponent implements OnInit {
 
-  public localData: ArticuloInsumo;
+  public unidadMedida: string;
   public stockForm: FormGroup;
 
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloInsumo,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: string,
     public dialogRef: MatDialogRef<StockFormComponent>,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public supplyService: SupplyService
   ) {
-    this.localData = { ...data };
+    this.unidadMedida = data;
   }
 
   ngOnInit(): void {
@@ -26,24 +28,16 @@ export class StockFormComponent implements OnInit {
 
   buildForm() {
     this.stockForm = this.formBuilder.group({
-      id: [this.localData.id],
-      ultimaActualizacion: [this.localData.ultimaActualizacion],
-      oculto: [this.localData.oculto],
-      cantidad: [this.localData.denominacion, [Validators.required]],
-      fechaMovimiento: [this.localData.descripcion],
-      operacion: [this.localData.descripcion]
+      cantidad: ['', [Validators.required]],
     });
   }
 
   onAction() {
-
-  }
-
-  onCancel() {
-    this.dialogRef.close({ event: 'Cancel' });
+    this.dialogRef.close({ event: 'Añadir', data: this.stockForm.value });
   }
 
   errorHandling = (control: string, error: string) => {
     return this.stockForm.controls[control].hasError(error);
   }
+
 }

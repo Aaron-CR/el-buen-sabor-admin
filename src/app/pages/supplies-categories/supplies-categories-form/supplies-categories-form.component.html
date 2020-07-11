@@ -12,7 +12,7 @@
     <!-- Rubro padre Select -->
     <mat-form-field class="w-100 pb-2">
       <mat-label>Seleccione rubro padre</mat-label>
-      <mat-select formControlName="rubroPadre">
+      <mat-select formControlName="rubroPadre" [compareWith]="compareWith">
         <mat-option *ngFor="let rubro of rubros" [value]="rubro">
           {{rubro.denominacion}}
         </mat-option>
@@ -41,7 +41,7 @@
     </mat-checkbox>
   </form>
   <mat-dialog-actions align="end" class="mb-3">
-    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button [mat-dialog-close]="true">Cancel</button>
     <button mat-flat-button color="primary" [disabled]="!suppliesCategoriesForm.valid" (click)="onAction()">
       {{ action }}
     </button>

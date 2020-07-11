@@ -17,10 +17,9 @@ export class InvoicesTableComponent implements OnInit {
     { columnDef: 'id', header: 'N° Factura', cell: (factura: Factura) => `${factura.id}` },
     { columnDef: 'fecha', header: 'Fecha', cell: (factura: Factura) => `${factura.fecha}` },
     { columnDef: 'total', header: 'Monto', cell: (factura: Factura) => `${factura.total}` },
-    { columnDef: 'estado', header: 'Estado', cell: (factura: Factura) => `${factura.estado}` },
+    { columnDef: 'estado', header: 'Estado', cell: (factura: Factura) => `${factura.estado.denominacion}` },
     { columnDef: 'orden', header: 'N° Orden', cell: (factura: Factura) => `${factura.orden.id}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
 

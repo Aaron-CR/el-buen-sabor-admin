@@ -1,8 +1,6 @@
-import { ErrorHandlerService } from './../services/error-handler.service';
 import { EmployeeService } from './../services/employee.service';
 import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
-import { auth } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { of, Observable } from 'rxjs';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
@@ -15,7 +13,11 @@ export class AuthService {
 
   public user: Observable<Empleado>;
 
-  constructor(private authService: AngularFireAuth, private employeeService: EmployeeService, private snackBar: MatSnackBar) {
+  constructor(
+    private authService: AngularFireAuth,
+    private employeeService: EmployeeService,
+    private snackBar: MatSnackBar
+  ) {
     this.user = this.authService.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -30,10 +32,10 @@ export class AuthService {
   registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.authService.createUserWithEmailAndPassword(email, pass)
-      .then( userData => {
-        resolve(userData);
-      }).catch(
-        err => console.log(reject(err)));
+        .then(userData => {
+          resolve(userData);
+        }).catch(
+          err => console.log(reject(err)));
     });
   }
 
@@ -41,26 +43,26 @@ export class AuthService {
   loginEmailUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.authService.signInWithEmailAndPassword(email, pass)
-        .then( userData => resolve(userData),
-        err => reject(err));
+        .then(userData => resolve(userData),
+          err => reject(err));
     });
   }
 
-  resetPassword(email: string){
+  resetPassword(email: string) {
     this.authService.sendPasswordResetEmail(email)
-        .then(
-          () => {
-            this.snackBar
+      .then(
+        () => {
+          this.snackBar
             .open('¡Correo enviado! Revisa tu casilla y sigue los pasos', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-          },
-          err => {
-            this.snackBar
+        },
+        err => {
+          this.snackBar
             .open('El email indicado no tiene usuario vinculado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
-          }
-        );
+        }
+      );
   }
 
-  confirmNewPassword(code: string, newPassword: string){
+  confirmNewPassword(code: string, newPassword: string) {
     return this.authService.confirmPasswordReset(code, newPassword);
   }
 
@@ -70,8 +72,7 @@ export class AuthService {
 
   /* Averigua si hay un usuario conectado o no */
   isAuth() {
-    // tslint:disable-next-line: no-shadowed-variable
-    return this.authService.authState.pipe(map( auth => auth));
+    return this.authService.authState.pipe(map(auth => auth));
   }
 
 }

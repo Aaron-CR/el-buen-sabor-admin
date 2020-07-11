@@ -1,12 +1,10 @@
 <div class="app-container">
   <div class="wrap-login">
-    <form novalidate [formGroup]="loginFormGroup" (ngSubmit)="onSignIn(loginFormGroup)">
-      <div class="app-logo mb-3">
-        <img src="assets/images/logos/logo.png" alt="LOGO" class="w-100">
-      </div>
-      <span class="app-title mb-4">
-        INGRESE A SU CUENTA
-      </span>
+    <div class="app-logo mb-3">
+      <img src="assets/images/logos/logo.png" alt="LOGO" class="w-100">
+    </div>
+    <span class="app-title mb-4"> INGRESE A SU CUENTA </span>
+    <form novalidate [formGroup]="loginFormGroup">
       <mat-form-field class="w-100">
         <mat-label>Correo electrónico</mat-label>
         <input matInput type="email" required formControlName="email" placeholder="Ingrese su correo electrónico.">
@@ -18,7 +16,7 @@
         <mat-icon class="material-icons-outlined" matSuffix (click)="hide = !hide">
           {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <button mat-flat-button color="primary" class="w-100 mb-4" type="submit">INGRESAR</button>
+      <button mat-flat-button color="primary" class="w-100 mb-4" (click)="onSignIn()">INGRESAR</button>
     </form>
     <button mat-button class="w-100 mb-4" (click)="onForgotPassword()">Olvidé mi contraseña</button>
   </div>

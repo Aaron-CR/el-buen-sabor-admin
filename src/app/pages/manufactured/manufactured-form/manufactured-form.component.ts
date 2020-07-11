@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Inject, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Optional, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Categoria } from 'src/app/core/models/articulos/categoria';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
@@ -7,15 +7,16 @@ import { HttpClient } from '@angular/common/http';
 import { DetailFormComponent } from './detail-form/detail-form.component';
 import { DetalleReceta } from 'src/app/core/models/articulos/detalle-receta';
 import { MatHorizontalStepper } from '@angular/material/stepper';
-import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manufactured-form',
   templateUrl: './manufactured-form.component.html',
   styleUrls: ['./manufactured-form.component.scss']
 })
-export class ManufacturedFormComponent implements OnInit, AfterViewInit {
+export class ManufacturedFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  private subscription: Subscription = new Subscription();
   public categorias: Array<Categoria>;
   public localData: ArticuloManufacturado;
   public action: string;
@@ -38,9 +39,9 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: ArticuloManufacturado,
-    public dialogRef: MatDialogRef<ManufacturedFormComponent>,
-    public dialog: MatDialog,
-    public formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<ManufacturedFormComponent>,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder,
     private http: HttpClient
   ) {
     this.localData = { ...data };
@@ -50,6 +51,10 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
     this.buildForm();
     this.setAction();
     this.getCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -81,8 +86,8 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
-    return this.http.get(`http://localhost:8080/api/v1/articulos/categorias/all`).pipe()
-      .subscribe((data: Array<Categoria>) => this.categorias = data);
+    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/categorias/all`).pipe()
+      .subscribe((data: Array<Categoria>) => this.categorias = data));
   }
 
   setAction() {
@@ -91,10 +96,6 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
 
   onAction() {
     this.dialogRef.close({ event: this.action, data: this.manufacturedForm.value });
-  }
-
-  onCancel() {
-    this.dialogRef.close({ event: 'Cancel' });
   }
 
   onSubmit(object: any) {
@@ -143,6 +144,10 @@ export class ManufacturedFormComponent implements OnInit, AfterViewInit {
 
   errorHandling = (control: string, error: string) => {
     return this.manufacturedForm.controls[control].hasError(error);
+  }
+
+  compareWith(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 
   formatLabel(value: number) {

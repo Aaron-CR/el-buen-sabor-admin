@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Rubro } from 'src/app/core/models/articulos/rubro';
+import { Component } from '@angular/core';
 import { SuppliesCategoriesDetailComponent } from '../supplies-categories-detail/supplies-categories-detail.component';
 import { SuppliesCategoriesFormComponent } from '../supplies-categories-form/supplies-categories-form.component';
+import { Rubro } from 'src/app/core/models/articulos/rubro';
 
 @Component({
   selector: 'app-supplies-categories-table',
   templateUrl: './supplies-categories-table.component.html',
   styleUrls: ['./supplies-categories-table.component.scss']
 })
-export class SuppliesCategoriesTableComponent implements OnInit {
+export class SuppliesCategoriesTableComponent {
 
   public detailDialog = SuppliesCategoriesDetailComponent;
   public formDialog = SuppliesCategoriesFormComponent;
@@ -22,11 +22,7 @@ export class SuppliesCategoriesTableComponent implements OnInit {
     { columnDef: 'rubroPadre', header: 'Rubro Padre', cell: (rubro: Rubro) => rubro.rubroPadre ? `${rubro.rubroPadre.denominacion}` : 'No tiene' },
     { columnDef: 'oculto', header: 'Público', cell: (rubro: Rubro) => `${rubro.oculto}` }
   ];
-  public displayedColumns = this.tableColumns.map(c => c.columnDef);
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

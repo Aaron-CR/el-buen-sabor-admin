@@ -1,17 +1,18 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { Rubro } from 'src/app/core/models/articulos/rubro';
+import { Component, OnInit, OnDestroy, Optional, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { HttpClient } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-supplies-categories-form',
   templateUrl: './supplies-categories-form.component.html',
   styleUrls: ['./supplies-categories-form.component.scss']
 })
-export class SuppliesCategoriesFormComponent implements OnInit {
+export class SuppliesCategoriesFormComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription();
   public rubros: Array<Rubro>;
   public localData: Rubro;
   public action: string;
@@ -23,8 +24,8 @@ export class SuppliesCategoriesFormComponent implements OnInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Rubro,
-    public dialogRef: MatDialogRef<SuppliesCategoriesFormComponent>,
-    public formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<SuppliesCategoriesFormComponent>,
+    private formBuilder: FormBuilder,
     private http: HttpClient
   ) {
     this.localData = { ...data };
@@ -34,6 +35,10 @@ export class SuppliesCategoriesFormComponent implements OnInit {
     this.buildForm();
     this.setAction();
     this.getCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   buildForm() {
@@ -48,8 +53,14 @@ export class SuppliesCategoriesFormComponent implements OnInit {
   }
 
   getCategories() {
-    return this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
-      .subscribe((data: Array<Rubro>) => this.rubros = data);
+    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+      .subscribe((data: Array<Rubro>) => {
+        if (this.action === 'Editar') {
+          return this.rubros = data.filter((rubro: Rubro) => rubro.id !== this.localData.id);
+        } else {
+          return this.rubros = data;
+        }
+      }));
   }
 
   setAction() {
@@ -60,12 +71,12 @@ export class SuppliesCategoriesFormComponent implements OnInit {
     this.dialogRef.close({ event: this.action, data: this.suppliesCategoriesForm.value });
   }
 
-  onCancel() {
-    this.dialogRef.close({ event: 'Cancel' });
-  }
-
   errorHandling = (control: string, error: string) => {
     return this.suppliesCategoriesForm.controls[control].hasError(error);
+  }
+
+  compareWith(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
   }
 
 }
