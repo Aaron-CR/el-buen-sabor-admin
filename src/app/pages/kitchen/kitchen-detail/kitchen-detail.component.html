@@ -2,7 +2,7 @@
   <mat-tab-group>
     <mat-tab label="Detalles">
       <app-user-info [data]="localData.cliente" title='Cliente'></app-user-info>
-      <app-status [data]="localData.estado" [statuses]="statuses"></app-status>
+      <app-status [orderId]="localData.id" [data]="localData.estado" [statuses]="statuses"></app-status>
     </mat-tab>
     <mat-tab label="Productos">
       <app-notes [data]="localData.aclaraciones"></app-notes>

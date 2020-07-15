@@ -1,7 +1,7 @@
 import { Empleado } from './../../core/models/usuarios/empleado';
 import { ErrorHandlerService } from './error-handler.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -17,5 +17,12 @@ export class EmployeeService {
   findByUid(uid: string): Observable<Empleado>{
     return this.httpClient.get<Empleado>(`${this.endpoint}/current/${uid}`)
       .pipe(catchError(error => this.errorHandler.handleError(error)));
+  }
+
+  findAllRepartidores(): Observable<Empleado[]> {
+    return this.httpClient.get<Empleado[]>(`${this.endpoint}/all`, {
+      params: new HttpParams()
+        .set('filter', 'repartidor')
+    }).pipe(catchError(error => this.errorHandler.handleError(error)));
   }
 }

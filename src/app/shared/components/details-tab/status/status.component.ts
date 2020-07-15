@@ -35,11 +35,9 @@ export class StatusComponent implements OnInit {
 
   changeStatus(newStatus){
     this.selectedStatus = newStatus;
-    alert(this.selectedStatus.denominacion);
   }
 
   updateStatus(){
-    alert(this.selectedStatus.denominacion + ', ' + this.orderId);
     this.orderService.updateEstado(this.selectedStatus, this.orderId).subscribe(
       res => {
         this.data = res.estado;

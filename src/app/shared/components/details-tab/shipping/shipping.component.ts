@@ -1,3 +1,6 @@
+import { OrderService } from './../../../services/order.service';
+import { EmployeeService } from './../../../services/employee.service';
+import { Empleado } from 'src/app/core/models/usuarios/empleado';
 import { Component, OnInit, Input } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 
@@ -10,6 +13,8 @@ export class ShippingComponent implements OnInit {
 
   @Input()
   public data: Orden;
+  public carriers: Empleado[];
+  public selectedCarrier: Empleado;
   public zoom = 18;
 
   get address() {
@@ -20,9 +25,30 @@ export class ShippingComponent implements OnInit {
     return `${this.data.repartidor.nombre} ${this.data.repartidor.apellido}`;
   }
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService, private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.getRepartidores();
+  }
+
+  getRepartidores(){
+    this.employeeService.findAllRepartidores().subscribe(
+      res => {
+        this.carriers = res;
+      }
+    );
+  }
+
+  changeCarrier(newCarrier: Empleado){
+    this.selectedCarrier = newCarrier;
+  }
+
+  updateCarrier(){
+    this.orderService.updateDelivery(this.selectedCarrier, this.data.id).subscribe(
+      res => {
+        this.data = res;
+      }
+    );
   }
 
 }

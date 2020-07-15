@@ -31,18 +31,15 @@
       <div class="mr-2 flex-grow-1">
         <mat-form-field appearance="outline" class="w-100 no-padding">
           <mat-label>Repartidor</mat-label>
-          <mat-select>
-            <!-- <mat-option *ngFor="let carrier of carriers" [value]="carrier">
+          <mat-select (selectionChange)="changeCarrier($event.value)">
+            <mat-option *ngFor="let carrier of carriers" [value]="carrier">
               {{ carrier.nombre }} {{ carrier.apellido }}
-            </mat-option> -->
-            <mat-option value="carrier">
-              A completar
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div>
-        <button mat-flat-button color="primary" class="ml-3">
+        <button mat-flat-button color="primary" class="ml-3" (click)="updateCarrier()">
           <mat-icon class="material-icons-outlined">refresh</mat-icon> Actualizar
         </button>
       </div>
