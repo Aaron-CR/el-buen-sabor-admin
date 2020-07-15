@@ -11,7 +11,7 @@
   <div class="mr-2 flex-grow-1">
     <mat-form-field appearance="outline" class="w-100 no-padding">
       <mat-label>Estado</mat-label>
-      <mat-select>
+      <mat-select (selectionChange)="changeStatus($event.value)">
         <mat-option *ngFor="let status of statuses" [value]="status">
           {{ status.denominacion | titlecase }}
         </mat-option>
@@ -19,7 +19,7 @@
     </mat-form-field>
   </div>
   <div>
-    <button mat-flat-button color="primary" class="ml-3">
+    <button mat-flat-button color="primary" class="ml-3" (click)="updateStatus()">
       <mat-icon class="material-icons-outlined">refresh</mat-icon> Actualizar
     </button>
   </div>
