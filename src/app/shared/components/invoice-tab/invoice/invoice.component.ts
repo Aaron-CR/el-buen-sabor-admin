@@ -1,3 +1,6 @@
+import { AuthService } from 'src/app/shared/authentication/auth.service';
+import { InvoiceService } from './../../../services/invoice.service';
+import { Factura } from 'src/app/core/models/comprobantes/factura';
 import { Component, OnInit, Input } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 
@@ -9,23 +12,56 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 export class InvoiceComponent implements OnInit {
 
   @Input()
-  public data: Orden;
+  public invoice: Factura;
+  @Input()
+  public orderId: number;
   public invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
   public total: number;
 
   get address() {
-    return `${this.data.direccionEntrega.calle} ${this.data.direccionEntrega.numero}, ${this.data.direccionEntrega.localidad.nombre}, ${this.data.direccionEntrega.localidad.provincia.nombre}`;
+    if (this.invoice !== undefined){
+      return `${this.invoice.orden.direccionEntrega.calle} ${this.invoice.orden.direccionEntrega.numero}, ${this.invoice.orden.direccionEntrega.localidad.nombre}, ${this.invoice.orden.direccionEntrega.localidad.provincia.nombre}`;
+    } else {
+      return '';
+    }
   }
 
-  constructor() { }
+  constructor(private invoiceService: InvoiceService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.total = this.getTotal();
+    if (this.orderId !== undefined){
+      this.getOrderInvoice();
+    }
+    if (this.invoice !== undefined){
+      this.total = this.getTotal();
+    }
   }
 
   /** Gets the total cost of all rows. */
   getTotal() {
-    return this.data.detalles.map(t => t.precioTotal).reduce((acc, value) => acc + value, 0);
+    return this.invoice.orden.detalles.map(t => t.precioTotal).reduce((acc, value) => acc + value, 0);
+  }
+
+  generateInvoice(){
+    this.authService.user.subscribe(
+      user => {
+        if (user){
+          this.invoiceService.createInvoice(this.orderId, user.uid).subscribe(
+            res => {
+              this.invoice = res;
+            }
+          );
+        }
+      }
+    );
+  }
+
+  getOrderInvoice(){
+    this.invoiceService.getInvoice(this.orderId).subscribe(
+      res => {
+        this.invoice = res;
+      }
+    );
   }
 
 }

@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AuthService {
 
   public user: Observable<Empleado>;
+  public userUid: string;
 
   constructor(
     private authService: AngularFireAuth,
@@ -21,6 +22,7 @@ export class AuthService {
     this.user = this.authService.authState.pipe(
       switchMap((user) => {
         if (user) {
+          this.userUid = user.uid;
           return this.employeeService.findByUid(user.uid);
         }
         return of(null);

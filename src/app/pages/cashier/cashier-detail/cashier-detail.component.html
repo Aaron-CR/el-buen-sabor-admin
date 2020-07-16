@@ -11,7 +11,7 @@
       <app-detail [data]="localData.detalles"></app-detail>
     </mat-tab>
     <mat-tab label="Factura">
-      <app-invoice [data]="localData"></app-invoice>
+      <app-invoice [orderId]="localData.id" ></app-invoice>
     </mat-tab>
   </mat-tab-group>
 </app-dialog>

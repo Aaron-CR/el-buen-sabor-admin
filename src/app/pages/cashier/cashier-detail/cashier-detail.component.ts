@@ -1,8 +1,10 @@
+import { InvoiceService } from './../../../shared/services/invoice.service';
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Estado } from 'src/app/core/models/comprobantes/estado';
 import { HttpClient } from '@angular/common/http';
+import { Factura } from 'src/app/core/models/comprobantes/factura';
 
 @Component({
   selector: 'app-cashier-detail',
@@ -53,5 +55,6 @@ export class CashierDetailComponent implements OnInit {
         }
       });
   }
+
 
 }
