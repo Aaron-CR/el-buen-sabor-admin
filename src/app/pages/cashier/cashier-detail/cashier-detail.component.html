@@ -2,7 +2,7 @@
   <mat-tab-group>
     <mat-tab label="Detalles">
       <app-user-info [data]="localData.cliente" title='Cliente'></app-user-info>
-      <app-status [orderId]="localData.id" [data]="localData.estado" [statuses]="statuses"></app-status>
+      <app-status [data]="localData"></app-status>
       <app-payment [data]="localData"></app-payment>
       <app-shipping [data]="localData"></app-shipping>
     </mat-tab>
@@ -11,7 +11,7 @@
       <app-detail [data]="localData.detalles"></app-detail>
     </mat-tab>
     <mat-tab label="Factura">
-      <app-invoice [orderId]="localData.id" ></app-invoice>
+      <app-invoice [orderId]="localData.id"></app-invoice>
     </mat-tab>
   </mat-tab-group>
 </app-dialog>
