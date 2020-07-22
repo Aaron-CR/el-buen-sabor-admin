@@ -21,42 +21,62 @@
     </div>
   </div>
   <!-- Ingresos -->
-  <div class="mt-3 app-card" style="height: 150px; width: 100%;" *ngIf="false">
+  <div class="mt-3 app-card" style="height: 270px; width: 100%; box-sizing: border-box; padding: 10px;">
     <!-- Action Button -->
-    <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
-      <mat-icon class="material-icons-outlined">more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" xPosition="before" class="px-1">
-      <!-- Diario Button -->
-      <button mat-menu-item>
-        <mat-icon class="material-icons app-menu-icon">calendar_today</mat-icon>
-        <span>Diario</span>
-      </button>
-      <!-- Mensual Button -->
-      <button mat-menu-item>
-        <mat-icon class="material-icons app-menu-icon">calendar_today</mat-icon>
-        <span>Mensual</span>
-      </button>
-      <!-- Exportar Button -->
-      <button mat-menu-item>
-        <mat-icon class="material-icons app-menu-icon">reply</mat-icon>
-        <span>Exportar</span>
-      </button>
-    </mat-menu>
-    <ngx-charts-number-card [results]="ingresos" [scheme]="ingresosColorScheme" [valueFormatting]="format"
+    <div class="container">
+      <div class="row">
+        <h1>Ingresos por periodo</h1> 
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Elige las fechas" [satDatepicker]="picker">
+            <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+            <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+          </mat-form-field>
+          
+          <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
+            <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
+      
+      <mat-menu #menu="matMenu" xPosition="before" class="px-1">
+        <!-- Exportar Button -->
+        <button mat-menu-item>
+          <mat-icon class="material-icons app-menu-icon">reply</mat-icon>
+          <span>Exportar</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div style="height: 200px; width: 100%;">
+      <ngx-charts-number-card [results]="ingresos" [scheme]="ingresosColorScheme" [valueFormatting]="format"
       [innerPadding]="0" [cardColor]="'#f2f2f2'">
-    </ngx-charts-number-card>
+      </ngx-charts-number-card>
+    </div>
+    
   </div>
+
   <!-- Stock -->
-  <!-- <div class="mt-3 app-card" style="height: 300px; width: 100%;">
-    <ngx-charts-bar-vertical [results]="stock" [scheme]="'fire'" [yAxis]="'true'" [legend]="'true'"
-      (select)="onSelect($event)">
-    </ngx-charts-bar-vertical>
-  </div> -->
+  <div class="mt-5 app-card" style="height: 400px; width: 100%; box-sizing: border-box; padding: 10px;">
+    <div class="container">
+      <div class="row">
+        <h1 class="mt-3 mb-3">Productos por debajo del stock mínimo</h1>
+        <button mat-button mat-icon-button matTooltip="More actions" [matMenuTriggerFor]="menu">
+          <mat-icon class="material-icons-outlined">more_vert</mat-icon>
+        </button>
+      </div>
+    </div>
+    
+    <div style="height: 350px; width: 99%;">
+      <ngx-charts-bar-vertical [results]="stock" [scheme]="'fire'" [yAxis]="'true'" [legend]="'true'" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
   <!-- Mas vendidos -->
   <!-- <div class="mt-3 app-card" style="height: 300px; width: 100%;">
     <ngx-charts-line-chart [results]="masVendidos" [scheme]="masVendidosColorScheme" [xAxis]="'true'" [yAxis]="'true'"
       [legend]="'true'" (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
     </ngx-charts-line-chart>
   </div> -->
+  
 </div>

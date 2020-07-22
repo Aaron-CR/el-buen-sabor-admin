@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModeloGrafico } from 'src/app/core/models/reportes/modelo-grafico';
+import { ReportsService } from 'src/app/shared/services/reports.service';
 
 
 const STOCK = [
@@ -78,11 +80,11 @@ const STOCK = [
 
 const INGRESOS = [
   {
-    name: 'ORDENES',
+    name: 'FACTURAS',
     value: 34
   },
   {
-    name: 'GANANCIAS',
+    name: 'INGRESOS',
     value: 20432
   }
 ];
@@ -243,8 +245,8 @@ const MAS_VENDIDOS = [
 })
 export class AdminComponent implements OnInit {
 
-  stock = STOCK;
-  ingresos = INGRESOS;
+  stock: ModeloGrafico[];
+  ingresos: ModeloGrafico[];
   masVendidos = MAS_VENDIDOS;
 
   ingresosColorScheme = {
@@ -255,14 +257,33 @@ export class AdminComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor() { }
+  constructor(private resportsService: ReportsService) { }
 
   ngOnInit(): void {
+    this.getInsumosStock();
+    this.getIngresos();
   }
 
   /* onSelect(event) {
     console.log(event);
   } */
+
+  getInsumosStock(){
+    this.resportsService.getInsumosOutOfStock().subscribe(
+      res => {
+        this.stock = res;
+        console.log(this.stock);
+      }
+    );
+  }
+
+  getIngresos(){
+    this.resportsService.getIngresosPorPeriodo().subscribe(
+      res => {
+        this.ingresos = res;
+      }
+    );
+  }
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));

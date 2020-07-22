@@ -1,5 +1,5 @@
 h1 {
-  margin: 0;
+  margin: auto;
 }
 
 .app-card {
@@ -25,4 +25,12 @@ h1 {
     transition: all 0.2s ease-out;
     box-shadow: 0px 5px 10px rgba(38, 38, 38, 0.2);
   }
+
+  .obj-inline{
+    display: inline;
+  }
+}
+
+.float-right {
+  float: right;
 }
