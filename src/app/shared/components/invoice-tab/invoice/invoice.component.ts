@@ -15,24 +15,29 @@ export class InvoiceComponent implements OnInit {
   public invoice: Factura;
   @Input()
   public orderId: number;
+
   public invoiceColumns: string[] = ['producto', 'precio', 'cantidad', 'total'];
   public total: number;
 
   get address() {
-    if (this.invoice !== undefined){
-      return `${this.invoice.orden.direccionEntrega.calle} ${this.invoice.orden.direccionEntrega.numero}, ${this.invoice.orden.direccionEntrega.localidad.nombre}, ${this.invoice.orden.direccionEntrega.localidad.provincia.nombre}`;
+    if (this.invoice !== undefined) {
+      const { calle, numero, localidad } = this.invoice.orden.cliente.direccionesEnvio[0];
+      return `${calle} ${numero}, ${localidad.nombre}, ${localidad.provincia.nombre}`;
     } else {
       return '';
     }
   }
 
-  constructor(private invoiceService: InvoiceService, private authService: AuthService) { }
+  constructor(
+    private invoiceService: InvoiceService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    if (this.orderId !== undefined){
+    if (this.orderId !== undefined) {
       this.getOrderInvoice();
     }
-    if (this.invoice !== undefined){
+    if (this.invoice !== undefined) {
       this.total = this.getTotal();
     }
   }
@@ -42,26 +47,19 @@ export class InvoiceComponent implements OnInit {
     return this.invoice.orden.detalles.map(t => t.precioTotal).reduce((acc, value) => acc + value, 0);
   }
 
-  generateInvoice(){
-    this.authService.user.subscribe(
-      user => {
-        if (user){
-          this.invoiceService.createInvoice(this.orderId, user.uid).subscribe(
-            res => {
-              this.invoice = res;
-            }
-          );
-        }
+  generateInvoice() {
+    this.authService.user.subscribe(user => {
+      if (user) {
+        this.invoiceService.createInvoice(this.orderId, user.uid).subscribe(res => {
+          this.invoice = res;
+        });
       }
-    );
+    });
   }
 
-  getOrderInvoice(){
-    this.invoiceService.getInvoice(this.orderId).subscribe(
-      res => {
-        this.invoice = res;
-      }
-    );
+  getOrderInvoice() {
+    this.invoiceService.getInvoice(this.orderId)
+      .subscribe(res => this.invoice = res);
   }
 
 }
