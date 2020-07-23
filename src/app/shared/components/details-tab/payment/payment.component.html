@@ -12,7 +12,7 @@
   <!-- Descuento Column -->
   <ng-container matColumnDef="montoDescuento">
     <mat-header-cell *matHeaderCellDef> DESCUENTO </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.montoDescuento | currency:"ARS":"symbol" }}</mat-cell>
+    <mat-cell *matCellDef="let row"> {{ row.delivery ? 'No' : (row.montoDescuento | currency:"ARS":"symbol") }}</mat-cell>
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
   <!-- Monto Column -->
