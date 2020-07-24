@@ -34,7 +34,12 @@ export class SuppliesDetailComponent {
   }
 
   addStock(data: any) {
-    this.supplyService.addStock(this.localData.id, data.cantidad);
+    this.supplyService.addStock(this.localData.id, data.cantidad)
+      .subscribe(res => this.localData = res);
+  }
+
+  getPublicClass() {
+    return this.localData.oculto ? 'private' : 'public';
   }
 
 }

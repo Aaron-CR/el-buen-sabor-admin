@@ -47,6 +47,14 @@ export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.suppliesForm.get('imagen') as FormControl;
   }
 
+  get esInsumo(): FormControl {
+    return this.suppliesForm.get('esInsumo') as FormControl;
+  }
+
+  get rubro(): FormControl {
+    return this.suppliesForm.get('rubro') as FormControl;
+  }
+
   @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper;
 
   constructor(
@@ -84,13 +92,25 @@ export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
       imagen: [this.localData.imagen, [Validators.required]],
       costo: [this.localData.costo, [Validators.required]],
       precio: [this.localData.precio, [Validators.required]],
-      stockActual: [this.localData.stockActual, [Validators.required]],
       stockMaximo: [this.localData.stockMaximo, [Validators.required]],
       stockMinimo: [this.localData.stockMinimo, [Validators.required]],
       unidadMedida: [this.localData.unidadMedida, [Validators.required]],
       historialStock: [this.localData.historialStock ? this.localData.historialStock : []],
       rubro: [this.localData.rubro, [Validators.required]],
     });
+    this.rubroValueChanges();
+  }
+
+  rubroValueChanges() {
+    this.rubro.valueChanges.subscribe((value: Rubro) => {
+      this.suppliesForm.patchValue({ esInsumo: this.isDrink(value) ? false : true });
+    });
+  }
+
+  isDrink(rubro: Rubro) {
+    if (rubro) {
+      return (rubro.denominacion.toLowerCase() === 'bebidas' || this.isDrink(rubro.rubroPadre));
+    }
   }
 
   getCategories() {

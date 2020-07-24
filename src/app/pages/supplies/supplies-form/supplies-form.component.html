@@ -19,13 +19,9 @@
             formControlName="descripcion"></textarea>
           <mat-hint align="end">{{descripcion.value?.length || 0}}/255</mat-hint>
         </mat-form-field>
-        <!-- Es Insumo Checkbox -->
-        <mat-checkbox class="w-100 pb-2 mr-3" formControlName="esInsumo">
-          ¿Venta al publico?
-        </mat-checkbox>
         <!-- Oculto Checkbox -->
         <mat-checkbox class="w-100 pb-2" formControlName="oculto">
-          ¿Desea que el articulo sea público?
+          ¿Desea que el articulo sea privado?
         </mat-checkbox>
       </form>
       <div class="d-flex flex-row-reverse">
@@ -126,6 +122,7 @@
           </div>
         </div>
       </form>
+      {{ esInsumo.value | json }}
       <div class="d-flex flex-row-reverse">
         <button mat-flat-button color="primary" [disabled]="!suppliesForm.valid" (click)="onAction()">
           {{ action }}

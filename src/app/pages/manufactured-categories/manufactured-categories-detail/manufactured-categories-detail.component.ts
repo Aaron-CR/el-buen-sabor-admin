@@ -16,7 +16,7 @@ export class ManufacturedCategoriesDetailComponent {
   }
 
   getPublicClass(oculto: boolean) {
-    return oculto ? 'public' : 'private';
+    return oculto ? 'private' : 'public';
   }
 
 }

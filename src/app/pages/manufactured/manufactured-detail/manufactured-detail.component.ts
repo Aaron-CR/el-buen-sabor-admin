@@ -35,4 +35,8 @@ export class ManufacturedDetailComponent implements OnInit {
     });
   }
 
+  getPublicClass() {
+    return this.localData.oculto ? 'private' : 'public';
+  }
+
 }

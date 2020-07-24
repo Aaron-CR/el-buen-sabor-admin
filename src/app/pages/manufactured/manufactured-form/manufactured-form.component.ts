@@ -155,7 +155,7 @@ export class ManufacturedFormComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   getPublicClass(row) {
-    return row.oculto ? 'public' : 'private';
+    return row.oculto ? 'private' : 'public';
   }
 
 }

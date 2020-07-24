@@ -17,9 +17,7 @@ export class SupplyService {
     private errorHandler: ErrorHandlerService
   ) { }
 
-  // Por alguna razón no funciona, pero si se copia la URL del console.log en Postman, si 🤷‍♂️
   addStock(id: number, cantidad: number): Observable<ArticuloInsumo> {
-    console.log(`${this.endpoint}/addStock/${id}?cantidad=${cantidad}`);
     return this.httpClient.put<ArticuloInsumo>(`${this.endpoint}/addStock/${id}?cantidad=${cantidad}`, null)
       .pipe(catchError(error => this.errorHandler.handleError(error)));
   }
