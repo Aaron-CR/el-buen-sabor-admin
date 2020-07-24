@@ -1,49 +1,53 @@
 <mat-toolbar class="mat-elevation-z1" *ngIf="visible">
   <!-- Logo Image -->
-  <img class="logo-icon" src="assets/images/logos/logo.png">
-  <span class="mx-2">El Buen Sabor</span>
+  <a>
+    <img class="logo-icon ml-2" src="assets/images/logos/logo.png">
+    <span [hidden]="(isHandset$ | async)" class="mx-2">El buen sabor</span>
+  </a>
   <!-- Spacer -->
-  <div class="mr-auto"></div>
-  <div *ngIf="userExists == true" [ngSwitch]="true">
+  <span class="flex-grow-1"></span>
+  <div *ngIf="(user$ | async) as user" [ngSwitch]="true">
     <!-- User Button -->
     <button mat-button class="toolbar-button" [matMenuTriggerFor]="menu">
       <div class="mat-button-wrapper">
-        <img src="assets/images/avatars/{{this.user.rol.denominacion}}.png" class="avatar">
-        <span class="mx-2"> {{this.user.nombre}} {{this.user.apellido}} </span>
-        <mat-icon class="material-icons-outlined" class="material-icons-outlined s-16">
-          keyboard_arrow_down</mat-icon>
+        <img src="assets/images/avatars/{{user.rol.denominacion}}.png" class="avatar">
+        <span [hidden]="(isHandset$ | async)" class="mx-2">
+          {{user.nombre}} {{user.apellido}}
+        </span>
+        <mat-icon [hidden]="(isHandset$ | async)" class="material-icons-round" [inline]="true">keyboard_arrow_down
+        </mat-icon>
       </div>
       <div matripple="" class="mat-ripple mat-button-ripple"></div>
       <div class="mat-button-focus-overlay"></div>
     </button>
     <!-- User Menu -->
     <mat-menu #menu="matMenu">
-      <div *ngSwitchCase="userRol === 'cajero' || userRol === 'administrador'">
+      <div *ngSwitchCase="user.rol.denominacion === 'cajero' || user.rol.denominacion === 'administrador'">
         <button mat-menu-item routerLink="/cashier">
           <!-- <mat-icon class="material-icons-outlined">assignment</mat-icon> -->
           <mat-icon class="material-icons-outlined">point_of_sale</mat-icon>
           <span>Cajero</span>
         </button>
       </div>
-      <div *ngSwitchCase="userRol === 'cocinero' || userRol === 'administrador'">
+      <div *ngSwitchCase="user.rol.denominacion === 'cocinero' || user.rol.denominacion === 'administrador'">
         <button mat-menu-item routerLink="/kitchen">
           <mat-icon class="material-icons-outlined">restaurant</mat-icon>
           <span>Cocina</span>
         </button>
       </div>
-      <div *ngSwitchCase="userRol === 'administrador'">
+      <div *ngSwitchCase="user.rol.denominacion === 'administrador'">
         <button mat-menu-item routerLink="/admin">
           <mat-icon class="material-icons-outlined">insert_chart</mat-icon>
           <span>Administrador</span>
         </button>
       </div>
-      <div  *ngSwitchCase="userRol === 'cocinero' || userRol === 'administrador'">
+      <div *ngSwitchCase="user.rol.denominacion === 'cocinero' || user.rol.denominacion === 'administrador'">
         <button mat-menu-item routerLink="/manufactured">
           <mat-icon class="material-icons-outlined">storefront</mat-icon>
           <span>Manufacturados</span>
         </button>
       </div>
-      <div  *ngSwitchCase="userRol === 'administrador'">
+      <div *ngSwitchCase="user.rol.denominacion === 'administrador'">
         <button mat-menu-item routerLink="/supplies">
           <mat-icon class="material-icons-outlined">shopping_basket</mat-icon>
           <span>Insumos</span>

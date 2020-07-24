@@ -3,9 +3,7 @@
   <div class="header d-flex justify-content-between">
     <!-- Title -->
     <div class="row d-flex align-items-center">
-      <button mat-mini-fab disabled class="mr-3">
-        <mat-icon class="material-icons-outlined">{{ icon }}</mat-icon>
-      </button>
+      <mat-icon class="material-icons-outlined circle-icon">{{ icon }}</mat-icon>
       <h1>{{ title }}</h1>
       <!-- Button -->
       <button mat-stroked-button class="ml-3" *ngIf="router" [routerLink]="[router]">
@@ -85,7 +83,8 @@
           </mat-cell>
         </ng-container>
         <!-- SwitchCase category -->
-        <ng-container *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro' || column.columnDef === 'formaPago' || column.columnDef === 'rol'">
+        <ng-container
+          *ngSwitchCase="column.columnDef === 'categoria' || column.columnDef === 'rubro' || column.columnDef === 'formaPago' || column.columnDef === 'rol'">
           <mat-header-cell mat-sort-header *matHeaderCellDef> {{ column.header  | uppercase }} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <span class="status-chip ml-1"> {{ column.cell(row) | titlecase }} </span>
@@ -130,12 +129,12 @@
           </button>
           <mat-menu #menu="matMenu" xPosition="before" class="px-1">
             <!-- Send Email Button -->
-            <button mat-menu-item >
+            <button mat-menu-item>
               <mat-icon class="material-icons app-menu-icon">mail_outline</mat-icon>
               <span>Enviar al cliente</span>
             </button>
             <!-- Print Button -->
-            <button mat-menu-item >
+            <button mat-menu-item>
               <mat-icon class="material-icons app-menu-icon">local_printshop</mat-icon>
               <span>Imprimir</span>
             </button>
@@ -148,7 +147,8 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="formDialog || title === 'Facturas' ? displayedColumns.concat('acciones') : displayedColumns">
+      <mat-header-row
+        *matHeaderRowDef="formDialog || title === 'Facturas' ? displayedColumns.concat('acciones') : displayedColumns">
       </mat-header-row>
       <mat-row class="table-row"
         *matRowDef="let item; columns: formDialog || title === 'Facturas' ? displayedColumns.concat('acciones') : displayedColumns"

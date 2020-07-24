@@ -2,69 +2,50 @@ import { DireccionLegal } from './../../../core/models/direccion/direccion-legal
 import { Direccion } from './../../../core/models/direccion/direccion';
 import { Empleado } from './../../../core/models/usuarios/empleado';
 import { Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AuthService } from '../../authentication/auth.service';
+import { Subscription, BehaviorSubject, Observable } from 'rxjs';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
 
   @Input() visible: boolean;
+  private subscription: Subscription = new Subscription();
+  private userSubject = new BehaviorSubject<Empleado>(null);
+  public user$ = this.userSubject.asObservable();
+  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches), shareReplay());
 
-  public userExists = false;
+  constructor(
+    private authService: AuthService,
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) { }
 
-  public user: Empleado = {
-    id: 0,
-    fechaAlta: null,
-    ultimaActualizacion: null,
-    oculto: false,
-    eliminado: false,
-    nombre: '',
-    apellido: '',
-    telefono: '',
-    cuil: '',
-    fechaDeIngreso: null,
-    email: '',
-    uid: '',
-    rol: null,
-    direccion: null
-  };
-
-  public userRol = '';
-
-  constructor(private authService: AuthService, private router: Router){
-
+  ngOnInit() {
+    this.subscription.add(this.authService.user.subscribe((user) =>
+      this.userSubject.next(user))
+    );
   }
 
-  ngOnInit(){
-    this.authService.user.subscribe((user) => {
-      if (!!user){
-        this.user = user;
-        this.userExists = true;
-        this.userRol = user.rol.denominacion;
-        /* if (!!user){
-          switch (user.rol.denominacion){
-            case 'administrador':
-              this.isAdmin = true;
-              break;
-            case 'cajero':
-              this.isCajero = true;
-              break;
-            case 'cocinero':
-              this.isCocinero = true;
-              break;
-          }
-        } */
-      }
-    });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  onSignOut(){
-    this.authService.logoutUser();
-    this.router.navigate(['']);
+  onSignOut() {
+    this.authService.logoutUser()
+      .then((resolve) => {
+        this.userSubject.next(null);
+        this.router.navigate(['']);
+      }, (reject) => {
+        console.log('error ', reject);
+      });
   }
 
 }
