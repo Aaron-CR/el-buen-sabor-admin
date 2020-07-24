@@ -6,6 +6,9 @@ import { MatHorizontalStepper } from '@angular/material/stepper';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Localidad } from 'src/app/core/models/direccion/localidad';
+import { AuthService } from 'src/app/shared/authentication/auth.service';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employees-form',
@@ -30,7 +33,10 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Empleado,
     public dialogRef: MatDialogRef<EmployeesFormComponent>,
     public formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService,
+    private employeeService: EmployeeService,
+    private snackBar: MatSnackBar
   ) {
     this.localData = { ...data };
   }
@@ -48,24 +54,29 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
 
   buildForm() {
     this.employeesForm = this.formBuilder.group({
-      id: [this.localData.id],
+      id: [this.localData.id != null ? this.localData.id : 0],
       ultimaActualizacion: [this.localData.ultimaActualizacion],
-      oculto: [this.localData.oculto],
+      oculto: [this.localData.oculto == null ? false : this.localData.oculto],
+      eliminado: [this.localData.eliminado == null ? false : this.localData.oculto],
+      fechaAlta: [this.localData.fechaAlta],
+      fechaDeIngreso: [this.localData.fechaDeIngreso],
       nombre: [this.localData.nombre, [Validators.required]],
       apellido: [this.localData.apellido, [Validators.required]],
       telefono: [this.localData.telefono, [Validators.required]],
       email: [this.localData.email, [Validators.required]],
+      uid: [this.localData.uid ? this.localData.uid : ''],
       cuil: [this.localData.cuil, [Validators.required]],
       rol: [this.localData.rol, [Validators.required]],
       direccion: this.formBuilder.group({
-        id: [this.localData.direccion ? this.localData.direccion.id : null],
+        id: [this.localData.direccion ? this.localData.direccion.id : 0],
         ultimaActualizacion: [this.localData.direccion ? this.localData.direccion.ultimaActualizacion : null],
-        oculto: [this.localData.direccion ? this.localData.direccion.oculto : null],
+        oculto: [this.localData.oculto == null ? false : this.localData.oculto],
+        eliminado: [this.localData.eliminado == null ? false : this.localData.oculto],
         calle: [this.localData.direccion ? this.localData.direccion.calle : '', [Validators.required]],
         numero: [this.localData.direccion ? this.localData.direccion.numero : 0, [Validators.required]],
         localidad: [this.localData.direccion ? this.localData.direccion.localidad : null, [Validators.required]],
-        piso: [this.localData.direccion ? this.localData.direccion.piso : ''],
-        departamento: [this.localData.direccion ? this.localData.direccion.departamento : ''],
+        piso: [this.localData.direccion ? this.localData.direccion.piso : null],
+        departamento: [this.localData.direccion ? this.localData.direccion.departamento : null],
       })
     });
   }
@@ -85,7 +96,13 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   }
 
   onAction() {
-    this.dialogRef.close({ event: this.action, data: this.employeesForm.value });
+    console.log(this.employeesForm.value);
+    if (this.action === 'Añadir'){
+      this.onSignUp(this.employeesForm.value);
+      this.onCancel();
+    } else {
+      this.dialogRef.close({ event: this.action, data: this.employeesForm.value});
+    }
   }
 
   onCancel() {
@@ -94,6 +111,14 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
 
   errorHandling = (control: string, error: string) => {
     return this.employeesForm.controls[control].hasError(error);
+  }
+
+  compareWith(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
+
+  onSignUp(empleado) {
+    this.authService.registerUser(empleado);
   }
 
 }

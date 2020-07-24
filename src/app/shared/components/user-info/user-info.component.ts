@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Usuario } from 'src/app/core/models/usuarios/usuario';
+import { Direccion } from 'src/app/core/models/direccion/direccion';
 
 @Component({
   selector: 'app-user-info',
@@ -10,6 +11,8 @@ export class UserInfoComponent implements OnInit {
 
   @Input()
   public data: Usuario;
+  @Input()
+  public direccion: Direccion;
   @Input()
   public title = 'Usuario';
   public dataSource: Array<Usuario> = [];

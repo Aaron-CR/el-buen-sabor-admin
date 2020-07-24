@@ -24,3 +24,11 @@
   <mat-header-row *matHeaderRowDef="customerColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: customerColumns"></mat-row>
 </mat-table>
+
+<div *ngIf="data.rol.denominacion != 'cliente'">
+  <span class="d-flex align-items-center my-3 subtitle">
+    <mat-icon class="material-icons-outlined mr-1">location_on</mat-icon>
+    Domicilio
+  </span>
+  <p class="domicilio mb-5">{{direccion.calle}} {{direccion.numero}}, Piso: {{direccion.piso != null ? direccion.piso : "-"}}  Depto: {{direccion.departamento != null ? direccion.departamento : "-"}}, {{direccion.localidad.nombre}} , {{direccion.localidad.provincia.nombre}} , {{direccion.localidad.provincia.pais.nombre}}</p> 
+</div>

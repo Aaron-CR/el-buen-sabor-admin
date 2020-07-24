@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { of, Observable } from 'rxjs';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,27 @@ export class AuthService {
   }
 
   /* Registra un usario con email y contraseña */
-  registerUser(email: string, pass: string) {
-    return new Promise((resolve, reject) => {
-      this.authService.createUserWithEmailAndPassword(email, pass)
-        .then(userData => {
-          resolve(userData);
-        }).catch(
-          err => console.log(reject(err)));
+  registerUser(userData: Empleado) {
+
+    const config = {
+      apiKey: 'AIzaSyDZHRmttCMVr-usvy0A8poGxRDgglHfMBU',
+      authDomain: 'elbuensabor-admin.firebaseapp.com',
+      databaseURL: 'https://elbuensabor-admin.firebaseio.com'
+    };
+    const secondaryApp = firebase.initializeApp(config, 'Secondary');
+
+    secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil).then( user => {
+
+      if (user.user){
+        userData.uid = user.user.uid;
+        userData.email = user.user.email;
+        console.log(userData);
+        this.employeeService.create(userData).subscribe( res => {
+          userData = res;
+          console.log('User ' + user.user.uid + ' created successfully!');
+        });
+      }
+      secondaryApp.auth().signOut();
     });
   }
 

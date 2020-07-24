@@ -14,6 +14,11 @@ export class EmployeeService {
 
   constructor(private httpClient: HttpClient, private errorHandler: ErrorHandlerService) { }
 
+  create(empleado: Empleado): Observable<Empleado> {
+    return this.httpClient.post<Empleado>(this.endpoint, empleado)
+    .pipe(catchError(error => this.errorHandler.handleError(error)));
+  }
+
   findByUid(uid: string): Observable<Empleado>{
     return this.httpClient.get<Empleado>(`${this.endpoint}/current/${uid}`)
       .pipe(catchError(error => this.errorHandler.handleError(error)));
