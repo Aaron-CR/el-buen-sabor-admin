@@ -59,7 +59,6 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
       oculto: [this.localData.oculto == null ? false : this.localData.oculto],
       eliminado: [this.localData.eliminado == null ? false : this.localData.oculto],
       fechaAlta: [this.localData.fechaAlta],
-      fechaDeIngreso: [this.localData.fechaDeIngreso],
       nombre: [this.localData.nombre, [Validators.required]],
       apellido: [this.localData.apellido, [Validators.required]],
       telefono: [this.localData.telefono, [Validators.required]],
