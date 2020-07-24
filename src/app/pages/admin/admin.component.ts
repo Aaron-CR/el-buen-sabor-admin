@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModeloGrafico } from 'src/app/core/models/reportes/modelo-grafico';
 import { ReportsService } from 'src/app/shared/services/reports.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ExcelService } from 'src/app/shared/services/excel.service';
 
 
 const STOCK = [
@@ -246,8 +248,16 @@ const MAS_VENDIDOS = [
 export class AdminComponent implements OnInit {
 
   stock: ModeloGrafico[];
+  stockLength = 0;
   ingresos: ModeloGrafico[];
-  masVendidos = MAS_VENDIDOS;
+  insumosMasVendidos: ModeloGrafico[];
+  insumosLength = 0;
+  manufacturadosMasVendidos: ModeloGrafico[];
+  manufacturadosLength = 0;
+
+  datesForm: FormGroup;
+
+  pieView: any[] = [300, 300];
 
   ingresosColorScheme = {
     domain: ['#ffc107', '#ffa000']
@@ -257,32 +267,76 @@ export class AdminComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor(private resportsService: ReportsService) { }
+  constructor(private resportsService: ReportsService, private fb: FormBuilder, private excelService: ExcelService) {
+    this.datesForm = fb.group({
+      date: [{begin: new Date(), end: new Date()}]
+    });
+  }
 
   ngOnInit(): void {
     this.getInsumosStock();
     this.getIngresos();
+    this.getTopInsumos();
+    this.getTopManufacturados();
   }
-
-  /* onSelect(event) {
-    console.log(event);
-  } */
 
   getInsumosStock(){
     this.resportsService.getInsumosOutOfStock().subscribe(
       res => {
         this.stock = res;
-        console.log(this.stock);
+        this.stockLength = this.stock.length;
       }
     );
   }
 
   getIngresos(){
-    this.resportsService.getIngresosPorPeriodo().subscribe(
+    const fechaInicio = this.datesForm.get('date').value.begin;
+    const fechaFin = this.datesForm.get('date').value.end;
+    this.resportsService.getIngresosPorPeriodo(fechaInicio, fechaFin).subscribe(
       res => {
         this.ingresos = res;
       }
     );
+  }
+
+  getTopInsumos(){
+    const fechaInicio = this.datesForm.get('date').value.begin;
+    const fechaFin = this.datesForm.get('date').value.end;
+    this.resportsService.getTopInsumos(fechaInicio, fechaFin).subscribe(
+      res => {
+        this.insumosMasVendidos = res;
+        this.insumosLength = this.insumosMasVendidos.length;
+      }
+    );
+  }
+
+  getTopManufacturados(){
+    const fechaInicio = this.datesForm.get('date').value.begin;
+    const fechaFin = this.datesForm.get('date').value.end;
+    this.resportsService.getTopManufacturados(fechaInicio, fechaFin).subscribe(
+      res => {
+        this.manufacturadosMasVendidos = res;
+        this.manufacturadosLength = this.manufacturadosMasVendidos.length;
+      }
+    );
+  }
+
+  onDownloadData(data: any[], name: string){
+    console.log(data);
+
+    const dataForExcel = [];
+
+    data.forEach((row: any) => {
+      dataForExcel.push(Object.values(row));
+    });
+
+    const reportData = {
+      title: name,
+      data: dataForExcel,
+      headers: Object.keys(data[0])
+    };
+
+    this.excelService.exportExcel(reportData);
   }
 
   onSelect(data): void {

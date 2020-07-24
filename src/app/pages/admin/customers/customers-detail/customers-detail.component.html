@@ -7,7 +7,7 @@
     </span>
     <form [formGroup]="datesForm">
       <mat-form-field>
-        <input matInput placeholder="Elige las fechas" [satDatepicker]="picker" formControlName="date"   (dateChange)="search()">
+        <input matInput placeholder="Elige las fechas" [satDatepicker]="picker" formControlName="date"   (dateChange)="getOrdenes()">
         <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
         <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
       </mat-form-field>
