@@ -3,6 +3,9 @@ import { Estado } from 'src/app/core/models/comprobantes/estado';
 import { HttpClient } from '@angular/common/http';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { CashierDetailComponent } from 'src/app/pages/cashier/cashier-detail/cashier-detail.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { KitchenDetailComponent } from 'src/app/pages/kitchen/kitchen-detail/kitchen-detail.component';
 
 interface Status {
   value: string;
@@ -24,6 +27,7 @@ export class StatusComponent implements OnInit {
   public selectedStatus: Estado;
 
   constructor(
+    private dialogRef: MatDialogRef<CashierDetailComponent | KitchenDetailComponent>,
     private orderService: OrderService,
     private http: HttpClient
   ) { }
@@ -42,7 +46,7 @@ export class StatusComponent implements OnInit {
     this.orderService.updateEstado(this.selectedStatus, this.data.id)
       .subscribe(data => {
         this.data = data;
-        this.filterStatuses(this.allStatuses);
+        this.dialogRef.close({ event: 'Reload' });
       });
   }
 

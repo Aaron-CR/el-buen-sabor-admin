@@ -122,6 +122,10 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       panelClass: 'app-dialog',
       data: object,
       width: '65%',
+    }).afterClosed().subscribe(result => {
+      if (result.event === 'Reload') {
+        this.loadPage();
+      }
     });
   }
 

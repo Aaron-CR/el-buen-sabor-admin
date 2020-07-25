@@ -3,6 +3,8 @@ import { EmployeeService } from './../../../services/employee.service';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
 import { Component, OnInit, Input } from '@angular/core';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
+import { MatDialogRef } from '@angular/material/dialog';
+import { CashierDetailComponent } from 'src/app/pages/cashier/cashier-detail/cashier-detail.component';
 
 @Component({
   selector: 'app-shipping',
@@ -25,13 +27,17 @@ export class ShippingComponent implements OnInit {
     return `${this.data.repartidor.nombre} ${this.data.repartidor.apellido}`;
   }
 
-  constructor(private employeeService: EmployeeService, private orderService: OrderService) { }
+  constructor(
+    private dialogRef: MatDialogRef<CashierDetailComponent>,
+    private employeeService: EmployeeService,
+    private orderService: OrderService
+  ) { }
 
   ngOnInit(): void {
     this.getRepartidores();
   }
 
-  getRepartidores(){
+  getRepartidores() {
     this.employeeService.findAllRepartidores().subscribe(
       res => {
         this.carriers = res;
@@ -39,14 +45,15 @@ export class ShippingComponent implements OnInit {
     );
   }
 
-  changeCarrier(newCarrier: Empleado){
+  changeCarrier(newCarrier: Empleado) {
     this.selectedCarrier = newCarrier;
   }
 
-  updateCarrier(){
+  updateCarrier() {
     this.orderService.updateDelivery(this.selectedCarrier, this.data.id).subscribe(
       res => {
         this.data = res;
+        this.dialogRef.close({ event: 'Reload' });
       }
     );
   }
