@@ -35,8 +35,6 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
     public formBuilder: FormBuilder,
     private http: HttpClient,
     private authService: AuthService,
-    private employeeService: EmployeeService,
-    private snackBar: MatSnackBar
   ) {
     this.localData = { ...data };
   }
@@ -96,11 +94,11 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
 
   onAction() {
     console.log(this.employeesForm.value);
-    if (this.action === 'Añadir'){
+    if (this.action === 'Añadir') {
       this.onSignUp(this.employeesForm.value);
       this.onCancel();
     } else {
-      this.dialogRef.close({ event: this.action, data: this.employeesForm.value});
+      this.dialogRef.close({ event: this.action, data: this.employeesForm.value });
     }
   }
 

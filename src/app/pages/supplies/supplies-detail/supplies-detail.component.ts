@@ -1,16 +1,18 @@
-import { Component, Optional, Inject } from '@angular/core';
+import { Component, Optional, Inject, OnDestroy } from '@angular/core';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { StockFormComponent } from './stock-form/stock-form.component';
 import { SupplyService } from 'src/app/shared/services/supply.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-supplies-detail',
   templateUrl: './supplies-detail.component.html',
   styleUrls: ['./supplies-detail.component.scss']
 })
-export class SuppliesDetailComponent {
+export class SuppliesDetailComponent implements OnDestroy {
 
+  private subscription: Subscription = new Subscription();
   public localData: ArticuloInsumo;
   public displayedColumns = ['fechaMovimiento', 'cantidad', 'operacion'];
 
@@ -20,6 +22,10 @@ export class SuppliesDetailComponent {
     private supplyService: SupplyService
   ) {
     this.localData = { ...data };
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onAddStock() {
@@ -34,8 +40,8 @@ export class SuppliesDetailComponent {
   }
 
   addStock(data: any) {
-    this.supplyService.addStock(this.localData.id, data.cantidad)
-      .subscribe(res => this.localData = res);
+    this.subscription.add(this.supplyService.addStock(this.localData.id, data.cantidad)
+      .subscribe(res => this.localData = res));
   }
 
   getPublicClass() {

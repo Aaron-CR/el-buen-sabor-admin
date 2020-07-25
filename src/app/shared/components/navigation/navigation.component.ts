@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     .pipe(map(result => result.matches), shareReplay());
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private breakpointObserver: BreakpointObserver,
     private router: Router
   ) { }

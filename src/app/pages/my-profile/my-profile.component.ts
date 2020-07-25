@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DialogService } from 'src/app/shared/components/dialogs/dialog.service';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-profile',
@@ -12,34 +11,24 @@ import { Subscription } from 'rxjs';
 export class MyProfileComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
-  public user: Empleado;
+  private userSubject = new BehaviorSubject<Empleado>(null);
+  public user$ = this.userSubject.asObservable();
   public edit = false;
-  public userExists = false;
 
-  constructor(
-    private dialogService: DialogService,
-    private authService: AuthService,
-  ) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.subscription.add(this.authService.user.subscribe((user) => {
-      if (!!user) {
-        this.user = user;
-        this.userExists = true;
-      }
-    }));
+    this.subscription.add(this.authService.user.subscribe((user) =>
+      this.userSubject.next(user))
+    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  onEditPhone() {
-    this.dialogService.editPhone();
-  }
-
   onEditPassword() {
-    this.authService.resetPassword(this.user.email);
+    this.authService.resetPassword(this.userSubject.value.email);
   }
 
   toggleEdit() {

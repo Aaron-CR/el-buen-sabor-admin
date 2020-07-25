@@ -123,7 +123,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       data: object,
       width: '65%',
     }).afterClosed().subscribe(result => {
-      if (result.event === 'Reload') {
+      if (result?.event === 'Reload') {
         this.loadPage();
       }
     });

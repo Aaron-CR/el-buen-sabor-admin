@@ -66,7 +66,6 @@ export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.localData = { ...data };
   }
 
-
   ngOnInit(): void {
     this.buildForm();
     this.setAction();

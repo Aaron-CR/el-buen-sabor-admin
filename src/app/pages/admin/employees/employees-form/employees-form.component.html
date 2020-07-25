@@ -1,4 +1,4 @@
-<app-dialog title=" {{ action }} Insumo ">
+<app-dialog title=" {{ action }} Empleado ">
   <mat-horizontal-stepper #stepper>
     <!-- PASO 1 -->
     <mat-step label="Información básica">
@@ -82,7 +82,8 @@
             <!-- Piso Input -->
             <mat-form-field class="w-100 mr-3">
               <mat-label>Piso</mat-label>
-              <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }" placeholder="Por favor indique el piso." formControlName="piso">
+              <input matInput currencyMask [options]="{ prefix: '', precision: 0, thousands: '.', decimal: ',' }"
+                placeholder="Por favor indique el piso." formControlName="piso">
             </mat-form-field>
             <!-- Departamento Input -->
             <mat-form-field class="w-100">
