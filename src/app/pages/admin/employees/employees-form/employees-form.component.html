@@ -28,6 +28,9 @@
           <mat-error *ngIf="errorHandling('email', 'required')">
             El email es <strong>obligatorio</strong>.
           </mat-error>
+          <mat-error *ngIf="errorHandling('email', 'email')">
+            Ingrese una direccion de email <strong>válida</strong>.
+          </mat-error>
         </mat-form-field>
         <!-- Teléfono Input -->
         <mat-form-field class="w-100 pb-2">

@@ -24,6 +24,11 @@ export class EmployeeService {
       .pipe(catchError(error => this.errorHandler.handleError(error)));
   }
 
+  findByCuil(cuil: string): Observable<boolean>{
+    return this.httpClient.get<boolean>(`${this.endpoint}/cuil/${cuil}`)
+      .pipe(catchError(error => this.errorHandler.handleError(error)));
+  }
+
   findAllRepartidores(): Observable<Empleado[]> {
     return this.httpClient.get<Empleado[]>(`${this.endpoint}/all`, {
       params: new HttpParams()

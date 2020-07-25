@@ -7,6 +7,13 @@ import { Empleado } from 'src/app/core/models/usuarios/empleado';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as firebase from 'firebase';
 
+const config = {
+  apiKey: 'AIzaSyDZHRmttCMVr-usvy0A8poGxRDgglHfMBU',
+  authDomain: 'elbuensabor-admin.firebaseapp.com',
+  databaseURL: 'https://elbuensabor-admin.firebaseio.com'
+};
+const secondaryApp = firebase.initializeApp(config, 'Secondary');
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,26 +38,26 @@ export class AuthService {
 
   /* Registra un usario con email y contraseña */
   registerUser(userData: Empleado) {
-
-    const config = {
-      apiKey: 'AIzaSyDZHRmttCMVr-usvy0A8poGxRDgglHfMBU',
-      authDomain: 'elbuensabor-admin.firebaseapp.com',
-      databaseURL: 'https://elbuensabor-admin.firebaseio.com'
-    };
-    const secondaryApp = firebase.initializeApp(config, 'Secondary');
-
-    secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil).then( user => {
+    /* secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil).then( user => {
 
       if (user.user){
         userData.uid = user.user.uid;
         userData.email = user.user.email;
-        console.log(userData);
         this.employeeService.create(userData).subscribe( res => {
           userData = res;
-          console.log('User ' + user.user.uid + ' created successfully!');
         });
       }
       secondaryApp.auth().signOut();
+    }); */
+
+    return new Promise((resolve, reject) => {
+      secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil)
+        .then(user => {
+          userData.uid = user.user.uid;
+          userData.email = user.user.email;
+          resolve(userData);
+        },
+          err => reject(err));
     });
   }
 

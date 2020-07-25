@@ -23,6 +23,8 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   public action: string;
   public employeesForm: FormGroup;
 
+  public empleado: Empleado;
+
   get numero(): FormControl {
     return this.employeesForm.get('direccion').get('numero') as FormControl;
   }
@@ -35,6 +37,8 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
     public formBuilder: FormBuilder,
     private http: HttpClient,
     private authService: AuthService,
+    private employeeService: EmployeeService,
+    private snackBar: MatSnackBar
   ) {
     this.localData = { ...data };
   }
@@ -60,7 +64,7 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
       nombre: [this.localData.nombre, [Validators.required]],
       apellido: [this.localData.apellido, [Validators.required]],
       telefono: [this.localData.telefono, [Validators.required]],
-      email: [this.localData.email, [Validators.required]],
+      email: [this.localData.email, [Validators.required, Validators.email]],
       uid: [this.localData.uid ? this.localData.uid : ''],
       cuil: [this.localData.cuil, [Validators.required]],
       rol: [this.localData.rol, [Validators.required]],
@@ -93,10 +97,8 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   }
 
   onAction() {
-    console.log(this.employeesForm.value);
     if (this.action === 'Añadir') {
       this.onSignUp(this.employeesForm.value);
-      this.onCancel();
     } else {
       this.dialogRef.close({ event: this.action, data: this.employeesForm.value });
     }
@@ -115,7 +117,22 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   }
 
   onSignUp(empleado) {
-    this.authService.registerUser(empleado);
+    this.employeeService.findByCuil(empleado.cuil).subscribe(
+      res => {
+        if (res){
+          this.snackBar
+            .open('El cuil ingresado ya se encuentra registrado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+        } else {
+          this.authService.registerUser(empleado).then(
+            userData => {
+              this.dialogRef.close({ event: this.action, data: userData });
+            }
+          ).catch( err => {
+            this.snackBar
+              .open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
+          });
+        }
+    });
   }
 
 }
