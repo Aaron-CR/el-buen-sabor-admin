@@ -38,18 +38,6 @@ export class AuthService {
 
   /* Registra un usario con email y contraseña */
   registerUser(userData: Empleado) {
-    /* secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil).then( user => {
-
-      if (user.user){
-        userData.uid = user.user.uid;
-        userData.email = user.user.email;
-        this.employeeService.create(userData).subscribe( res => {
-          userData = res;
-        });
-      }
-      secondaryApp.auth().signOut();
-    }); */
-
     return new Promise((resolve, reject) => {
       secondaryApp.auth().createUserWithEmailAndPassword(userData.email, userData.cuil)
         .then(user => {
