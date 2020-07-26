@@ -92,6 +92,7 @@ export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
       imagen: [this.localData.imagen, [Validators.required]],
       costo: [this.localData.costo, [Validators.required]],
       precio: [this.localData.precio, [Validators.required]],
+      stockActual: [this.localData.stockActual],
       stockMaximo: [this.localData.stockMaximo, [Validators.required]],
       stockMinimo: [this.localData.stockMinimo, [Validators.required]],
       unidadMedida: [this.localData.unidadMedida, [Validators.required]],

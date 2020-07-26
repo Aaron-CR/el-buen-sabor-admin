@@ -46,10 +46,19 @@ export class AdminComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor(private resportsService: ReportsService, private fb: FormBuilder, private excelService: ExcelService) {
-    this.datesForm = fb.group({
-      date: [{begin: new Date(), end: new Date()}]
-    });
+  constructor(
+    private resportsService: ReportsService,
+    private fb: FormBuilder,
+    private excelService: ExcelService
+  ) {
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth(), this.daysInMonth(date.getMonth() + 1, date.getFullYear()));
+    this.datesForm = fb.group({ date: [{ begin: firstDay, end: lastDay }] });
+  }
+
+  daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
   }
 
   ngOnInit(): void {
@@ -59,7 +68,7 @@ export class AdminComponent implements OnInit {
     this.getTopManufacturados();
   }
 
-  getInsumosStock(){
+  getInsumosStock() {
     this.resportsService.getInsumosOutOfStock().subscribe(
       res => {
         this.stock = res;
@@ -68,7 +77,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getIngresos(){
+  getIngresos() {
     const fechaInicio: Date = this.datesForm.get('date').value.begin;
     const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getIngresosPorPeriodo(fechaInicio, fechaFin).subscribe(
@@ -79,7 +88,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getTopInsumos(){
+  getTopInsumos() {
     const fechaInicio: Date = this.datesForm.get('date').value.begin;
     const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getTopInsumos(fechaInicio, fechaFin).subscribe(
@@ -91,7 +100,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getTopManufacturados(){
+  getTopManufacturados() {
     const fechaInicio: Date = this.datesForm.get('date').value.begin;
     const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getTopManufacturados(fechaInicio, fechaFin).subscribe(
@@ -103,7 +112,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getOrdenesPorCliente(){
+  getOrdenesPorCliente() {
     const fechaInicio: Date = this.datesForm.get('date').value.begin;
     const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getOrdenesPorCliente(fechaInicio, fechaFin).subscribe(
@@ -115,7 +124,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  onDownloadData(data: any[], name: string, headersGrafico: string[], fechas: string){
+  onDownloadData(data: any[], name: string, headersGrafico: string[], fechas: string) {
     console.log(data);
 
     const dataForExcel = [];

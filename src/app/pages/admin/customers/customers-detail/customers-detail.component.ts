@@ -33,16 +33,21 @@ export class CustomersDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.localData = { ...data };
-    this.datesForm = fb.group({
-      date: [{begin: new Date('2020-06-23'), end: new Date('2020-06-29')}]
-    });
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth(), this.daysInMonth(date.getMonth() + 1, date.getFullYear()));
+    this.datesForm = fb.group({ date: [{ begin: firstDay, end: lastDay }] });
+  }
+
+  daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
   }
 
   ngOnInit(): void {
     this.getOrdenes();
   }
 
-  getOrdenes(){
+  getOrdenes() {
     const fechaInicio = this.datesForm.get('date').value.begin;
     const fechaFin = this.datesForm.get('date').value.end;
     this.reportsService.getOrdenesPorPeriodo(this.localData.uid, fechaInicio, fechaFin).subscribe(
@@ -53,7 +58,7 @@ export class CustomersDetailComponent implements OnInit {
     );
   }
 
-  search(){
+  search() {
     this.getOrdenes();
   }
 
