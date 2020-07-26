@@ -107,8 +107,16 @@
     </div>
   </div>
   <div class="d-flex flex-row-reverse">
-    <button mat-raised-button color="accent" class="download-invoice" (click)="downloadInvoice()">
-      <mat-icon [inline]="true">save_alt</mat-icon> Descargar PDF
+    <button mat-raised-button color="accent" class="invoice-button" (click)="downloadInvoice()">
+      <mat-icon>save_alt</mat-icon> Descargar PDF
+    </button>
+    <button mat-raised-button color="accent" class="invoice-button" [disabled]="isLoading" (click)="uploadInvoice()">
+      <ng-container *ngIf="!isLoading; else elseTemplate">
+        <mat-icon>mail_outline</mat-icon> Enviar Email
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-spinner class="mx-5" diameter="20"></mat-spinner>
+      </ng-template>
     </button>
   </div>
 </ng-container>
