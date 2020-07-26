@@ -42,6 +42,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.authService.logoutUser()
       .then((resolve) => {
         this.userSubject.next(null);
+        this.subscription.unsubscribe();
         this.router.navigate(['']);
       }, (reject) => {
         console.log('error ', reject);
