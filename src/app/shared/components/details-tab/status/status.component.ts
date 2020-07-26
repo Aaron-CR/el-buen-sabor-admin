@@ -6,6 +6,7 @@ import { OrderService } from 'src/app/shared/services/order.service';
 import { CashierDetailComponent } from 'src/app/pages/cashier/cashier-detail/cashier-detail.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { KitchenDetailComponent } from 'src/app/pages/kitchen/kitchen-detail/kitchen-detail.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 interface Status {
   value: string;
@@ -50,7 +51,7 @@ export class StatusComponent implements OnInit {
   }
 
   getStatuses() {
-    return this.http.get(`http://localhost:8080/api/v1/comprobantes/estados/all`).pipe()
+    return this.http.get(AppEndpoints.STATUS_ALL).pipe()
       .subscribe((data: Array<Estado>) => {
         this.allStatuses = data;
         this.filterStatuses(this.allStatuses);

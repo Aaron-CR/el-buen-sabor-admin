@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Subscription } from 'rxjs';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 export interface UnidadMedida {
   abreviatura: string;
@@ -113,7 +114,7 @@ export class SuppliesFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getCategories() {
-    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+    this.subscription.add(this.http.get(AppEndpoints.RUBROS_ALL).pipe()
       .subscribe((data: Array<Rubro>) => this.rubros = data));
   }
 

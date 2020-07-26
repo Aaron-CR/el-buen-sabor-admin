@@ -3,6 +3,7 @@ import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Estado } from 'src/app/core/models/comprobantes/estado';
 import { HttpClient } from '@angular/common/http';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-kitchen-detail',
@@ -27,7 +28,7 @@ export class KitchenDetailComponent implements OnInit {
   }
 
   getStatuses() {
-    return this.http.get(`http://localhost:8080/api/v1/comprobantes/estados/all`).pipe()
+    return this.http.get(AppEndpoints.STATUS_ALL).pipe()
       .subscribe((data: Array<Estado>) => this.statuses = data
         .filter(status => status.denominacion === 'demorado' || status.denominacion === 'listo'));
   }

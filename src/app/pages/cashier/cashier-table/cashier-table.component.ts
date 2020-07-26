@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { CashierDetailComponent } from '../cashier-detail/cashier-detail.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-cashier-table',
@@ -11,7 +12,7 @@ import { CashierDetailComponent } from '../cashier-detail/cashier-detail.compone
 export class CashierTableComponent implements OnInit {
 
   public detailDialog = CashierDetailComponent;
-  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes';
+  public path = AppEndpoints.ORDERS;
   public title = 'Cajero';
   public icon = 'point_of_sale';
   public tableColumns = [

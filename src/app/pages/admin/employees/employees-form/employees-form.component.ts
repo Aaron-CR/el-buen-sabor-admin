@@ -9,6 +9,7 @@ import { Localidad } from 'src/app/core/models/direccion/localidad';
 import { AuthService } from 'src/app/shared/authentication/auth.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-employees-form',
@@ -83,12 +84,12 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   }
 
   getRoles() {
-    return this.http.get(`http://localhost:8080/api/v1/usuarios/roles/all`).pipe()
+    return this.http.get(AppEndpoints.USERS_ROLES_ALL).pipe()
       .subscribe((data: Array<Rol>) => this.roles = data);
   }
 
   getLocalidades() {
-    return this.http.get(`http://localhost:8080/api/v1/direcciones/localidad/all`).pipe()
+    return this.http.get(AppEndpoints.LOCATIONS_ALL).pipe()
       .subscribe((data: Array<Localidad>) => this.localidades = data);
   }
 
@@ -119,7 +120,7 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
   onSignUp(empleado) {
     this.employeeService.findByCuil(empleado.cuil).subscribe(
       res => {
-        if (res){
+        if (res) {
           this.snackBar
             .open('El cuil ingresado ya se encuentra registrado', 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
         } else {
@@ -127,12 +128,12 @@ export class EmployeesFormComponent implements OnInit, AfterViewInit {
             userData => {
               this.dialogRef.close({ event: this.action, data: userData });
             }
-          ).catch( err => {
+          ).catch(err => {
             this.snackBar
               .open(err.message, 'OK', { duration: 10000, panelClass: ['app-snackbar'] });
           });
         }
-    });
+      });
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Factura } from 'src/app/core/models/comprobantes/factura';
 import { InvoicesDetailComponent } from '../invoices-detail/invoices-detail.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-invoices-table',
@@ -10,7 +11,7 @@ import { InvoicesDetailComponent } from '../invoices-detail/invoices-detail.comp
 export class InvoicesTableComponent implements OnInit {
 
   public detailDialog = InvoicesDetailComponent;
-  public path = 'http://localhost:8080/api/v1/comprobantes/facturas';
+  public path = AppEndpoints.INVOICES;
   public title = 'Facturas';
   public icon = 'receipt';
   public tableColumns = [

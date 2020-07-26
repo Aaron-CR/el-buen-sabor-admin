@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-detail-form',
@@ -86,10 +87,10 @@ export class DetailFormComponent implements OnInit, OnDestroy {
       }),
       switchMap(value => {
         if (typeof value === 'string') {
-          return this.http.get(`http://localhost:8080/api/v1/articulos/insumos/all?filter=${value}`)
+          return this.http.get(`${AppEndpoints.SUPPLIES_ALL}?filter=${value}`)
             .pipe(finalize(() => { this.isLoading = false; }));
         } else {
-          return this.http.get(`http://localhost:8080/api/v1/articulos/insumos/all`)
+          return this.http.get(`${AppEndpoints.SUPPLIES_ALL}`)
             .pipe(finalize(() => { this.isLoading = false; }));
         }
       }))

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Orden } from 'src/app/core/models/comprobantes/orden';
 import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-kitchen-table',
@@ -11,7 +12,7 @@ import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.compone
 export class KitchenTableComponent implements OnInit {
 
   public detailDialog = KitchenDetailComponent;
-  public path = 'http://localhost:8080/api/v1/comprobantes/ordenes/cocina';
+  public path = AppEndpoints.ORDERS_KITCHEN;
   public title = 'Cocina';
   public icon = 'restaurant';
   public tableColumns = [

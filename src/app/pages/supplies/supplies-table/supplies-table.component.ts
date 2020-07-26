@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SuppliesDetailComponent } from '../supplies-detail/supplies-detail.component';
 import { SuppliesFormComponent } from '../supplies-form/supplies-form.component';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-supplies-table',
@@ -12,7 +13,7 @@ export class SuppliesTableComponent {
 
   public detailDialog = SuppliesDetailComponent;
   public formDialog = SuppliesFormComponent;
-  public path = 'http://localhost:8080/api/v1/articulos/insumos';
+  public path = AppEndpoints.SUPPLIES;
   public router = '/supplies-categories';
   public routerText = 'Rubros';
   public title = 'Insumos';

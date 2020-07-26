@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empleado } from 'src/app/core/models/usuarios/empleado';
 import { EmployeesDetailComponent } from '../employees-detail/employees-detail.component';
 import { EmployeesFormComponent } from '../employees-form/employees-form.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-employees-table',
@@ -12,7 +13,7 @@ export class EmployeesTableComponent implements OnInit {
 
   public formDialog = EmployeesFormComponent;
   public detailDialog = EmployeesDetailComponent;
-  public path = 'http://localhost:8080/api/v1/usuarios/empleados';
+  public path = AppEndpoints.EMPLOYEES;
   public title = 'Empleados';
   public icon = 'work_outline';
   public tableColumns = [

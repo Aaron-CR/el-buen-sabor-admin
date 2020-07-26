@@ -6,17 +6,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ErrorHandlerService } from './error-handler.service';
 import { catchError } from 'rxjs/operators';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private endpoint = 'http://localhost:8080/api/v1/comprobantes/ordenes';
+  private endpoint = AppEndpoints.ORDERS;
 
   constructor(private httpClient: HttpClient, private errorHandler: ErrorHandlerService) { }
 
-  createOrder(orden: Orden, clienteUid: string): Observable<Orden>{
+  createOrder(orden: Orden, clienteUid: string): Observable<Orden> {
     return this.httpClient.post<Orden>(`${this.endpoint}/save`, orden, {
       params: new HttpParams()
         .set('clienteUid', clienteUid)

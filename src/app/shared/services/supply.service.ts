@@ -4,13 +4,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ErrorHandlerService } from './error-handler.service';
 import { ArticuloInsumo } from 'src/app/core/models/articulos/articulo-insumo';
 import { catchError } from 'rxjs/operators';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupplyService {
 
-  private endpoint = 'http://localhost:8080/api/v1/articulos/insumos';
+  private endpoint = AppEndpoints.SUPPLIES;
 
   constructor(
     private httpClient: HttpClient,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Cliente } from 'src/app/core/models/usuarios/cliente';
 import { CustomersDetailComponent } from '../customers-detail/customers-detail.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-customers-table',
@@ -11,7 +12,7 @@ import { CustomersDetailComponent } from '../customers-detail/customers-detail.c
 export class CustomersTableComponent implements OnInit {
 
   public detailDialog = CustomersDetailComponent;
-  public path = 'http://localhost:8080/api/v1/usuarios/clientes';
+  public path = AppEndpoints.CUSTOMERS;
   public title = 'Clientes';
   public icon = 'people';
   public tableColumns = [

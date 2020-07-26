@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Rubro } from 'src/app/core/models/articulos/rubro';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-supplies-categories-form',
@@ -48,12 +49,12 @@ export class SuppliesCategoriesFormComponent implements OnInit, OnDestroy {
       oculto: [this.localData.oculto],
       denominacion: [this.localData.denominacion, [Validators.required]],
       rubroPadre: [this.localData.rubroPadre],
-      imagen: [this.localData.imagen, [Validators.required]]
+      imagen: [this.localData.imagen]
     });
   }
 
   getCategories() {
-    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/rubros/all`).pipe()
+    this.subscription.add(this.http.get(AppEndpoints.RUBROS_ALL).pipe()
       .subscribe((data: Array<Rubro>) => {
         if (this.action === 'Editar') {
           return this.rubros = data.filter((rubro: Rubro) => rubro.id !== this.localData.id);

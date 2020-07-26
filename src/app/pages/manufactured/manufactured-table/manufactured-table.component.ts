@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ArticuloManufacturado } from 'src/app/core/models/articulos/articulo-manufacturado';
 import { ManufacturedDetailComponent } from '../manufactured-detail/manufactured-detail.component';
 import { ManufacturedFormComponent } from '../manufactured-form/manufactured-form.component';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-manufactured-table',
@@ -12,7 +13,7 @@ export class ManufacturedTableComponent {
 
   public formDialog = ManufacturedFormComponent;
   public detailDialog = ManufacturedDetailComponent;
-  public path = 'http://localhost:8080/api/v1/articulos/manufacturados';
+  public path = AppEndpoints.MANUFACTURED;
   public router = '/manufactured-categories';
   public routerText = 'Categorias';
   public title = 'Manufacturados';

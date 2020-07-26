@@ -8,6 +8,7 @@ import { DetailFormComponent } from './detail-form/detail-form.component';
 import { DetalleReceta } from 'src/app/core/models/articulos/detalle-receta';
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { Subscription } from 'rxjs';
+import { AppEndpoints } from 'src/app/app-endpoints';
 
 @Component({
   selector: 'app-manufactured-form',
@@ -86,7 +87,7 @@ export class ManufacturedFormComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   getCategories() {
-    this.subscription.add(this.http.get(`http://localhost:8080/api/v1/articulos/categorias/all`).pipe()
+    this.subscription.add(this.http.get(AppEndpoints.CATEGORIES_ALL).pipe()
       .subscribe((data: Array<Categoria>) => this.categorias = data));
   }
 
