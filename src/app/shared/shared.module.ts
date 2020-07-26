@@ -23,6 +23,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 /* FIREBASE */
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from './../../environments/environment';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -81,6 +82,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     DialogService,
     AngularFireAuth,
+    AngularFireStorage,
     DialogService
   ],
 })
