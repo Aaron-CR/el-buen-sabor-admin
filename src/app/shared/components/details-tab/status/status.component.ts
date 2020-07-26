@@ -43,11 +43,10 @@ export class StatusComponent implements OnInit {
   }
 
   updateStatus() {
-    this.orderService.updateEstado(this.selectedStatus, this.data.id)
-      .subscribe(data => {
-        this.data = data;
-        this.dialogRef.close({ event: 'Reload' });
-      });
+    this.orderService.updateEstado(this.selectedStatus, this.data.id).subscribe(data => {
+      this.data = data;
+      this.dialogRef.close({ event: 'Reload' });
+    });
   }
 
   getStatuses() {
