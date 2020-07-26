@@ -25,7 +25,7 @@
               <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
               <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
             </mat-form-field>
-            <button mat-button mat-icon-button matTooltip="Descargar" (click)="onDownloadData(ingresos, 'Ingresos')">
+            <button mat-button mat-icon-button matTooltip="Descargar" (click)="onDownloadData(ingresos, 'Ingresos', ingresosHeaders, periodoIngresos)">
               <mat-icon class="material-icons app-menu-icon">vertical_align_bottom</mat-icon>
             </button>
           </form>
@@ -46,7 +46,7 @@
       <div class="row">
         <h1 class="mt-3 mb-3">Productos por debajo del stock mínimo</h1>
         <button mat-button mat-icon-button matTooltip="Descargar"
-          (click)="onDownloadData(stock, 'Productos con bajo stock')">
+          (click)="onDownloadData(stock, 'Productos con bajo stock', stockHeaders, '')">
           <mat-icon class="material-icons-outlined">vertical_align_bottom</mat-icon>
         </button>
       </div>
@@ -74,7 +74,7 @@
               <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
             </mat-form-field>
             <button mat-button mat-icon-button matTooltip="Descargar"
-              (click)="onDownloadData(insumosMasVendidos, 'Insumos mas vendidos')">
+              (click)="onDownloadData(insumosMasVendidos, 'Insumos mas vendidos', productosHeaders, periodoInsumos)">
               <mat-icon class="material-icons app-menu-icon">vertical_align_bottom</mat-icon>
             </button>
           </form>
@@ -104,7 +104,7 @@
               <sat-datepicker-toggle matSuffix [for]="picker3"></sat-datepicker-toggle>
             </mat-form-field>
             <button mat-button mat-icon-button matTooltip="Descargar"
-              (click)="onDownloadData(manufacturadosMasVendidos, 'Manufacturados mas vendidos')">
+              (click)="onDownloadData(manufacturadosMasVendidos, 'Manufacturados mas vendidos', productosHeaders, periodoManufacturados)">
               <mat-icon class="material-icons app-menu-icon">vertical_align_bottom</mat-icon>
             </button>
           </form>
@@ -120,9 +120,38 @@
 
   </div>
 
+  <!--Ordenes por cliente-->
+  <div class="mt-5 app-card" style="height: auto; width: 100%; box-sizing: border-box; padding: 10px;">
+    <div class="container">
+      <div class="row">
+        <h1>Cantidad de ordenes por cliente</h1>
+        <div>
+          <form [formGroup]="datesForm">
+            <mat-form-field>
+              <input matInput placeholder="Elige las fechas" [satDatepicker]="picker4" formControlName="date"
+                (dateChange)="getOrdenesPorCliente()">
+              <sat-datepicker #picker4 [rangeMode]="true"></sat-datepicker>
+              <sat-datepicker-toggle matSuffix [for]="picker4"></sat-datepicker-toggle>
+            </mat-form-field>
+            <button mat-button mat-icon-button matTooltip="Descargar"
+              (click)="onDownloadData(ordenesPorCliente, 'Cantidad de ordenes por cliente', ordenesHeaders, periodoOrdenes)">
+              <mat-icon class="material-icons app-menu-icon">vertical_align_bottom</mat-icon>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 350px; width: 99%;" *ngIf="ordenesLength > 0; else sinDatos">
+      <ngx-charts-bar-vertical [results]="ordenesPorCliente" [scheme]="'fire'" [yAxis]="'true'" [legend]="'true'"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+
   <ng-template #sinDatos>
     <div class="empty-state">
-      No hay datos para el periodo indicado
+      No existen datos para el periodo indicado
     </div>
   </ng-template>
 

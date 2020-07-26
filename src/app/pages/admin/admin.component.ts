@@ -5,241 +5,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ExcelService } from 'src/app/shared/services/excel.service';
 
 
-const STOCK = [
-  {
-    name: 'Hungary',
-    value: 3
-  },
-  {
-    name: 'Uzbekistan',
-    value: 21
-  },
-  {
-    name: 'Côte D\'Ivoire',
-    value: 46
-  },
-  {
-    name: 'Australia',
-    value: 70
-  },
-  {
-    name: 'Brazil',
-    value: 19
-  },
-  {
-    name: 'Spain',
-    value: 31
-  },
-  {
-    name: 'Belgium',
-    value: 52
-  },
-  {
-    name: 'American Samoa',
-    value: 107
-  },
-  {
-    name: 'Christmas Island',
-    value: 52
-  },
-  {
-    name: 'India',
-    value: 50
-  },
-  {
-    name: 'Tuvalu',
-    value: 56
-  },
-  {
-    name: 'Western Sahara',
-    value: 13
-  },
-  {
-    name: 'Guernsey',
-    value: 27
-  },
-  {
-    name: 'Gabon',
-    value: 59
-  },
-  {
-    name: 'Solomon Islands',
-    value: 48
-  },
-  {
-    name: 'Gambia',
-    value: 24
-  },
-  {
-    name: 'Faroe Islands',
-    value: 51
-  },
-  {
-    name: 'Lao People\'s Democratic Republic',
-    value: 11
-  }
-];
-
-const INGRESOS = [
-  {
-    name: 'FACTURAS',
-    value: 34
-  },
-  {
-    name: 'INGRESOS',
-    value: 20432
-  }
-];
-
-const MAS_VENDIDOS = [
-  {
-    name: 'Pizza',
-    series: [
-      {
-        value: 39,
-        name: 'Lunes'
-      },
-      {
-        value: 61,
-        name: 'Martes'
-      },
-      {
-        value: 66,
-        name: 'Miércoles'
-      },
-      {
-        value: 25,
-        name: 'Jueves'
-      },
-      {
-        value: 40,
-        name: 'Viernes'
-      },
-      {
-        value: 79,
-        name: 'Sábado'
-      }
-    ]
-  },
-  {
-    name: 'Hamburguesa',
-    series: [
-      {
-        value: 50,
-        name: 'Lunes'
-      },
-      {
-        value: 30,
-        name: 'Martes'
-      },
-      {
-        value: 50,
-        name: 'Miércoles'
-      },
-      {
-        value: 55,
-        name: 'Jueves'
-      },
-      {
-        value: 61,
-        name: 'Viernes'
-      },
-      {
-        value: 59,
-        name: 'Sábado'
-      }
-    ]
-  },
-  {
-    name: 'Pancho',
-    series: [
-      {
-        value: 65,
-        name: 'Lunes'
-      },
-      {
-        value: 64,
-        name: 'Martes'
-      },
-      {
-        value: 35,
-        name: 'Miércoles'
-      },
-      {
-        value: 35,
-        name: 'Jueves'
-      },
-      {
-        value: 21,
-        name: 'Viernes'
-      },
-      {
-        value: 58,
-        name: 'Sábado'
-      }
-    ]
-  },
-  {
-    name: 'Milanesa',
-    series: [
-      {
-        value: 64,
-        name: 'Lunes'
-      },
-      {
-        value: 42,
-        name: 'Martes'
-      },
-      {
-        value: 59,
-        name: 'Miércoles'
-      },
-      {
-        value: 22,
-        name: 'Jueves'
-      },
-      {
-        value: 65,
-        name: 'Viernes'
-      },
-      {
-        value: 73,
-        name: 'Sábado'
-      }
-    ]
-  },
-  {
-    name: 'Helado',
-    series: [
-      {
-        value: 44,
-        name: 'Lunes'
-      },
-      {
-        value: 36,
-        name: 'Martes'
-      },
-      {
-        value: 23,
-        name: 'Miércoles'
-      },
-      {
-        value: 48,
-        name: 'Jueves'
-      },
-      {
-        value: 38,
-        name: 'Viernes'
-      },
-      {
-        value: 74,
-        name: 'Sábado'
-      }
-    ]
-  }
-];
-
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -249,15 +14,29 @@ export class AdminComponent implements OnInit {
 
   stock: ModeloGrafico[];
   stockLength = 0;
+  stockHeaders = ['Producto', 'Stock Actual'];
+
   ingresos: ModeloGrafico[];
+  ingresosHeaders = ['', ''];
+
   insumosMasVendidos: ModeloGrafico[];
   insumosLength = 0;
+
   manufacturadosMasVendidos: ModeloGrafico[];
   manufacturadosLength = 0;
 
-  datesForm: FormGroup;
+  productosHeaders = ['Nombre producto', 'Stock actual'];
 
-  pieView: any[] = [300, 300];
+  ordenesPorCliente: ModeloGrafico[];
+  ordenesLength = 0;
+  ordenesHeaders = ['Email Cliente', 'Cant. ordenes realizadas'];
+
+  periodoIngresos: string;
+  periodoInsumos: string;
+  periodoManufacturados: string;
+  periodoOrdenes: string;
+
+  datesForm: FormGroup;
 
   ingresosColorScheme = {
     domain: ['#ffc107', '#ffa000']
@@ -290,20 +69,22 @@ export class AdminComponent implements OnInit {
   }
 
   getIngresos(){
-    const fechaInicio = this.datesForm.get('date').value.begin;
-    const fechaFin = this.datesForm.get('date').value.end;
+    const fechaInicio: Date = this.datesForm.get('date').value.begin;
+    const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getIngresosPorPeriodo(fechaInicio, fechaFin).subscribe(
       res => {
+        this.periodoIngresos = fechaInicio.toISOString().slice(0, 10) + ' hasta ' + fechaFin.toISOString().slice(0, 10);
         this.ingresos = res;
       }
     );
   }
 
   getTopInsumos(){
-    const fechaInicio = this.datesForm.get('date').value.begin;
-    const fechaFin = this.datesForm.get('date').value.end;
+    const fechaInicio: Date = this.datesForm.get('date').value.begin;
+    const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getTopInsumos(fechaInicio, fechaFin).subscribe(
       res => {
+        this.periodoInsumos = fechaInicio.toISOString().slice(0, 10) + ' hasta ' + fechaFin.toISOString().slice(0, 10);
         this.insumosMasVendidos = res;
         this.insumosLength = this.insumosMasVendidos.length;
       }
@@ -311,17 +92,30 @@ export class AdminComponent implements OnInit {
   }
 
   getTopManufacturados(){
-    const fechaInicio = this.datesForm.get('date').value.begin;
-    const fechaFin = this.datesForm.get('date').value.end;
+    const fechaInicio: Date = this.datesForm.get('date').value.begin;
+    const fechaFin: Date = this.datesForm.get('date').value.end;
     this.resportsService.getTopManufacturados(fechaInicio, fechaFin).subscribe(
       res => {
+        this.periodoManufacturados = fechaInicio.toISOString().slice(0, 10) + ' hasta ' + fechaFin.toISOString().slice(0, 10);
         this.manufacturadosMasVendidos = res;
         this.manufacturadosLength = this.manufacturadosMasVendidos.length;
       }
     );
   }
 
-  onDownloadData(data: any[], name: string){
+  getOrdenesPorCliente(){
+    const fechaInicio: Date = this.datesForm.get('date').value.begin;
+    const fechaFin: Date = this.datesForm.get('date').value.end;
+    this.resportsService.getOrdenesPorCliente(fechaInicio, fechaFin).subscribe(
+      res => {
+        this.periodoOrdenes = fechaInicio.toISOString().slice(0, 10) + ' hasta ' + fechaFin.toISOString().slice(0, 10);
+        this.ordenesPorCliente = res;
+        this.ordenesLength = this.ordenesPorCliente.length;
+      }
+    );
+  }
+
+  onDownloadData(data: any[], name: string, headersGrafico: string[], fechas: string){
     console.log(data);
 
     const dataForExcel = [];
@@ -333,7 +127,8 @@ export class AdminComponent implements OnInit {
     const reportData = {
       title: name,
       data: dataForExcel,
-      headers: Object.keys(data[0])
+      headers: headersGrafico,
+      periodo: fechas
     };
 
     this.excelService.exportExcel(reportData);
@@ -353,7 +148,7 @@ export class AdminComponent implements OnInit {
 
   format(c): string {
     switch (c.label) {
-      case 'GANANCIAS':
+      case 'INGRESOS':
         return `\$${c.value.toLocaleString()}`;
       default:
         return c.value.toLocaleString();

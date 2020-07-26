@@ -52,4 +52,12 @@ export class ReportsService {
         .set('fechaFin', fechaFin.toISOString().slice(0, 10))
     }).pipe(catchError(error => this.errorHandler.handleError(error)));
   }
+
+  getOrdenesPorCliente(fechaInicio: Date, fechaFin: Date): Observable<ModeloGrafico[]>{
+    return this.httpClient.get<ModeloGrafico[]>(`${this.endpoint}/cantidadOrdenes`, {
+      params: new HttpParams()
+        .set('fechaInicio', fechaInicio.toISOString().slice(0, 10))
+        .set('fechaFin', fechaFin.toISOString().slice(0, 10))
+    }).pipe(catchError(error => this.errorHandler.handleError(error)));
+  }
 }

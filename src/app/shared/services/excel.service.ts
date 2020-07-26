@@ -15,6 +15,7 @@ export class ExcelService {
     const title = excelData.title;
     const header = excelData.headers;
     const data = excelData.data;
+    const periodo = excelData.periodo;
 
     // Create a workbook with a worksheet
     const workbook = new Workbook();
@@ -22,23 +23,21 @@ export class ExcelService {
 
 
     // Add Row and formatting
-    worksheet.mergeCells('A1', 'F4');
     const titleRow = worksheet.getCell('A1');
     titleRow.value = title;
     titleRow.font = {
       name: 'Calibri',
-      size: 16,
+      size: 18,
       underline: 'single',
       bold: true,
-      color: { argb: '0085A3' }
+      color: { argb: '222222' }
     };
     titleRow.alignment = { vertical: 'middle', horizontal: 'center' };
 
     // Date
-    worksheet.mergeCells('G1:H4');
     const d = new Date();
     const date = d.toISOString().slice(0, 10);
-    const dateCell = worksheet.getCell('G1');
+    const dateCell = worksheet.getCell('B1');
     dateCell.value = date;
     dateCell.font = {
       name: 'Calibri',
@@ -50,13 +49,19 @@ export class ExcelService {
     // Blank Row
     worksheet.addRow([]);
 
+    if (periodo !== ''){
+      const periodCell = worksheet.getCell('A3');
+      periodCell.value = 'Periodo: ' + periodo;
+      worksheet.addRow([]);
+    }
+
     // Adding Header Row
     const headerRow = worksheet.addRow(header);
     headerRow.eachCell((cell, number) => {
       cell.fill = {
         type: 'pattern',
         pattern: 'solid',
-        fgColor: { argb: '4167B8' },
+        fgColor: { argb: 'FF8F00' },
         bgColor: { argb: '' }
       };
       cell.font = {
@@ -72,19 +77,31 @@ export class ExcelService {
     }
     );
 
-    worksheet.getColumn(3).width = 20;
+    worksheet.getColumn(1).width = 50;
+    worksheet.getColumn(2).width = 30;
+    worksheet.getRow(1).height = 50;
     worksheet.addRow([]);
 
     // Footer Row
-    const footerRow = worksheet.addRow([title + 'generado en El Buen Sabor ' + date]);
+    const footerRow = worksheet.addRow(['Reporte generado por ©El Buen Sabor el día ' + date]);
     footerRow.getCell(1).fill = {
       type: 'pattern',
       pattern: 'solid',
-      fgColor: { argb: 'FFB050' }
+      fgColor: { argb: 'FF8F00' }
     };
 
+    footerRow.getCell(1).font = {
+      bold: true,
+      color: { argb: 'FFFFFF' },
+      size: 12
+    };
+
+    footerRow.height = 30;
+
+    footerRow.alignment = { vertical: 'middle', horizontal: 'center' };
+
     // Merge Cells
-    worksheet.mergeCells(`A${footerRow.number}:F${footerRow.number}`);
+    worksheet.mergeCells(`A${footerRow.number}:B${footerRow.number}`);
 
     // Generate & Save Excel File
     workbook.xlsx.writeBuffer().then((data) => {
